@@ -1,6 +1,6 @@
 <template>
   <Popover v-model:open="open" by="label">
-    <PopoverTrigger as-child  >
+    <PopoverTrigger as-child>
       <Button
         ref="triggerRef"
         variant="outline"
@@ -28,7 +28,13 @@
         <ChevronDown class="h-4 w-4 shrink-0 opacity-50" />
       </Button>
     </PopoverTrigger>
-    <PopoverContent class="p-0 min-w-[50px]":style="{ width: `${width + 22}px` }">
+    <PopoverContent
+      class="min-w-[50px] p-0"
+      :style="{
+        width: !popoverCustomWidth ? `${width + 22}px` : 'auto',
+        minWidth: `${width + 22}px`
+      }"
+    >
       <Command v-model:searchTerm="searchTerm" :class="cn(popEverClass)">
         <CommandInput v-if="search" placeholder="Search..." class="h-9" />
         <CommandEmpty class="flex flex-col items-center gap-2">
@@ -94,6 +100,7 @@ const props = withDefaults(
     disableCheck?: boolean
     search?: boolean
     clear?: boolean
+    popoverCustomWidth?: boolean
   }>(),
   {
     itemKey: (item: T) => item as unknown as U,
