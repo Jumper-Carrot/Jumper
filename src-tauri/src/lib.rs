@@ -59,6 +59,7 @@ pub fn run() {
         .plugin(tauri_plugin_deep_link::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_fs::init())
+        .plugin(tauri_plugin_app_exit::init())
         .plugin(
             tauri_plugin_log::Builder::new()
                 .max_file_size(100_000_000 /* bytes */)

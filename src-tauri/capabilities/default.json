@@ -58,6 +58,7 @@
     "fs:allow-temp-write",
     "fs:allow-template-write-recursive",
     "log:default",
-    "fs:default"
+    "fs:default",
+    "app-exit:default"
   ]
 }

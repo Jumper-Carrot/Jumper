@@ -38,6 +38,7 @@
     "reka-ui": "^2.2.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
+    "tauri-plugin-app-exit-api": "^0.1.1",
     "url": "^0.11.4",
     "uuid": "^11.1.0",
     "vee-validate": "^4.15.0",

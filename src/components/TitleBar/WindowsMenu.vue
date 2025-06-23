@@ -28,6 +28,7 @@
 </template>
 
 <script setup lang="ts">
+import { exitApp } from "tauri-plugin-app-exit-api";
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import { X, Minus, Square } from 'lucide-vue-next'
 import { useDebugWindowStore } from '@/stores'
@@ -43,6 +44,8 @@ const close = () => {
     debugWindowStore.close()
     return
   }
-  appWindow.close()
+  exitApp().catch((err: Error) => {
+    console.error(err)
+  })
 }
 </script>
