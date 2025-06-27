@@ -11,7 +11,7 @@
         <Label class="text-[13px] text-slate-700 dark:text-slate-500"
           >Active only</Label
         >
-        <Switch v-model:checked="activeOnly" class="" />
+        <Switch v-model:checked="activeOnly"/>
       </div>
       <AddUserButton @userAdded="refetch" />
     </div>
@@ -73,6 +73,7 @@ import {
 } from '@/components/BackOfficePage/@common'
 import UserRow from './UserRow.vue'
 import AddUserButton from './modals/AddUserButton.vue'
+import { size } from '@tauri-apps/plugin-fs'
 
 const { isSSOEnabled } = storeToRefs(useAuthConfigStore())
 
