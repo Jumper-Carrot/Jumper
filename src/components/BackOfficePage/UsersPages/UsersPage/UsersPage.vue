@@ -73,7 +73,6 @@ import {
 } from '@/components/BackOfficePage/@common'
 import UserRow from './UserRow.vue'
 import AddUserButton from './modals/AddUserButton.vue'
-import { size } from '@tauri-apps/plugin-fs'
 
 const { isSSOEnabled } = storeToRefs(useAuthConfigStore())
 
