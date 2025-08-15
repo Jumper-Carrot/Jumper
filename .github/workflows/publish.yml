@@ -1,9 +1,8 @@
 name: 'publish'
 
 on:
-  push:
-    tags:
-      - '*'
+  release:
+    types: [created]
 
 jobs:
   publish-tauri:
@@ -35,10 +34,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
         with:
-          appVersion: ${{ github.ref_name }}
-          tagName: ${{ github.ref_name }}
-          releaseName: ${{ github.ref_name }}
-          releaseBody: 'Jumper version ${{ github.ref_name }}'
+          appVersion: ${{ github.event.release.tag_name }}
+          tagName: ${{ github.event.release.tag_name }}
+          releaseName: ${{ github.event.release.tag_name }}
+          releaseBody: 'Jumper version ${{ github.event.release.tag_name }}'
           releaseDraft: true
           prerelease: false
           args: ${{ matrix.args }}
