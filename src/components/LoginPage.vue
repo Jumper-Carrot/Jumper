@@ -100,6 +100,14 @@
         </div>
       </template>
     </div>
+
+    <div
+      v-if="isBackendReachable"
+      class="absolute bottom-1 left-2 flex items-center gap-1 text-center text-xs italic
+        text-slate-400/80 dark:text-slate-500/80"
+    >
+      <p>Version : {{ appVersion }}</p>
+    </div>
     <div
       v-if="isBackendReachable"
       class="absolute bottom-1 right-2 flex items-center gap-1 text-center text-xs italic
@@ -123,6 +131,7 @@ import { useToast } from '@@materials/ui/toast'
 import jumper from '@/services/jumper'
 import { openUrl } from '@tauri-apps/plugin-opener'
 import { onOpenUrl } from '@tauri-apps/plugin-deep-link'
+import { getVersion } from '@tauri-apps/api/app'
 
 import { useAuthConfigStore, useAuthUserStore } from '@/stores'
 import { useDark } from '@vueuse/core'
@@ -134,6 +143,11 @@ import { Input } from '@@materials/ui/input'
 import { Label } from '@@materials/ui/label'
 
 const isDark = useDark()
+const appVersion = ref<string | null>(null)
+
+getVersion().then((version) => {
+  appVersion.value = version
+})
 
 const authConfigStore = useAuthConfigStore()
 const { isEmailEnabled, isOidcEnabled, ssoDiplayName, oidcRedirectUrl } =
