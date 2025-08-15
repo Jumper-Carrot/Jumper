@@ -36,12 +36,16 @@ jobs:
           VERSION=${GITHUB_EVENT_RELEASE_TAG_NAME}
           sed -i "s/^version = .*/version = \"${VERSION#v}\"/" Cargo.toml
         env:
-          GITHUB_EVENT_RELEASE_TAG_NAME: ${{ github.event.release.tag_name }}
+          GITHUB_EVENT_RELEASE_TAG_NAME: ${{ github.ref_name }}
 
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
         with:
-          tagName: ${{ github.event.release.tag_name }}
+          tagName: ${{ github.ref_name }}
+          releaseName: ${{ github.ref_name }}
+          releaseBody: 'Jumper version ${{ github.ref_name }}'
+          releaseDraft: true
+          prerelease: false
           args: ${{ matrix.args }}
