@@ -34,7 +34,7 @@ jobs:
         shell: bash
         run: |
           VERSION=${GITHUB_EVENT_RELEASE_TAG_NAME}
-          sed -i "s/^version = .*/version = \"${VERSION#v}\"/" Cargo.toml
+          sed -i "s/^version = .*/version = \"${VERSION#v}\"/" src-tauri/Cargo.toml
         env:
           GITHUB_EVENT_RELEASE_TAG_NAME: ${{ github.ref_name }}
 
