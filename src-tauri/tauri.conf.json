@@ -46,7 +46,7 @@
         "https://github.com/LibertAntoine/Jumper/releases/latest/download/latest.json"
       ],
       "windows": {
-        "installMode": "passive"
+        "installMode": "quiet"
       },
       "dangerousInsecureTransportProtocol": true
     },
@@ -58,9 +58,7 @@
     "externalBin": ["bin/python/python"],
     "active": true,
     "createUpdaterArtifacts": true,
-    "targets": [
-      "nsis"
-    ],
+    "targets": ["nsis"],
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
