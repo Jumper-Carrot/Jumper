@@ -1,7 +1,10 @@
 <template>
   <div class="flex w-full flex-col gap-3 border-b pb-4" v-if="actionDetailed">
     <div class="flex w-full gap-3">
-      <ActionCardPreview :actionsComposable="actionsComposable" :cardOptions="cardOptions" />
+      <ActionCardPreview
+        :actionsComposable="actionsComposable"
+        :cardOptions="cardOptions"
+      />
       <div class="flex w-full flex-col gap-3">
         <div class="flex items-center gap-3">
           <div
@@ -9,8 +12,12 @@
               p-1 shadow-sm dark:bg-slate-800"
             :title="actionDetailed.data.type"
           >
-            <Link v-if="actionDetailed.data.type == 'Link'" :size="15" />
-            <img v-else src="/actions/python.png" />
+            <Link v-if="actionDetailed.data.type == 'Link'" :size="12" />
+            <img
+              v-else-if="actionDetailed.data.type == 'Python'"
+              src="/actions/python.png"
+            />
+            <img v-else src="/actions/windows-cmd.png" />
           </div>
           <InputField
             class="h-[28px] px-2 font-semibold"
@@ -54,7 +61,8 @@
           </Switch>
           <Button
             class="ml-1 flex items-center justify-center bg-slate-50 p-2 text-sm text-slate-500
-              hover:bg-slate-100 hover:text-slate-950 dark:bg-slate-950 dark:text-slate-200 dark:hover:bg-slate-800"
+              hover:bg-slate-100 hover:text-slate-950 dark:bg-slate-950 dark:text-slate-200
+              dark:hover:bg-slate-800"
             variant="outline"
             @click.prevent="isVersionBarOpen = !isVersionBarOpen"
           >
@@ -86,7 +94,7 @@ import { useToast } from '@@materials/ui/toast'
 import { useField } from 'vee-validate'
 
 const props = defineProps<{
-  actionsComposable: ActionsComposable,
+  actionsComposable: ActionsComposable
   cardOptions?: string[] | null
 }>()
 
