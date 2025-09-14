@@ -49,7 +49,7 @@
       >
         <template #default="{ item }">
           <span class="flex items-center gap-1 px-1">
-            <UserIcon :size="16" />
+            <UsersIcon :size="16" />
             {{ item.value.name }}
           </span>
         </template>
@@ -67,7 +67,7 @@
               :value="group.name"
               @select.prevent="addTag(group)"
             >
-              <GroupIcon :size="16" />
+              <UsersIcon :size="16" />
               <p>{{ group.name }}</p>
             </CommandItem>
           </template>
@@ -87,7 +87,7 @@ import { useToast } from '@@materials/ui/toast'
 import { FormModal } from '@@materials/modal'
 import { InputField, TextareaField, TagsField } from '@@materials/input'
 import { CommandItem } from '@@materials/ui/command'
-import { GroupIcon, Loader2, UserIcon } from 'lucide-vue-next'
+import { UsersIcon, Loader2, UserIcon } from 'lucide-vue-next'
 import { useUsersQuery, useGroupsQuery } from '@/composables/query'
 
 const { toast } = useToast()

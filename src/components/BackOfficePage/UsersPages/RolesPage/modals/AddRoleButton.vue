@@ -58,7 +58,7 @@
         >
           <template #default="{ item }">
             <span class="flex items-center gap-1 px-1">
-              <GroupIcon :size="16" />
+              <UsersIcon :size="16" />
               {{ item.value.name }}
             </span>
           </template>
@@ -76,7 +76,7 @@
                 :value="group.name"
                 @select.prevent="addTag(group)"
               >
-                <GroupIcon :size="16" />
+                <UsersIcon :size="16" />
                 <p>{{ group.name }}</p>
               </CommandItem>
             </template>
@@ -95,7 +95,7 @@ import { useToast } from '@@materials/ui/toast'
 import { useAuthConfigStore } from '@/stores'
 import { storeToRefs } from 'pinia'
 import { useUsersQuery, useGroupsQuery } from '@/composables/query'
-import { Loader2, UserCog, UserIcon, GroupIcon } from 'lucide-vue-next'
+import { Loader2, UserCog, UserIcon, UsersIcon } from 'lucide-vue-next'
 import { Button } from '@@materials/ui/button'
 import { FormModal } from '@@materials/modal'
 import { InputField, TextareaField, TagsField } from '@@materials/input'

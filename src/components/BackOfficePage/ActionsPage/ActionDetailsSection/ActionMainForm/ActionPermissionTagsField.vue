@@ -19,7 +19,7 @@
         v-else-if="item.value.isAdminGroup !== undefined"
       >
         <UsersIcon :size="16" />
-        {{ item.value.description }}
+        {{ item.value.name }}
       </span>
       <span
         class="flex items-center gap-1 px-1"
