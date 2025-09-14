@@ -106,8 +106,7 @@ const onSubmit = userForm.handleSubmit(async (values) => {
     const roleUpdated = await jumper.roles.update(props.role.id, {
       ...values,
       users: values.users.map((user: User) => user.id),
-      groups: values.groups.map((group: Group) => group.id),
-      actions: values.actions.map((action: Action) => action.id)
+      groups: values.groups.map((group: Group) => group.id)
     })
     emit('roleUpdated', roleUpdated)
   } catch (error) {
