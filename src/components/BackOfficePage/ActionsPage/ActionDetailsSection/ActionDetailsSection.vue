@@ -2,18 +2,18 @@
   <BackOfficePageLayout>
     <form @submit="onSubmit" class="h-full">
       <div class="flex h-full flex-col" v-if="actionDetailed">
-        <ActionMainForm
+        <ActionHeaderForm
           :actionsComposable="actionsComposable"
           v-model:isVersionBarOpen="isVersionBarOpen"
           :cardOptions="cardOptions"
         />
         <div class="relative flex h-full overflow-hidden">
           <div
-            class="flex flex-grow flex-col transition-all transi ease-in-out"
+            class="flex flex-grow flex-col transition-all ease-in-out h-full relative" 
             :class="[isVersionBarOpen ? 'md:mr-[244px]' : 'md:mr-0']"
           >
             <div
-              class="mt-4 flex w-full flex-grow flex-col gap-2 overflow-auto"
+              class="mt-4 flex w-full flex-col gap-2 overflow-hidden h-full"
             >
               <component
                 :is="ACTION_DATA_COMPONENTS[actionDetailed.data.type]"
@@ -22,7 +22,7 @@
                 v-model:options="cardOptions"
               />
             </div>
-            <div class="flex w-full items-end justify-end gap-2 pt-2">
+            <div class="flex w-full items-end justify-end gap-2 border-t flex-shrink-0">
               <div class="mr-auto">
                 <DeleteActionButton
                   class="mr-auto"
@@ -56,13 +56,12 @@ import { useToast } from '@@materials/ui/toast'
 import Button from '@@materials/ui/button/Button.vue'
 import { Save } from 'lucide-vue-next'
 import { useActionDetailedForm } from './useActionDetailedForm'
-import ActionMainForm from './ActionMainForm/ActionMainForm.vue'
+import ActionHeaderForm from './ActionMainForm/ActionHeaderForm.vue'
 import { ACTION_DATA_COMPONENTS } from './ActionDataForm'
 import DeleteActionButton from './DeleteActionButton.vue'
 import BackOfficePageLayout from '../../@common/BackOfficePageLayout.vue'
 import ActionDetailsVersionsBar from './ActionDetailsVersionsBar.vue'
 import { useVersions } from './useVersions'
-
 
 const { toast } = useToast()
 

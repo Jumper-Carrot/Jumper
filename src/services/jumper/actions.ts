@@ -1,5 +1,5 @@
 import type {
-  ActionDataVersion,
+  ActionVersion,
   Action,
   PlayableAction,
   DetailedAction,
@@ -95,7 +95,7 @@ export const updateActionThumbnail = async (
 }
 
 export const getVersions = async (actionId: DetailedAction['id']) => {
-  const response = await jumperClient.get<ActionDataVersion[]>(`/v1/actions/${actionId}/versions`)
+  const response = await jumperClient.get<ActionVersion[]>(`/v1/actions/${actionId}/versions`)
   if (response.status !== 200) throw new JumperBackendError(response)
   return response.data
 }

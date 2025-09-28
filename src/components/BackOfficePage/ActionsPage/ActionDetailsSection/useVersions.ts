@@ -1,4 +1,4 @@
-import { ActionDataVersion, DetailedAction, ActionData } from '@@types/action'
+import { ActionVersion, DetailedAction, ActionData } from '@@types/action'
 import type { ActionDetailedForm } from './useActionDetailedForm'
 import { useQuery } from '@/composables'
 import jumper from '@/services/jumper'
@@ -13,10 +13,10 @@ export const useVersions = (
 ) => {
   const showVersionsRef = toRef(showVersions)
   const actionRef = toRef(action)
-  const selectedVersion = ref<ActionDataVersion | null>(null)
-  const { values, setValues } = form
+  const selectedVersion = ref<ActionVersion | null>(null)
+  const { setValues } = form
 
-  const versionsQuery = useQuery<ActionDataVersion[]>(
+  const versionsQuery = useQuery<ActionVersion[]>(
     ['action-versions', () => actionRef.value?.id, showVersionsRef],
     async () => {
       selectedVersion.value = null
@@ -28,13 +28,19 @@ export const useVersions = (
     }
   )
 
-  const selectVersion = (version: ActionDataVersion) => {
+  const selectVersion = (version: ActionVersion) => {
     selectedVersion.value = version
     setValues({
-      ...values,
-      data: {
-        ...version
-      }
+      name: version.name,
+      description: version.description,
+      isPublic: version.isPublic,
+      data: version.data,
+      isActive: version.isActive,
+      permissions: [
+        ...version.users,
+        ...version.groups,
+        ...version.roles
+      ]
     })
   }
 

@@ -87,7 +87,7 @@ const code = defineModel<string>({ default: `` })
 const resultOptions = defineModel<string[]>('resultOptions', {
   default: []
 })
-const selectedOption = ref<string | null>(null)
+const selectedOption = ref<string | null>(props.options?.[0] ?? null)
 
 const showCompare = ref(false)
 const editorInput = ref<HTMLElement | null>()
@@ -117,10 +117,7 @@ const {
   () => props.namespace
 )
 
-watch(execOptions, (newOptions) => (resultOptions.value = newOptions ?? []), {
-  immediate: true
-})
-
+watch(execOptions, (newOptions) => (resultOptions.value = newOptions ?? []))
 </script>
 
 <style>

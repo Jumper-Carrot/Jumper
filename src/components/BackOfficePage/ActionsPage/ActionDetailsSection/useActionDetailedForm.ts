@@ -43,6 +43,7 @@ export const useActionDetailedForm = (
         name: z.string().min(2).max(25),
         description: z.string().max(500).optional(),
         isPublic: z.boolean().default(false),
+        isActive: z.boolean().default(false),
         permissions: z
           .array(z.custom<User | DetailedGroup | DetailedRole>())
           .default([]),
@@ -59,6 +60,7 @@ export const useActionDetailedForm = (
         name: newValue.name,
         description: newValue.description,
         isPublic: newValue.isPublic,
+        isActive: newValue.isActive,
         data: newValue.data,
         permissions: [...newValue.users, ...newValue.groups, ...newValue.roles]
       }
@@ -67,7 +69,8 @@ export const useActionDetailedForm = (
 
   const form = useForm({
     validationSchema: actionSchema,
-    initialValues: getInitialValues(actionRef.value)
+    initialValues: getInitialValues(actionRef.value),
+    keepValuesOnUnmount: true
   })
 
   watch(actionRef, (newValue) => {

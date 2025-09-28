@@ -2,6 +2,7 @@
   <TagsField
     class=" max-w-[600px] max-h-[100px] overflow-auto p-[6px] gap-[6px]"
     field-name="permissions"
+    label="Permissions"
     :show-error-message="false"
     placeholder="Access..."
     v-model:search-term="search"

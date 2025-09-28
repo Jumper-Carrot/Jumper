@@ -81,6 +81,7 @@ export const useCodeExec = (
       removeTempCodeFile(filepath)
     })
     if (modeRef.value === 'get-options') {
+      options.value = []
       command.stdout.on('data', (data) => {
         const message = data.toString()
         if (message.startsWith(`${commandId} - options `)) {

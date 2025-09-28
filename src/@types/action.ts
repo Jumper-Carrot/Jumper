@@ -42,7 +42,7 @@ export type ActionData =
   | LinkActionData
   | WindowsCMDActionData
 
-export type ActionDataVersion = ActionData & {
+export type ActionVersion = DetailedAction & {
   history: {
     id: number
     date: string

@@ -3,10 +3,7 @@
     class="flex h-[145px] w-[130px] flex-shrink-0 flex-col items-center gap-2 rounded-md
       bg-slate-100 p-2 pb-1 shadow-sm dark:bg-slate-800"
   >
-    <button
-      @click.prevent="() => open()"
-      class="h-[78px] w-[78px] flex-shrink-0 p-[2px]"
-    >
+    <div class="h-[78px] w-[78px] flex-shrink-0 p-[2px]">
       <img
         v-if="actionDetailed?.thumbnailUrl"
         :src="actionDetailed?.thumbnailUrl"
@@ -15,11 +12,11 @@
       <div v-else class="flex h-full w-full items-center justify-center">
         <Carrot :size="60" class="ml-2 text-slate-300" />
       </div>
-    </button>
+    </div>
     <div class="flex flex-grow flex-col items-center gap-0.5">
       <h2
-        class="text-md w-full text-center overflow-hidden
-          break-all font-semibold text-slate-700 dark:text-slate-200"
+        class="text-md w-full overflow-hidden break-all text-center font-semibold
+          text-slate-700 dark:text-slate-200"
         :class="{
           'line-clamp-2': !cardOptions,
           'line-clamp-1': cardOptions
@@ -58,13 +55,9 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import type { ActionsComposable } from '../../useActions'
-import { useFileDialog } from '@vueuse/core'
 import { useField } from 'vee-validate'
-import { useToast } from '@@materials/ui/toast'
 import { Carrot } from 'lucide-vue-next'
 import { Combobox } from '@@materials/input'
-
-const { toast } = useToast()
 
 const props = defineProps<{
   actionsComposable: ActionsComposable
@@ -72,38 +65,8 @@ const props = defineProps<{
 }>()
 const selectedOption = ref<string | null>(null)
 
-const { open, onChange } = useFileDialog({
-  multiple: false,
-  accept: 'image/*'
-})
-
 const { actionDetailed } = props.actionsComposable
 const { value: name } = useField<string>('name')
-
-onChange(async (files) => {
-  if (files && files.length > 0 && actionDetailed.value) {
-    const file = files[0]
-    try {
-      await props.actionsComposable.updateThumbnail(
-        actionDetailed.value.id,
-        file
-      )
-      toast({
-        title: 'Thumbnail updated.',
-        description: `Action thumbnail updated to ${file.name}.`,
-        variant: 'default'
-      })
-    } catch (error) {
-      if (error instanceof Error) {
-        toast({
-          title: 'Failed to update thumbnail.',
-          description: error.message,
-          variant: 'destructive'
-        })
-      }
-    }
-  }
-})
 
 watch(
   () => props.cardOptions,
