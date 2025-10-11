@@ -89,7 +89,13 @@ const router = createRouter({
                 )
             }
           ]
-        }
+        },
+        {
+          path: 'info',
+          name: 'info',
+          component: () =>
+            import('@/components/BackOfficePage/InfoPage/InfoPage.vue')
+        },
       ]
     },
     {

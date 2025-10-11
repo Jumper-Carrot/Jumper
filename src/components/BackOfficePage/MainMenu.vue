@@ -64,19 +64,35 @@
               </CollapsibleContent>
             </Collapsible>
           </div>
+          <RouterLink :to="{ name: 'info' }" class="mt-auto w-full">
+            <Button
+              variant="ghost"
+              class="w-full justify-start px-3 text-sm text-slate-400 transition-colors
+                hover:text-primary dark:text-slate-500 dark:hover:text-destructive"
+              :class="{
+                'bg-slate-100 text-primary dark:bg-slate-800 dark:text-primary':
+                  $route.matched.some((r) => r.name == 'info'),
+                'dark:text-slate-300': !$route.matched.some(
+                  (r) => r.name == 'info'
+                )
+              }"
+            >
+              <Info />
+              Info
+            </Button>
+          </RouterLink>
           <Button
             variant="ghost"
-            class="justify-start text-slate-400 text-sm transition-colors hover:text-destructive
-              dark:text-slate-500 dark:hover:text-destructive px-3 mt-auto mb-2"
-              @click="authUserStore.signOut"
+            class="mb-2 justify-start px-3 text-sm text-slate-400 transition-colors
+              hover:text-destructive dark:text-slate-500 dark:hover:text-destructive"
+            @click="authUserStore.signOut"
           >
             <LogOut />
             Logout
           </Button>
-
           <RouterLink
             :to="{ name: 'home' }"
-            class=" flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground
               transition-all hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
           >
             <ChevronLeft class="h-4 w-4" />
@@ -105,7 +121,8 @@ import {
   Carrot,
   User,
   Users,
-  LogOut
+  LogOut,
+  Info
 } from 'lucide-vue-next'
 
 const authUserStore = useAuthUserStore()
@@ -160,4 +177,3 @@ const menuItems = [
   }
 ]
 </script>
-

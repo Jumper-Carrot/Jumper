@@ -21,6 +21,7 @@ export const usePagePermissions = async (): Promise<{
     login: () => true,
     account: () => isAuthenticated.value,
     appearance: () => isAuthenticated.value,
+    info: () => true,
     home: () => isAuthenticated.value,
     settings: () => isAuthenticated.value,
     actions: () => isSuperAdmin.value,
