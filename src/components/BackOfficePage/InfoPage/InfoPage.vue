@@ -88,9 +88,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Carrot, Check } from 'lucide-vue-next'
+import { Carrot } from 'lucide-vue-next'
 import BackOfficePageLayout from '../@common/BackOfficePageLayout.vue'
-import { Badge } from '@@materials/ui/badge'
 import { getVersion } from '@tauri-apps/api/app'
 import jumper from '@/services/jumper'
 
