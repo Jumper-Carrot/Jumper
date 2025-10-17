@@ -12,7 +12,7 @@
     </div>
     <div class="flex h-full w-full flex-col gap-4">
       <div
-        class="flex h-[100px] max-w-[200px] flex-col gap-1 rounded-md border bg-slate-50 p-3
+        class="flex h-[100px] max-w-[200px] flex-col gap-1 rounded-md border bg-slate-50 dark:bg-slate-800 p-3
           py-2"
       >
         <h2
@@ -40,7 +40,7 @@
 
       <div
         class="mb-auto flex h-[100px] max-w-[400px] flex-col gap-1 rounded-md border
-          bg-slate-50 p-3 py-2"
+          bg-slate-50 dark:bg-slate-800 p-3 py-2"
       >
         <h2
           class="text-md mb-1 flex items-center gap-1.5 font-semibold text-slate-800
