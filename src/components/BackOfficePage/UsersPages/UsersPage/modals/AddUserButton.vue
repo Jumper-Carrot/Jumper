@@ -6,7 +6,12 @@
     :onSubmit="onSubmit"
   >
     <template #trigger>
-      <Button variant="outline" size="sm" class="text-slate-700 dark:text-slate-300"><UserIcon />Add User</Button>
+      <Button
+        variant="outline"
+        size="sm"
+        class="text-slate-700 dark:text-slate-300"
+        ><UserIcon />Add User</Button
+      >
     </template>
     <template #default>
       <div class="flex flex-col">
@@ -15,11 +20,8 @@
         <InputField field-name="username" label="Username" />
         <InputField field-name="firstName" label="First Name" />
         <InputField field-name="lastName" label="Last Name" />
-        <CheckboxField
-          field-name="isSuperAdmin"
-          label="Is admin"
-          description="Admin users can manage all users' permissions."
-        />
+        <Label class="mb-1 ml-1">System Role</Label>
+        <SystemRoleSelect v-model="systemRole" />
       </div>
     </template>
   </FormModal>
@@ -32,13 +34,18 @@ import { useToast } from '@@materials/ui/toast'
 import { UserIcon } from 'lucide-vue-next'
 import { Button } from '@@materials/ui/button'
 import { FormModal } from '@@materials/modal'
-import { InputField, CheckboxField } from '@@materials/input'
+import { InputField } from '@@materials/input'
+import SystemRoleSelect from '../SystemRoleSelect.vue'
+import { useField } from 'vee-validate'
+import { Label } from '@@materials/ui/label'
+import { SystemRole } from '@@types/user'
 
 const { toast } = useToast()
 
 const userForm = useUserForm()
 
 const emit = defineEmits<{ userAdded: [] }>()
+const { value: systemRole } = useField<SystemRole>('systemRole')
 
 const onSubmit = userForm.handleSubmit(async (values) => {
   try {

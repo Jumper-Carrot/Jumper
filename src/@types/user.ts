@@ -1,5 +1,7 @@
 import type { Action } from '@@types'
 
+export type SystemRole = 'user' | 'action_manager' | 'user_manager' | 'admin'
+
 export type ShortUser = {
   readonly id: number
   username: string
@@ -9,7 +11,7 @@ export type ShortUser = {
   readonly profilePictureUrl?: string
 }
 
-export type User = ShortUser &{
+export type User = ShortUser & {
   externalId: string | null
   groups: string[]
   isSuperuserGroupMember: boolean
@@ -17,6 +19,7 @@ export type User = ShortUser &{
   readonly lastUpdate: string
   isActive: boolean
   password?: string
+  systemRole: SystemRole
   isSuperuser: boolean
 }
 
@@ -52,5 +55,3 @@ export type DetailedRole = Omit<Role, 'users' | 'groups'> & {
   groups: Group[]
   actions: Action[]
 }
-
-

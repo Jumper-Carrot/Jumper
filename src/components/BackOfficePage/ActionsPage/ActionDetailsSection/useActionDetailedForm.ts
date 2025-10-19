@@ -1,4 +1,4 @@
-import { type DetailedAction } from '@@types'
+import type { DetailedAction } from '@@types'
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
@@ -45,6 +45,7 @@ export const useActionDetailedForm = (
         isPublic: z.boolean().default(false),
         isActive: z.boolean().default(false),
         thumbnailUrl: z.string().url().optional(),
+        workspace: z.number().nullable().optional(),
         permissions: z
           .array(z.custom<User | DetailedGroup | DetailedRole>())
           .default([]),
@@ -63,6 +64,7 @@ export const useActionDetailedForm = (
         isPublic: newValue.isPublic,
         isActive: newValue.isActive,
         data: newValue.data,
+        workspace: newValue.workspace,
         permissions: [...newValue.users, ...newValue.groups, ...newValue.roles]
       }
     }

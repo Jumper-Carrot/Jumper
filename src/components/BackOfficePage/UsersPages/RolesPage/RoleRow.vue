@@ -75,12 +75,17 @@
     </TooltipProvider>
   </TableCell>
   <TableCell class="float-end flex-grow">
-    <RoleDropdownMenuButton :role="role" @roleUpdated="$emit('roleUpdated')" />
+    <RoleDropdownMenuButton
+      v-if="authUserStore.isAdmin || authUserStore.isUserManager"
+      :role="role"
+      @roleUpdated="$emit('roleUpdated')"
+    />
   </TableCell>
 </template>
 
 <script setup lang="ts">
 import type { DetailedRole } from '@@types'
+import { useAuthUserStore } from '@/stores'
 import { TableCell } from '@@materials/ui/table'
 import { UserIcon, Users } from 'lucide-vue-next'
 import RoleDropdownMenuButton from './modals/RoleDropdownMenuButton.vue'
@@ -95,6 +100,7 @@ import { useAuthConfigStore } from '@/stores'
 
 import { storeToRefs } from 'pinia'
 
+const authUserStore = useAuthUserStore()
 const { isScimEnabled } = storeToRefs(useAuthConfigStore())
 
 defineEmits<{

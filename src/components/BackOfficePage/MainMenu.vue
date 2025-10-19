@@ -68,7 +68,7 @@
             <Button
               variant="ghost"
               class="w-full justify-start px-3 text-sm text-slate-400 transition-colors
-                hover:text-primary dark:text-slate-500 dark:hover:text-destructive"
+                hover:text-primary dark:text-slate-500 dark:hover:text-primary"
               :class="{
                 'bg-slate-100 text-primary dark:bg-slate-800 dark:text-primary':
                   $route.matched.some((r) => r.name == 'info'),
@@ -105,7 +105,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthUserStore, useAuthConfigStore } from '@/stores'
+import { useAuthUserStore, useAuthConfigStore, useSystemStore } from '@/stores'
 import { RouterLink } from 'vue-router'
 import { Button } from '@@materials/ui/button'
 
@@ -122,11 +122,13 @@ import {
   User,
   Users,
   LogOut,
-  Info
+  Info,
+  Settings
 } from 'lucide-vue-next'
 
 const authUserStore = useAuthUserStore()
 const authConfigStore = useAuthConfigStore()
+const systemStore = useSystemStore()
 
 const menuItems = [
   {
@@ -150,7 +152,7 @@ const menuItems = [
   {
     title: 'Users',
     icon: Users,
-    condition: () => authUserStore.isSuperAdmin,
+    condition: () => authUserStore.isAdmin || authUserStore.isUserManager || authUserStore.isActionManager,
     children: [
       {
         title: 'Users',
@@ -171,9 +173,26 @@ const menuItems = [
   },
   {
     title: 'Actions',
-    page: 'actions',
     icon: Carrot,
-    condition: () => authUserStore.isSuperAdmin
+    condition: () => authUserStore.isAdmin || authUserStore.isActionManager,
+    children: [
+      {
+        title: 'Workspaces',
+        page: 'workspaces',
+        condition: () => systemStore.isWorkspacesAllowed
+      },
+      {
+        title: 'Action editor',
+        page: 'action-editor',
+        condition: () => true
+      }
+    ]
+  },
+  {
+    title: 'System',
+    page: 'system',
+    icon: Settings,
+    condition: () => authUserStore.isAdmin
   }
 ]
 </script>

@@ -1,8 +1,8 @@
 <template>
   <TagsField
     class=" max-w-[600px] max-h-[100px] overflow-auto p-[6px] gap-[6px]"
-    field-name="permissions"
-    label="Permissions"
+    :field-name="fieldName"
+    :label="label || 'Permissions'"
     :show-error-message="false"
     placeholder="Access..."
     v-model:search-term="search"
@@ -120,7 +120,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ActionPermissions } from '@@types'
+import type { Permissions } from '@@types'
 import { ref } from 'vue'
 import { useQuery } from '@/composables'
 import jumper from '@/services/jumper'
@@ -130,7 +130,13 @@ import { CommandItem, CommandGroup } from '@@materials/ui/command'
 
 const search = ref('')
 
-const searchedPermissions = useQuery<ActionPermissions>(
+defineProps<{
+  fieldName: string
+  label?: string
+}>()
+
+
+const searchedPermissions = useQuery<Permissions>(
   ['action-permissions-search', search],
   async () => {
     if (!search.value)

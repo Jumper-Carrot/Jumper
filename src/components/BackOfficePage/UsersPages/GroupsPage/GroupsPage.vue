@@ -41,7 +41,6 @@
 
 <script setup lang="ts">
 import { useGroupsQuery } from '@/composables/query'
-
 import { SearchBar } from '@/components/@materials/input'
 import {
   BackOfficePageLayout,

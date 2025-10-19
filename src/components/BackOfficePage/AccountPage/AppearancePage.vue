@@ -1,11 +1,10 @@
 <template>
-  <backOfficePageLayout>
+  <BackOfficePageLayout>
     <div class="mb-4 flex w-full flex-col gap-1 border-b px-1 pb-4">
       <div class="flex items-center space-x-2">
         <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-200">
           Appearance preferences
         </h2>
-        <!-- <Badge variant="outline" class="h-6">SSO</Badge> -->
       </div>
       <p class="text-sm text-slate-400 dark:text-slate-500">
         Edit the appearance of the app
@@ -32,11 +31,11 @@
         </Select>
       </div>
     </div>
-  </backOfficePageLayout>
+  </BackOfficePageLayout>
 </template>
 
 <script setup lang="ts">
-import backOfficePageLayout from '../@common/BackOfficePageLayout.vue'
+import BackOfficePageLayout from '../@common/BackOfficePageLayout.vue'
 import { useColorMode } from '@vueuse/core'
 import {
   Select,

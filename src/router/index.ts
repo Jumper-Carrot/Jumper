@@ -56,8 +56,25 @@ const router = createRouter({
         {
           path: 'actions',
           name: 'actions',
-          component: () =>
-            import('@/components/BackOfficePage/ActionsPage/ActionsPage.vue')
+          redirect: { name: 'action-editor' },
+          children: [
+            {
+              path: 'workspaces',
+              name: 'workspaces',
+              component: () =>
+                import(
+                  '@/components/BackOfficePage/WorkspacePage/WorkspacePage.vue'
+                )
+            },
+            {
+              path: 'editor',
+              name: 'action-editor',
+              component: () =>
+                import(
+                  '@/components/BackOfficePage/ActionsPage/ActionsPage.vue'
+                )
+            }
+          ]
         },
         {
           path: 'users',
@@ -89,6 +106,12 @@ const router = createRouter({
                 )
             }
           ]
+        },
+        {
+          path: 'system',
+          name: 'system',
+          component: () =>
+            import('@/components/BackOfficePage/SystemPage/SystemPage.vue')
         },
         {
           path: 'info',

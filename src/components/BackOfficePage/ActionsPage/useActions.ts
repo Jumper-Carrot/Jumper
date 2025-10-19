@@ -12,7 +12,7 @@ export const useActions = () => {
   // TODO: see how to manage infinite scroll
   const actionsQuery = useQuery<Action[]>(['actions', search], async () => {
     const data = await jumper.actions.getActions({
-      limit: 50,
+      limit: 10000,
       search: search.value
     })
     if (!selectedAction.value && data.results.length)

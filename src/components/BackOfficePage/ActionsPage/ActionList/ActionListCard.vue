@@ -23,7 +23,7 @@
         {{ action.name }}
       </h3>
       <div
-        class="ml-auto flex h-2 w-2 items-center justify-center rounded-md mb-2"
+        class="ml-auto flex h-2 w-2 items-center justify-center rounded-md mb-2 flex-shrink-0"
         :title="action.isActive ? 'Active' : 'Inactive'"
         :class="{
           'bg-green-400 ':

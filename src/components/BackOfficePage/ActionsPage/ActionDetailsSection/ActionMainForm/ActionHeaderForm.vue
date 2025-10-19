@@ -19,9 +19,23 @@
             />
             <img v-else src="/actions/windows-cmd.png" />
           </div>
-          <div class="line-clamp-1 font-semibold">
+          <div class="line-clamp-1 truncate font-semibold">
             {{ actionDetailed.name }}
           </div>
+          <Badge
+            v-if="workspaces && actionDetailed.workspace"
+            variant="outline"
+            class="ml-1 flex max-w-[150px] flex-shrink-0 items-center gap-1 rounded-md border-none
+              bg-slate-100 py-0.5 text-sm shadow-sm dark:bg-slate-800"
+          >
+            <ComponentIcon :size="12" class="flex-shrink-0" />
+            <p class="truncate">
+              {{
+                workspaces?.find((ws) => ws.id === actionDetailed?.workspace)
+                  ?.name
+              }}
+            </p>
+          </Badge>
           <div
             class="ml-auto size-2 flex-shrink-0 animate-pulse rounded-full"
             :class="{
@@ -49,11 +63,13 @@
 </template>
 
 <script setup lang="ts">
+import type { Workspace } from '@@types'
 import type { ActionsComposable } from '../../useActions'
 import ActionCardPreview from './ActionCardPreview.vue'
 import { Button } from '@@materials/ui/button'
+import { Badge } from '@@materials/ui/badge'
 import PermissionList from './PermissionList.vue'
-import { Link, GitCompareArrows } from 'lucide-vue-next'
+import { Link, GitCompareArrows, ComponentIcon } from 'lucide-vue-next'
 
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
@@ -81,6 +97,7 @@ onBeforeUnmount(() => {
 const props = defineProps<{
   actionsComposable: ActionsComposable
   cardOptions?: string[] | null
+  workspaces?: Workspace[] | null
 }>()
 
 const { actionDetailed } = props.actionsComposable

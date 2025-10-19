@@ -6,8 +6,7 @@ import * as z from 'zod'
 import { passwordSchema } from '@/composables/usePasswordUserForm'
 import {
   checkUniqueEmail,
-  checkUniqueUsername,
-  checkIsNotLastAdmin
+  checkUniqueUsername
 } from '@/services/form-checks/userFormChecks'
 
 export const useUserForm = (user?: User): ReturnType<typeof useForm> => {
@@ -31,26 +30,9 @@ export const useUserForm = (user?: User): ReturnType<typeof useForm> => {
         : passwordSchema,
       firstName: z.string().min(2).max(20).optional().or(z.literal('')),
       lastName: z.string().min(2).max(20).optional().or(z.literal('')),
-      isSuperuser: user
-        ? z
-            .boolean()
-            .refine(
-              async (isSuperAdmin) =>
-                await checkIsNotLastAdmin(user, isSuperAdmin),
-              {
-                message: 'You cannot remove the last admin'
-              }
-            )
-        : z
-            .boolean()
-            .default(false)
-            .refine(
-              async (isSuperAdmin) =>
-                await checkIsNotLastAdmin(user, isSuperAdmin),
-              {
-                message: 'You cannot remove the last admin'
-              }
-            ),
+      systemRole: z
+        .enum(['user', 'action_manager', 'user_manager', 'admin'])
+        .default('user'),
       isActive: user ? z.boolean() : z.boolean().default(true)
     })
   )

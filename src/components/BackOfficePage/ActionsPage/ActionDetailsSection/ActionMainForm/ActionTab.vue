@@ -1,14 +1,14 @@
 <template>
   <div class="flex w-full flex-col gap-3 pb-4" v-if="actionDetailed">
     <div class="flex w-full gap-3">
-      <div class="flex w-full flex-col gap-2">
+      <div class="flex w-full flex-col gap-2 ml-1">
         <div class="flex items-center gap-3">
           <div class="flex items-center gap-1 pl-1 text-sm">
             <p class="font-semibold">Type :</p>
             <Badge
               variant="outline"
-              class="ml-1 flex items-center gap-1 rounded-md border-none bg-slate-100 dark:bg-slate-800 px-2 py-1
-                text-sm shadow-sm"
+              class="ml-1 flex items-center gap-1 rounded-md border-none bg-slate-100 px-2 py-1
+                text-sm shadow-sm dark:bg-slate-800"
             >
               <div
                 class="flex h-4 w-4 flex-shrink-0 items-center justify-center"
@@ -45,7 +45,7 @@
         <div
           class="flex w-full items-start justify-between gap-4 max-lg:flex-col-reverse"
         >
-          <div class="flex max-w-[calc(100%-100px)] w-full flex-col gap-3">
+          <div class="flex w-full max-w-[calc(100%-100px)] flex-col gap-3">
             <InputField
               class="max-w-[600px] px-2"
               field-name="name"
@@ -60,8 +60,25 @@
               maxlength="500"
               :show-error-message="false"
             />
+            <SelectField
+              v-if="workspaces"
+              class="max-w-[600px] px-2 py-1 shadow-none"
+              size="sm"
+              fieldName="workspace"
+              field-label="Workspace"
+              :show-error-message="false"
+              label="label"
+              itemKey="value"
+              :items="[
+                { label: 'None', value: null },
+                ...workspaces.map((ws) => ({
+                  label: ws.name,
+                  value: ws.id
+                }))
+              ]"
+            />
             <div class="flex flex-col gap-1">
-              <ActionPermissionTagsField v-if="!isPublic" />
+              <PermissionTagsField v-if="!isPublic" field-name="permissions" />
               <div class="flex items-center gap-[2px]">
                 <div class="pl-1">
                   <CheckboxField
@@ -81,8 +98,8 @@
           </div>
           <div
             class="group relative flex h-[78px] w-[78px] flex-shrink-0 flex-col items-center gap-2
-              rounded-md border-slate-300 bg-slate-100 dark:border-slate-700 dark:bg-slate-800
-              hover:cursor-pointer hover:border-slate-400 hover:shadow-sm"
+              rounded-md border-slate-300 bg-slate-100 hover:cursor-pointer
+              hover:border-slate-400 hover:shadow-sm dark:border-slate-700 dark:bg-slate-800"
           >
             <button
               @click.prevent="() => open()"
@@ -115,19 +132,22 @@
 </template>
 
 <script setup lang="ts">
+import type { Workspace } from '@@types'
 import { useField } from 'vee-validate'
 import { useFileDialog } from '@vueuse/core'
 import { Switch } from '@@materials/ui/switch'
 import type { ActionsComposable } from '../../useActions'
 import { useToast } from '@@materials/ui/toast'
-import ActionPermissionTagsField from '../ActionMainForm/ActionPermissionTagsField.vue'
+import PermissionTagsField from '@/components/BackOfficePage/@common/PermissionTagsField.vue'
 import { InputField, TextareaField, CheckboxField } from '@@materials/input'
+import { SelectField } from '@@materials/form'
 import { Badge } from '@@materials/ui/badge'
 import { Check, Link, Carrot, ImagePlus } from 'lucide-vue-next'
 
 const props = defineProps<{
   actionsComposable: ActionsComposable
   cardOptions?: string[] | null
+  workspaces?: Workspace[] | null
 }>()
 
 const { actionDetailed } = props.actionsComposable

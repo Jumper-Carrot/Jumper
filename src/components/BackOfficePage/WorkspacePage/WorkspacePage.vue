@@ -1,6 +1,9 @@
 <template>
   <BackOfficePageLayout>
-    <BackOfficeHeader title="Users" description="Manage Jumper's users" />
+    <BackOfficeHeader
+      title="Workspaces"
+      description="Manage Jumper's workspaces"
+    />
     <div class="flex items-center gap-4">
       <SearchBar
         v-model="search"
@@ -13,42 +16,36 @@
         >
         <Switch v-model="activeOnly" />
       </div>
-      <AddUserButton
-        @userAdded="refetch"
-        v-if="authUserStore.isAdmin || authUserStore.isUserManager"
+      <AddWorkspaceButton
+        @workspaceAdded="refetch"
+        v-if="authUserStore.isAdmin"
       />
     </div>
     <TableLayout
       class="my-3 h-full"
       :error-message="errorMessage"
       :is-loading="isFetching || isSearchDebouncing"
-      :data="usersPage?.results"
-      item-name="user"
+      :data="workspacesPage?.results"
+      item-name="workspace"
     >
       <template #header>
         <TableHead class="w-[250px]"
-          ><OrderByButton field="username" v-model:order="orderBy">
+          ><OrderByButton field="name" v-model:order="orderBy">
             Name
           </OrderByButton>
         </TableHead>
-        <TableHead class="w-[210px]">
-          <OrderByButton field="system_role,username" v-model:order="orderBy">
-            System role
-          </OrderByButton>
-        </TableHead>
-        <TableHead v-if="isSSOEnabled" class="w-[50px]">SSO User</TableHead>
         <TableHead v-if="!activeOnly" class="w-[50px]">
-          <OrderByButton field="is_active,username" v-model:order="orderBy">
+          <OrderByButton field="is_active,name" v-model:order="orderBy">
             Active
           </OrderByButton>
         </TableHead>
         <TableHead></TableHead>
       </template>
-      <template #default="{ item: user }">
-        <UserRow
-          :user="user"
+      <template #default="{ item: workspace }">
+        <WorkspaceRow
+          :workspace="workspace"
           :active-only="activeOnly"
-          @user-updated="refetch()"
+          @workspace-updated="refetch()"
         />
       </template>
     </TableLayout>
@@ -61,10 +58,8 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthConfigStore } from '@/stores'
+import { useWorkspacesQuery } from './useWorkspacesQuery'
 import { useAuthUserStore } from '@/stores'
-import { storeToRefs } from 'pinia'
-import { useUsersQuery } from '@/composables'
 import { TableHead } from '@@materials/ui/table'
 import { Switch } from '@@materials/ui/switch'
 import { Label } from '@@materials/ui/label'
@@ -75,14 +70,13 @@ import {
   BackOfficePageLayout,
   BackOfficeHeader
 } from '@/components/BackOfficePage/@common'
-import UserRow from './UserRow.vue'
-import AddUserButton from './modals/AddUserButton.vue'
+import WorkspaceRow from './WorkspaceRow.vue'
+import AddWorkspaceButton from './modals/AddWorkspaceButton.vue'
 
-const { isSSOEnabled } = storeToRefs(useAuthConfigStore())
 const authUserStore = useAuthUserStore()
 
 const {
-  data: usersPage,
+  data: workspacesPage,
   isFetching,
   errorMessage,
   refetch,
@@ -93,7 +87,7 @@ const {
   search,
   activeOnly,
   isSearchDebouncing
-} = useUsersQuery({
+} = useWorkspacesQuery({
   searchDebounceTime: 400
 })
 </script>

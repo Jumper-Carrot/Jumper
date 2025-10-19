@@ -6,6 +6,7 @@
           :actionsComposable="actionsComposable"
           v-model:isVersionBarOpen="isVersionBarOpen"
           :cardOptions="cardOptions"
+          :workspaces="workspaces?.results || null"
         />
         <div class="relative flex h-full overflow-hidden">
           <div
@@ -17,6 +18,7 @@
                 :is="ACTION_DATA_COMPONENTS[actionDetailed.data.type]"
                 :actionComposable="actionsComposable"
                 :differentDataFields="differentDataFields"
+                :workspaces="workspaces?.results || null"
                 v-model:options="cardOptions"
               />
             </div>
@@ -55,6 +57,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import type { ActionsComposable } from '../useActions'
+import { useSystemStore } from '@/stores'
 import { useToast } from '@@materials/ui/toast'
 import Button from '@@materials/ui/button/Button.vue'
 import { Save } from 'lucide-vue-next'
@@ -65,8 +68,12 @@ import DeleteActionButton from './DeleteActionButton.vue'
 import BackOfficePageLayout from '../../@common/BackOfficePageLayout.vue'
 import ActionDetailsVersionsBar from './ActionDetailsVersionsBar.vue'
 import { useVersions } from './useVersions'
+import jumper from '@/services/jumper'
+import { useQuery } from '@/composables'
 
 const { toast } = useToast()
+
+const systemStore = useSystemStore()
 
 const props = defineProps<{
   actionsComposable: ActionsComposable
@@ -84,6 +91,18 @@ const cardOptions = ref<string[] | null>([])
 watch(
   () => actionDetailed.value,
   () => (cardOptions.value = null)
+)
+
+const { data: workspaces } = useQuery(
+  ['action-workspaces', () => systemStore.isWorkspacesAllowed],
+  () => {
+    if (!systemStore.isWorkspacesAllowed) {
+      return Promise.resolve(null)
+    }
+    return jumper.workspaces.listWorkspaces({
+      limit: 10000
+    })
+  }
 )
 
 const onSubmit = handleSubmit(async (values) => {

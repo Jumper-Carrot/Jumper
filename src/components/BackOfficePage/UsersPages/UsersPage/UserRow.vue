@@ -21,17 +21,9 @@
     </div>
   </TableCell>
 
-  <TableCell class="w-[180px]">
-    <Select v-model="role">
-      <SelectTrigger class="h-7 w-[120px] pl-2 pr-1">
-        <SelectValue class="font-semibold text-slate-700 dark:text-slate-400" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="admin">Admin</SelectItem>
-        <SelectItem value="user">User</SelectItem>
-      </SelectContent>
-    </Select></TableCell
-  >
+  <TableCell class="w-[210px]">
+    <SystemRoleSelect v-model="role" />
+  </TableCell>
   <TableCell class="w-[50px]" v-if="isSSOEnabled"
     ><Check v-if="isSsoUser" :size="20"
   /></TableCell>
@@ -44,6 +36,7 @@
   <TableCell>
     <div class="flex justify-end">
       <UserDropdownMenuButton
+        v-if="authUserStore.isAdmin || authUserStore.isUserManager"
         :user="user"
         @user-updated="(e) => $emit('userUpdated', e)"
       />
@@ -52,7 +45,9 @@
 </template>
 
 <script setup lang="ts">
+import type { SystemRole } from '@@types'
 import { storeToRefs } from 'pinia'
+import { useAuthUserStore } from '@/stores'
 import { computed } from 'vue'
 import jumper from '@/services/jumper'
 import { useToast } from '@@materials/ui/toast'
@@ -60,20 +55,14 @@ import type { User } from '@@types'
 import { useAuthConfigStore } from '@/stores'
 import { Check } from 'lucide-vue-next'
 import UserDropdownMenuButton from './modals/UserDropdownMenuButton.vue'
-
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@@materials/ui/select'
+import SystemRoleSelect from './SystemRoleSelect.vue'
 
 import { TableCell } from '@@materials/ui/table'
 
 const emit = defineEmits<{ userUpdated: [user?: User] }>()
 
 const { isSSOEnabled } = storeToRefs(useAuthConfigStore())
+const authUserStore = useAuthUserStore()
 
 const props = defineProps<{
   user: User
@@ -88,13 +77,12 @@ const { toast } = useToast()
 
 const role = computed({
   get: () => {
-    if (props.user.isSuperuser) return 'admin'
-    return 'user'
+    return props.user.systemRole
   },
-  set: async (value: string) => {
+  set: async (value: SystemRole) => {
     try {
       const updatedUser = await jumper.users.update(props.user.id, {
-        isSuperuser: value === 'admin'
+        systemRole: value
       })
       emit('userUpdated', updatedUser)
     } catch (error) {

@@ -10,22 +10,22 @@
       <InputField field-name="username" label="Username" />
       <InputField field-name="firstName" label="First Name" />
       <InputField field-name="lastName" label="Last Name" />
-      <CheckboxField
-        field-name="isSuperAdmin"
-        label="Is admin"
-        description="Admin users can manage all users' permissions."
-      />
+      <Label class="mb-1 ml-1">System Role</Label>
+      <SystemRoleSelect v-model="systemRole" />
     </div>
   </FormModal>
 </template>
 
 <script setup lang="ts">
-import type { User } from '@@types'
+import { SystemRole, type User } from '@@types'
+import { useField } from 'vee-validate'
 import { useUserForm } from './useUserForm'
 import jumper from '@/services/jumper'
 import { useToast } from '@@materials/ui/toast'
 import { FormModal } from '@@materials/modal'
-import { InputField, CheckboxField } from '@@materials/input'
+import { InputField } from '@@materials/input'
+import { Label } from '@@materials/ui/label'
+import SystemRoleSelect from '../SystemRoleSelect.vue'
 
 const { toast } = useToast()
 
@@ -34,6 +34,7 @@ const props = defineProps<{
 }>()
 
 const userForm = useUserForm(props.user)
+const { value: systemRole } = useField<SystemRole>('systemRole')
 
 const emit = defineEmits<{ userUpdated: [user: User] }>()
 

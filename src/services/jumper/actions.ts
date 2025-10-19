@@ -4,7 +4,7 @@ import type {
   PlayableAction,
   DetailedAction,
   Page,
-  ActionPermissions
+  Permissions
 } from '@@types'
 import { jumperClient, JumperBackendError } from '@/services/jumper/client'
 
@@ -55,16 +55,13 @@ export const update = async (
     { params: { detailed: true } }
   )
   if (response.status !== 200) throw new JumperBackendError(response)
-  return response.data 
+  return response.data
 }
 
 export const searchPermissions = async (search: string) => {
-  const response = await jumperClient.get<ActionPermissions>(
-    '/v1/actions/search',
-    {
-      params: { query: search }
-    }
-  )
+  const response = await jumperClient.get<Permissions>('/v1/actions/search', {
+    params: { query: search }
+  })
   if (response.status !== 200) throw new JumperBackendError(response)
   return response.data
 }
@@ -95,7 +92,9 @@ export const updateActionThumbnail = async (
 }
 
 export const getVersions = async (actionId: DetailedAction['id']) => {
-  const response = await jumperClient.get<ActionVersion[]>(`/v1/actions/${actionId}/versions`)
+  const response = await jumperClient.get<ActionVersion[]>(
+    `/v1/actions/${actionId}/versions`
+  )
   if (response.status !== 200) throw new JumperBackendError(response)
   return response.data
 }

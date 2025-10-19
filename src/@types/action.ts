@@ -1,4 +1,5 @@
 import type { ShortUser, User, DetailedRole, DetailedGroup } from './user'
+import { Workspace } from './workspace'
 
 export const ACTION_TYPES = ['Python', 'Link', 'Windows CMD'] as const
 
@@ -28,10 +29,11 @@ export type DetailedAction = Action & {
   groups: DetailedGroup[]
   group_ids?: DetailedGroup['id'][]
   roles: DetailedRole[]
+  workspace: Workspace['id'] | null
   role_ids?: DetailedRole['id'][]
 }
 
-export type ActionPermissions = {
+export type Permissions = {
   users: User[]
   groups: DetailedGroup[]
   roles: DetailedRole[]

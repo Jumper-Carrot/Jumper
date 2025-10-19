@@ -2,6 +2,7 @@
   <ActionMainForm
     :actionsComposable="actionComposable"
     :cardOptions="options"
+    :workspaces="workspaces"
     :tabs-triggers="[
       { label: 'Code', value: 'code' },
       { label: 'Options', value: 'options' }
@@ -25,6 +26,7 @@
 
 <script setup lang="ts">
 import { watch } from 'vue'
+import type { Workspace } from '@@types'
 import type { ActionsComposable } from '../../../useActions'
 import { useField } from 'vee-validate'
 import { TabsContent } from '@@materials/ui/tabs'
@@ -35,6 +37,7 @@ import WindowsCMDOptionsEditor from './WindowsCMDOptionsEditor.vue'
 defineProps<{
   actionComposable: ActionsComposable
   differentDataFields: string[]
+  workspaces: Workspace[] | null
 }>()
 
 const options = defineModel<string[] | null>('options', {

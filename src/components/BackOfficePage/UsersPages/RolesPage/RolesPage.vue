@@ -5,11 +5,11 @@
       description="Use role to assign actions to user easily."
     />
     <div class="flex items-center gap-4">
-      <SearchBar
-        v-model="search"
-        class="mr-auto w-[280px] flex-shrink"
+      <SearchBar v-model="search" class="mr-auto w-[280px] flex-shrink" />
+      <AddRoleButton
+        @role-added="refetch"
+        v-if="authUserStore.isAdmin || authUserStore.isUserManager"
       />
-      <AddRoleButton @role-added="refetch" />
     </div>
     <TableLayout
       class="my-3 h-full"
@@ -50,6 +50,7 @@
 
 <script setup lang="ts">
 import { useRolesQuery } from '@/composables/query'
+import { useAuthUserStore } from '@/stores'
 import {
   BackOfficePageLayout,
   BackOfficeHeader
@@ -64,6 +65,7 @@ import { useAuthConfigStore } from '@/stores'
 import { storeToRefs } from 'pinia'
 import { AddRoleButton } from './modals'
 
+const authUserStore = useAuthUserStore()
 const { isScimEnabled } = storeToRefs(useAuthConfigStore())
 
 const {

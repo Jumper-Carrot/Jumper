@@ -25,6 +25,7 @@
         <ActionTab
           :actions-composable="actionsComposable"
           :card-options="cardOptions"
+          :workspaces="workspaces"
         >
           <slot name="action-tab" />
         </ActionTab>
@@ -35,6 +36,7 @@
 </template>
 
 <script setup lang="ts">
+import type { Workspace } from '@@types'
 import type { ActionsComposable } from '../../useActions'
 import ActionTab from './ActionTab.vue'
 import { TabsContent, TabsList, TabsTrigger, Tabs } from '@@materials/ui/tabs'
@@ -43,5 +45,6 @@ defineProps<{
   actionsComposable: ActionsComposable
   cardOptions?: string[] | null
   tabsTriggers?: Array<{ label: string; value: string }>
+  workspaces?: Workspace[] | null
 }>()
 </script>

@@ -29,9 +29,9 @@ export const checkUniqueEmail = useMemoize(
 
 export const checkIsNotLastAdmin = async (
   user: User | DetailedUser | undefined,
-  isSuperAdmin: boolean | undefined
+  isAdmin: boolean | undefined
 ): Promise<boolean> => {
-  if (!user || isSuperAdmin) {
+  if (!user || isAdmin) {
     return true
   }
   return !(await isLastAdmin(user?.id))
