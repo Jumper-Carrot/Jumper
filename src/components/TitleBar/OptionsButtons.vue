@@ -3,16 +3,10 @@
     <button
       class="group rounded-full p-[3px] transition-colors hover:bg-slate-200
         dark:hover:bg-slate-800"
-      :title="isDark ? 'Light Mode' : 'Dark Mode'"
-      @click="() => toggleDark()"
+      @click="() => (isThemingBarOpen = !isThemingBarOpen)"
+      :title="isThemingBarOpen ? 'Close Theming Bar' : 'Open Theming Bar'"
     >
-      <Sun
-        v-if="isDark"
-        class="h-[17px] w-[17px] text-slate-700 transition-colors group-hover:text-slate-900
-          dark:text-slate-200 dark:group-hover:text-slate-100"
-      />
-      <Moon
-        v-else
+      <Palette
         class="h-[17px] w-[17px] text-slate-700 transition-colors group-hover:text-slate-900
           dark:text-slate-200 dark:group-hover:text-slate-100"
       />
@@ -51,19 +45,17 @@
 </template>
 
 <script setup lang="ts">
-import { useDark, useToggle } from '@vueuse/core'
 import { useRouter } from 'vue-router'
-import { Cog, Sun, Bug } from 'lucide-vue-next'
-import Moon from './Moon.vue'
-import { useDebugWindowStore } from '@/stores'
+import { Cog, Bug, Palette } from 'lucide-vue-next'
+
+import { useDebugWindowStore, useTitleBarOptionsStore } from '@/stores'
+import { storeToRefs } from 'pinia'
 
 const router = useRouter()
 const debugWindowStore = useDebugWindowStore()
 
-const isDark = useDark()
-const toggleDark = useToggle(isDark)
-
 const isSettingDisabled = () => router.currentRoute.value.name !== 'home'
+const { isThemingBarOpen } = storeToRefs(useTitleBarOptionsStore())
 
 const openDebugWindow = () => {
   if (debugWindowStore.isOpen) {

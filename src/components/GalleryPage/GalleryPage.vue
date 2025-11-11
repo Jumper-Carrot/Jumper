@@ -1,4 +1,5 @@
 <template>
+  <ThemingBar />
   <div
     class="h-full overflow-auto bg-cover bg-center"
     :style="{
@@ -43,6 +44,7 @@ import jumper from '@/services/jumper'
 import { useQuery } from '@/composables'
 import { Loader2 } from 'lucide-vue-next'
 import ActionCard from './ActionCard.vue'
+import ThemingBar from './ThemingBar.vue'
 import {
   useSystemStore,
   useAuthUserStore,
