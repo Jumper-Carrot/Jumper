@@ -35,6 +35,8 @@ export type CodeExec = {
   runTimestamp: string | null
 }
 
+export type CodeExecComposable = ReturnType<typeof useCodeExec>
+
 
 export const useCodeExec = (
   mode: MaybeRefOrGetter<ExecMode>,
@@ -164,6 +166,9 @@ export const useCodeExec = (
       email: user.value.email
     }
   }
+  watch(options, () => {
+    console.log('options updated:', options.value)
+  })
 
   onUnmounted(() => {
     if (process.value) kill()
