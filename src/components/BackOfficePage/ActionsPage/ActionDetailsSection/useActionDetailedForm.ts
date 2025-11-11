@@ -45,6 +45,7 @@ export const useActionDetailedForm = (
         isPublic: z.boolean().default(false),
         isActive: z.boolean().default(false),
         thumbnailUrl: z.string().url().optional(),
+        section: z.string().nullable().optional(),
         workspace: z.number().nullable().optional(),
         permissions: z
           .array(z.custom<User | DetailedGroup | DetailedRole>())
@@ -64,6 +65,7 @@ export const useActionDetailedForm = (
         isPublic: newValue.isPublic,
         isActive: newValue.isActive,
         data: newValue.data,
+        section: newValue.section,
         workspace: newValue.workspace,
         permissions: [...newValue.users, ...newValue.groups, ...newValue.roles]
       }

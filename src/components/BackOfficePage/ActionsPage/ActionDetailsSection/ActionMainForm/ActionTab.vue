@@ -1,7 +1,7 @@
 <template>
   <div class="flex w-full flex-col gap-3 pb-4" v-if="actionDetailed">
     <div class="flex w-full gap-3">
-      <div class="flex w-full flex-col gap-2 ml-1">
+      <div class="ml-1 flex w-full flex-col gap-2">
         <div class="flex items-center gap-3">
           <div class="flex items-center gap-1 pl-1 text-sm">
             <p class="font-semibold">Type :</p>
@@ -58,6 +58,14 @@
               field-name="description"
               label="Description"
               maxlength="500"
+              :show-error-message="false"
+            />
+            <InputField
+              v-if="systemInfo?.allowActionSections"
+              class="max-w-[600px] px-2"
+              field-name="section"
+              label="Section"
+              maxlength="25"
               :show-error-message="false"
             />
             <SelectField
@@ -143,6 +151,10 @@ import { InputField, TextareaField, CheckboxField } from '@@materials/input'
 import { SelectField } from '@@materials/form'
 import { Badge } from '@@materials/ui/badge'
 import { Check, Link, Carrot, ImagePlus } from 'lucide-vue-next'
+import { useSystemStore } from '@/stores/systemStore'
+import { storeToRefs } from 'pinia'
+
+const { systemInfo } = storeToRefs(useSystemStore())
 
 const props = defineProps<{
   actionsComposable: ActionsComposable

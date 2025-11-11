@@ -5,13 +5,30 @@
       backgroundImage: backgroundImage
     }"
   >
-    <div class="flex flex-wrap justify-center gap-4 p-4" v-if="isFetched">
-      <ActionCard
-        class="h-[145px] w-[130px]"
-        v-for="action in actions"
-        :key="action.id"
-        :action="action"
-      />
+    <div class="flex flex-col justify-center gap-4 p-4" v-if="isFetched">
+      <div
+        v-for="sectionName in orderedSections"
+        :key="sectionName"
+        class="w-full"
+      >
+        <div class="mb-2 px-2">
+          <h2
+            v-if="isManySections"
+            class="border-b border-secondary text-sm font-semibold italic text-slate-400
+              dark:text-slate-300"
+          >
+            {{ sectionName }}
+          </h2>
+          <div class="flex flex-wrap justify-start gap-4 p-4 px-3">
+            <ActionCard
+              class="h-[145px] w-[130px]"
+              v-for="action in actionsBySection[sectionName]"
+              :key="action.id"
+              :action="action"
+            />
+          </div>
+        </div>
+      </div>
     </div>
     <div v-else class="flex h-full items-center justify-center">
       <Loader2 class="h-8 w-8 animate-spin text-muted-foreground" />
@@ -48,4 +65,34 @@ const { data: actions, isFetched } = useQuery<PlayableAction[]>(
   ['playable-actions'],
   jumper.actions.getMyActions
 )
+
+const actionsBySection = computed(() => {
+  const sections: Record<string, PlayableAction[]> = {}
+  actions.value?.forEach((action) => {
+    let section = 'Others'
+    if (systemInfo.value?.allowActionSections && action.section) {
+      section = action.section
+    }
+    if (!sections[section]) {
+      sections[section] = []
+    }
+    sections[section].push(action)
+  })
+  return sections
+})
+
+const isManySections = computed(() => {
+  return Object.keys(actionsBySection.value).length > 1
+})
+
+const orderedSections = computed(() => {
+  const sections = Object.keys(actionsBySection.value)
+  sections.sort((a, b) => {
+    if (sections.includes('Others')) {
+      return sections.indexOf('Others') === 0 ? -1 : 1
+    }
+    return a.localeCompare(b)
+  })
+  return sections
+})
 </script>

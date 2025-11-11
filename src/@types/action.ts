@@ -12,6 +12,7 @@ export type Action = {
   creationDate: string
   lastUpdate: string
   thumbnailUrl: string
+  section: string | null
   data: {
     type: ActionData['type']
   }
