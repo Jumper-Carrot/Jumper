@@ -13,17 +13,12 @@ export const useAuthUserStore = defineStore('authUser', () => {
   const refetch = query.refetch
 
   async function fetchUser() {
-    // TODO: optimize number of requests
-    if (await jumper.auth.isAuthenticated()) {
-      const authenticatedUser = await jumper.users.getAuthUser()
-      if (!authenticatedUser) {
-        signOut()
-        return null
-      }
-      return authenticatedUser
+    const authenticatedUser = await jumper.users.getAuthUser()
+    if (!authenticatedUser) {
+      signOut()
+      return null
     }
-    console.warn('User is not authenticated')
-    return null
+    return authenticatedUser
   }
 
   const signIn = async (email: User['email'], password: string) => {

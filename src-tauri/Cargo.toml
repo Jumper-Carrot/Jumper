@@ -31,6 +31,7 @@ tauri-plugin-deep-link = "2"
 tauri-plugin-app-exit = "0.1"
 url = "2"
 tauri-plugin-dialog = "2"
+tauri-plugin-store = "2.4.1"
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
 tauri-plugin-single-instance = { version = "2.0.0", features = ["deep-link"] }

@@ -5,10 +5,8 @@ import { camelToSnake, snakeToCamel } from '@/services/utils'
 
 export const jumperClient = axios.create({
   baseURL: undefined,
-  withCredentials: true,
   headers: {
-    'Content-Type': 'application/json',
-    'X-Client-Agent': 'jumper-client'
+    'Content-Type': 'application/json'
   },
   validateStatus: Boolean
 })
@@ -47,8 +45,8 @@ export const setBackendUrl = async () => {
   }
 }
 
-export const getInfo = async (): Promise<CarrotInfo> => {
-  const response = await jumperClient.get('/v1/info')
+export const getBackendInfo = async () => {
+  const response = await jumperClient.get<BackendInfo>('/v1/')
   if (response.status !== 200) {
     throw new JumperBackendError(response)
   }
@@ -68,6 +66,7 @@ jumperClient.interceptors.response.use((response) => {
   }
   return response
 })
+
 
 export class JumperBackendError extends Error {
   constructor(response: AxiosResponse) {
