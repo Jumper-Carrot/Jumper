@@ -61,12 +61,12 @@ import { PaginationFooter } from '@@materials/table'
 import { TableHead } from '@@materials/ui/table'
 import { OrderByButton } from '@@materials/input'
 import RoleRow from './RoleRow.vue'
-import { useAuthConfigStore } from '@/stores'
+import { useBackendInfoStore } from '@/stores'
 import { storeToRefs } from 'pinia'
 import { AddRoleButton } from './modals'
 
 const authUserStore = useAuthUserStore()
-const { isScimEnabled } = storeToRefs(useAuthConfigStore())
+const { isScimEnabled } = storeToRefs(useBackendInfoStore())
 
 const {
   data: rolesPage,

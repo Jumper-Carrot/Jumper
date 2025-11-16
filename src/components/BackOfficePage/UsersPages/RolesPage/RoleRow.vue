@@ -96,12 +96,12 @@ import {
   TooltipTrigger
 } from '@@materials/ui/tooltip'
 
-import { useAuthConfigStore } from '@/stores'
+import { useBackendInfoStore } from '@/stores'
 
 import { storeToRefs } from 'pinia'
 
 const authUserStore = useAuthUserStore()
-const { isScimEnabled } = storeToRefs(useAuthConfigStore())
+const { isScimEnabled } = storeToRefs(useBackendInfoStore())
 
 defineEmits<{
   roleUpdated: []

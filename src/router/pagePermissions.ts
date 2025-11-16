@@ -1,6 +1,6 @@
 import type { RouteLocationNormalized } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { useAuthUserStore, useAuthConfigStore } from '@/stores'
+import { useAuthUserStore, useBackendInfoStore } from '@/stores'
 
 type pagePermission = (
   to: RouteLocationNormalized,
@@ -13,7 +13,7 @@ export const usePagePermissions = async (): Promise<{
   const authUserStore = useAuthUserStore()
   const { isAuthenticated, isAdmin, isFetching, isUserManager, isActionManager } =
     storeToRefs(useAuthUserStore())
-  const { isScimEnabled } = storeToRefs(useAuthConfigStore())
+  const { isScimEnabled } = storeToRefs(useBackendInfoStore())
   if (isFetching.value) {
     await authUserStore.refetch()
   }

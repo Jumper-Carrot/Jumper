@@ -61,7 +61,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthConfigStore } from '@/stores'
+import { useBackendInfoStore } from '@/stores'
 import { useAuthUserStore } from '@/stores'
 import { storeToRefs } from 'pinia'
 import { useUsersQuery } from '@/composables'
@@ -78,7 +78,7 @@ import {
 import UserRow from './UserRow.vue'
 import AddUserButton from './modals/AddUserButton.vue'
 
-const { isSSOEnabled } = storeToRefs(useAuthConfigStore())
+const { isSSOEnabled } = storeToRefs(useBackendInfoStore())
 const authUserStore = useAuthUserStore()
 
 const {

@@ -105,7 +105,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthUserStore, useAuthConfigStore, useSystemStore } from '@/stores'
+import { useAuthUserStore, useBackendInfoStore, useSystemStore } from '@/stores'
 import { RouterLink } from 'vue-router'
 import { Button } from '@@materials/ui/button'
 
@@ -127,7 +127,7 @@ import {
 } from 'lucide-vue-next'
 
 const authUserStore = useAuthUserStore()
-const authConfigStore = useAuthConfigStore()
+const backendInfoStore = useBackendInfoStore()
 const systemStore = useSystemStore()
 
 const menuItems = [
@@ -162,7 +162,7 @@ const menuItems = [
       {
         title: 'Groups',
         page: 'groups',
-        condition: () => authConfigStore.isScimEnabled
+        condition: () => backendInfoStore.isScimEnabled
       },
       {
         title: 'Roles',

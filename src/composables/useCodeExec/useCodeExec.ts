@@ -166,9 +166,6 @@ export const useCodeExec = (
       email: user.value.email
     }
   }
-  watch(options, () => {
-    console.log('options updated:', options.value)
-  })
 
   onUnmounted(() => {
     if (process.value) kill()

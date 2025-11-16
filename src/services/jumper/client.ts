@@ -1,4 +1,4 @@
-import type { CarrotInfo } from '@/@types/utils'
+import type { BackendInfo } from '@/@types/utils'
 import { invoke } from '@tauri-apps/api/core'
 import axios, { type AxiosResponse } from 'axios'
 import { camelToSnake, snakeToCamel } from '@/services/utils'
@@ -33,8 +33,10 @@ export const setBackendUrl = async () => {
     localStorage.setItem('jumper-backend-url', backendUrl)
     jumperClient.defaults.baseURL = backendUrl
     try {
-      const info =  await getInfo()
-      if (!info || info.name !== 'Carrot') throw new Error('Invalid backend info')
+      const info = await getBackendInfo()
+      if (!info || info.name !== 'Carrot')
+        throw new Error('Invalid backend info')
+      return info
     } catch (error) {
       jumperClient.defaults.baseURL = undefined
       localStorage.removeItem('jumper-backend-url')

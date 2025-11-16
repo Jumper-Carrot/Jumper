@@ -11,20 +11,28 @@ export interface Order {
 }
 
 export type VersionInfo = {
-    version: string;
-    notes: string;
-    pub_date: string;
-    platforms: {
-        [key: string]: {
-            signature: string;
-            url: string;
-        };
-    };
+  version: string
+  notes: string
+  pub_date: string
+  platforms: {
+    [key: string]: {
+      signature: string
+      url: string
+    }
+  }
 }
-
-export interface CarrotInfo {
+export interface BackendInfo {
   name: string
   version: string
   commit: string
   buildDate: string
+  scimEnabled: boolean
+  providers: AuthProvider[]
+}
+
+export interface AuthProvider {
+  id: 'oidc' | 'email'
+  name: string
+  authUrl: string
+  logoutUrl?: string
 }

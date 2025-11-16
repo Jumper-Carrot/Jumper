@@ -1,16 +1,17 @@
 import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
 import { usePagePermissions } from '@/router/pagePermissions'
-import jumper from '@/services/jumper'
+import { useBackendInfoStore } from '@/stores'
 
 export const userAuthorisationGuard = async (
   to: RouteLocationNormalized,
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) => {
-  if (!jumper.client.jumperClient.defaults.baseURL)
-    await jumper.client.setBackendUrl()
+  const backendInfoStore = useBackendInfoStore()
+  if (!backendInfoStore.isBackendSetup)
+    await backendInfoStore.setBackendInfo()
   if (['login', 'debug', 'updater'].includes(to.name as string)) return next()
-  if (!jumper.client.jumperClient.defaults.baseURL)
+  if (!backendInfoStore.isBackendSetup)
     return next({ name: 'login' })
   const pagePermisions = await usePagePermissions()
   for (const record of to.matched) {

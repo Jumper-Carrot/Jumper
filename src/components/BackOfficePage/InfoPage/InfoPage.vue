@@ -12,8 +12,8 @@
     </div>
     <div class="flex h-full w-full flex-col gap-4">
       <div
-        class="flex h-[100px] max-w-[200px] flex-col gap-1 rounded-md border bg-slate-50 dark:bg-slate-800 p-3
-          py-2"
+        class="flex h-[100px] max-w-[200px] flex-col gap-1 rounded-md border bg-slate-50 p-3
+          py-2 dark:bg-slate-800"
       >
         <h2
           class="text-md mb-1 font-semibold text-slate-800 dark:text-slate-200"
@@ -34,13 +34,13 @@
           class="flex items-center gap-1 text-sm font-semibold text-slate-600 dark:text-slate-400"
         >
           <Carrot class="inline h-5 w-[21px] text-orange-500" />
-          Carrot: {{ carrotVersion }}
+          Carrot: {{ backendInfo?.version }}
         </div>
       </div>
 
       <div
         class="mb-auto flex h-[100px] max-w-[400px] flex-col gap-1 rounded-md border
-          bg-slate-50 dark:bg-slate-800 p-3 py-2"
+          bg-slate-50 p-3 py-2 dark:bg-slate-800"
       >
         <h2
           class="text-md mb-1 flex items-center gap-1.5 font-semibold text-slate-800
@@ -57,11 +57,11 @@
         >
           Jumper:
           <a
-            href="https://github.com/LibertAntoine/Jumper"
+            href="https://github.com/Jumper-Carrot/Jumper"
             class="text-blue-600 hover:underline dark:text-blue-400"
             target="_blank"
             rel="noopener noreferrer"
-            >https://github.com/LibertAntoine/Jumper</a
+            >https://github.com/Jumper-Carrot/Jumper</a
           >
         </div>
         <div
@@ -69,11 +69,11 @@
         >
           Carrot:
           <a
-            href="https://github.com/LibertAntoine/Carrot"
+            href="https://github.com/Jumper-Carrot/Carrot"
             class="text-blue-600 hover:underline dark:text-blue-400"
             target="_blank"
             rel="noopener noreferrer"
-            >https://github.com/LibertAntoine/Carrot</a
+            >https://github.com/Jumper-Carrot/Carrot</a
           >
         </div>
       </div>
@@ -91,7 +91,8 @@ import { ref } from 'vue'
 import { Carrot } from 'lucide-vue-next'
 import BackOfficePageLayout from '../@common/BackOfficePageLayout.vue'
 import { getVersion } from '@tauri-apps/api/app'
-import jumper from '@/services/jumper'
+import { useBackendInfoStore } from '@/stores'
+import { storeToRefs } from 'pinia'
 
 const jumperVersion = ref<string | null>(null)
 const carrotVersion = ref<string | null>(null)
@@ -100,7 +101,5 @@ getVersion().then((version) => {
   jumperVersion.value = version
 })
 
-jumper.client.getInfo().then((info) => {
-  carrotVersion.value = info.version
-})
+const { backendInfo } = storeToRefs(useBackendInfoStore())
 </script>

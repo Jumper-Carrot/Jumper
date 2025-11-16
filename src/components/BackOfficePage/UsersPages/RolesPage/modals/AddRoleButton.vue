@@ -92,7 +92,7 @@ import { Group, User, Action } from '@@types'
 import { useRoleForm } from './useRoleForm'
 import jumper from '@/services/jumper'
 import { useToast } from '@@materials/ui/toast'
-import { useAuthConfigStore } from '@/stores'
+import { useBackendInfoStore } from '@/stores'
 import { storeToRefs } from 'pinia'
 import { useUsersQuery, useGroupsQuery } from '@/composables/query'
 import { Loader2, UserCog, UserIcon, UsersIcon } from 'lucide-vue-next'
@@ -105,7 +105,7 @@ import { CommandItem } from '@@materials/ui/command'
 const { toast } = useToast()
 
 const roleForm = useRoleForm()
-const { isScimEnabled } = storeToRefs(useAuthConfigStore())
+const { isScimEnabled } = storeToRefs(useBackendInfoStore())
 
 const emit = defineEmits<{ roleAdded: [] }>()
 

@@ -132,7 +132,7 @@ import { onOpenUrl } from '@tauri-apps/plugin-deep-link'
 import { getVersion } from '@tauri-apps/api/app'
 import { useUpdater } from '@/composables/useUpdater'
 
-import { useAuthConfigStore, useAuthUserStore } from '@/stores'
+import { useBackendInfoStore, useAuthUserStore } from '@/stores'
 import { useDark } from '@vueuse/core'
 import { useRouter } from 'vue-router'
 
@@ -149,9 +149,9 @@ getVersion().then((version) => {
   appVersion.value = version
 })
 
-const authConfigStore = useAuthConfigStore()
+const backendInfoStore = useBackendInfoStore()
 const { isEmailEnabled, isOidcEnabled, ssoDiplayName, oidcRedirectUrl } =
-  storeToRefs(authConfigStore)
+  storeToRefs(backendInfoStore)
 const loggedUser = useAuthUserStore()
 const router = useRouter()
 
@@ -220,7 +220,7 @@ const setBackendUrl = async () => {
     return
   }
   loggedUser.refetch()
-  authConfigStore.refetch()
+  backendInfoStore.setBackendInfo()
   isBackendReachable.value = true
   updater.askForUpdate()
 }

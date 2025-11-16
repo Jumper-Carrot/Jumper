@@ -52,7 +52,7 @@ import { computed } from 'vue'
 import jumper from '@/services/jumper'
 import { useToast } from '@@materials/ui/toast'
 import type { User } from '@@types'
-import { useAuthConfigStore } from '@/stores'
+import { useBackendInfoStore } from '@/stores'
 import { Check } from 'lucide-vue-next'
 import UserDropdownMenuButton from './modals/UserDropdownMenuButton.vue'
 import SystemRoleSelect from './SystemRoleSelect.vue'
@@ -61,7 +61,7 @@ import { TableCell } from '@@materials/ui/table'
 
 const emit = defineEmits<{ userUpdated: [user?: User] }>()
 
-const { isSSOEnabled } = storeToRefs(useAuthConfigStore())
+const { isSSOEnabled } = storeToRefs(useBackendInfoStore())
 const authUserStore = useAuthUserStore()
 
 const props = defineProps<{

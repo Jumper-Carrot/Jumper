@@ -81,7 +81,7 @@
 import type { Role, DetailedRole, User, Group } from '@@types'
 import { useRoleForm } from './useRoleForm'
 import jumper from '@/services/jumper'
-import { useAuthConfigStore } from '@/stores'
+import { useBackendInfoStore } from '@/stores'
 import { storeToRefs } from 'pinia'
 import { useToast } from '@@materials/ui/toast'
 import { FormModal } from '@@materials/modal'
@@ -97,7 +97,7 @@ const props = defineProps<{
 }>()
 
 const userForm = useRoleForm(props.role)
-const { isScimEnabled } = storeToRefs(useAuthConfigStore())
+const { isScimEnabled } = storeToRefs(useBackendInfoStore())
 
 const emit = defineEmits<{ roleUpdated: [role: Role] }>()
 

@@ -82,7 +82,7 @@ import type { User } from '@@types'
 import jumper from '@/services/jumper'
 import { storeToRefs } from 'pinia'
 import { ref, computed } from 'vue'
-import { useAuthConfigStore } from '@/stores'
+import { useBackendInfoStore } from '@/stores'
 import { useToast } from '@@materials/ui/toast'
 import { MoreHorizontal } from 'lucide-vue-next'
 import { Button } from '@@materials/ui/button'
@@ -103,7 +103,7 @@ import {
   TooltipTrigger
 } from '@@materials/ui/tooltip'
 
-const { isSSOEnabled } = storeToRefs(useAuthConfigStore())
+const { isSSOEnabled } = storeToRefs(useBackendInfoStore())
 const { toast } = useToast()
 const editUserModalOpen = ref(false)
 const deleteUserModalOpen = ref(false)

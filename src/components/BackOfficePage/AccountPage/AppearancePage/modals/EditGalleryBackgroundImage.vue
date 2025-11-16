@@ -126,7 +126,6 @@ const onSubmit = backgroundImageForm.handleSubmit(async (values) => {
 
 watch(isModalOpen, (newVal) => {
   if (newVal === false) {
-    console.log('resetting form')
     newBackgroundImageUrl.value = null
     backgroundImageForm.resetForm()
   }
