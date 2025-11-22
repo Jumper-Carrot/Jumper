@@ -5,7 +5,7 @@
       description="Use role to assign actions to user easily."
     />
     <div class="flex items-center gap-4">
-      <SearchBar v-model="search" class="mr-auto w-[280px] flex-shrink" />
+      <SearchBar v-model="search" class="mr-auto w-[280px] shrink" />
       <AddRoleButton
         @role-added="refetch"
         v-if="authUserStore.isAdmin || authUserStore.isUserManager"

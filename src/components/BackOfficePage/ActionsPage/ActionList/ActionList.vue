@@ -1,17 +1,17 @@
 <template>
   <div
-    class="flex h-full w-[210px] flex-shrink-0 scroll-py-36 flex-col items-center border-r
+    class="flex h-full w-[210px] shrink-0 scroll-py-36 flex-col items-center border-r
       bg-slate-100 pb-3 pt-2 dark:border-slate-700 dark:bg-slate-800 dark:bg-opacity-60"
   >
     <div class="w-full px-2">
       <Input v-model="search" class="h-[25px]" placeholder="Search" />
     </div>
     <div
-      class="my-2 flex w-full flex-grow flex-col gap-2 overflow-auto px-2 py-2"
+      class="my-2 flex w-full grow flex-col gap-2 overflow-auto px-2 py-2"
       v-if="actionsQuery.isFetched"
     >
       <ActionListCard
-        class="flex-shrink-0"
+        class="shrink-0"
         v-for="action in actions"
         :key="action.id"
         :action="action"
@@ -19,7 +19,7 @@
         @click="selectedAction = action"
       />
     </div>
-    <div class="flex-grow" v-else>
+    <div class="grow" v-else>
       <div class="flex h-full flex-col items-center pt-[25px]">
         <Loader2 class="size-7 animate-spin text-primary" />
       </div>

@@ -7,7 +7,7 @@
         role="combobox"
         :class="cn(selectVariants({ variant, size }), props.class)"
       >
-        <div class="flex flex-grow items-center gap-2 truncate text-start">
+        <div class="flex grow items-center gap-2 truncate text-start">
           <slot
             name="selection"
             :items="modelValue.map((key) => getItem(key))"
@@ -53,13 +53,13 @@
               @select="select(item)"
             >
               <div
-                class="mr-auto flex flex-grow items-center gap-2 truncate text-start"
+                class="mr-auto flex grow items-center gap-2 truncate text-start"
               >
                 <slot name="list-item" :item="item" :label="getItemLabel(item)">
                   {{ getItemLabel(item) }}
                 </slot>
               </div>
-              <div class="w-[23px] flex-shrink-0">
+              <div class="w-[23px] shrink-0">
                 <Check v-if="isSelected(item)" class="ml-auto h-4 w-4" />
               </div>
             </CommandItem>

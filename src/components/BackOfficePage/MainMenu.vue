@@ -30,7 +30,7 @@
                   }"
                 >
                   <component v-if="item.icon" :is="item.icon" class="h-4 w-4" />
-                  <p class="flex-grow text-left">{{ item.title }}</p>
+                  <p class="grow text-left">{{ item.title }}</p>
                   <ChevronRight
                     v-if="item.children"
                     class="group/collapsible/trigger h-4 w-4 transition-transform duration-300"
@@ -96,7 +96,7 @@
               transition-all hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
           >
             <ChevronLeft class="h-4 w-4" />
-            <p class="flex-grow text-left">Back to home</p>
+            <p class="grow text-left">Back to home</p>
           </RouterLink>
         </nav>
       </div>

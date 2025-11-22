@@ -1,11 +1,11 @@
 <template>
   <div
     data-tauri-drag-region
-    class="fixed top-0 z-[10000] flex h-[32px] w-full items-center gap-1 bg-slate-100 pl-1
+    class="fixed top-0 z-10000 flex h-[32px] w-full items-center gap-1 bg-slate-100 pl-1
       dark:bg-slate-900"
   >
     <img
-      class="pointer-events-none ml-[2px] mt-[1px] w-[23px]"
+      class="pointer-events-none ml-[2px] mt-px w-[23px]"
       src="@/assets/jumper-logo.png"
       alt="Jumper Logo"
     />
@@ -14,7 +14,7 @@
     >
       Jumper - Debug
     </h1>
-    <div class="flex-grow" />
+    <div class="grow" />
     <WindowsMenu debug-window />
   </div>
 </template>

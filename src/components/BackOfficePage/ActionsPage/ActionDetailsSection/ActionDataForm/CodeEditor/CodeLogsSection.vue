@@ -1,7 +1,7 @@
 <template>
   <div class="h-[400px]">
     <div
-      class="flex h-[40px] w-full items-center border-slate-300 bg-slate-200 px-2 shadow-sm
+      class="flex h-[40px] w-full items-center border-slate-300 bg-slate-200 px-2 shadow-xs
         dark:bg-slate-800"
     >
       <p class="italic text-slate-500 dark:text-slate-300">Logs</p>

@@ -35,7 +35,7 @@
     <ComboboxRoot
       v-model:open="open"
       v-model:search-term="searchTerm"
-      class="flex-grow"
+      class="grow"
     >
       <ComboboxAnchor as-child>
         <ComboboxInput as-child>
@@ -55,7 +55,7 @@
             align="start"
             position="popper"
             class="z-50 mt-2 max-h-[200px] max-w-full rounded-md bg-popover text-popover-foreground
-              shadow-md outline-none data-[state=open]:animate-in
+              shadow-md outline-hidden data-[state=open]:animate-in
               data-[state=closed]:animate-out data-[state=closed]:fade-out-0
               data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95
               data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2

@@ -1,7 +1,7 @@
 <template>
   <div class="flex h-full">
     <div
-      class="flex h-full w-[210px] flex-shrink-0 scroll-py-36 flex-col items-center border-r
+      class="flex h-full w-[210px] shrink-0 scroll-py-36 flex-col items-center border-r
         bg-slate-100 pb-3 pt-2 dark:border-slate-700 dark:bg-slate-800
         dark:bg-opacity-60"
       @click="() => (selection = [])"
@@ -10,10 +10,10 @@
         <Input v-model="search" class="h-[25px]" placeholder="Search" />
       </div>
       <div
-        class="my-2 flex w-full flex-grow flex-col gap-2 overflow-auto px-2 py-2"
+        class="my-2 flex w-full grow flex-col gap-2 overflow-auto px-2 py-2"
       >
         <p
-          class="text-xs font-[600] italic text-slate-400"
+          class="text-xs font-semibold italic text-slate-400"
           v-if="executionsRunning.length"
         >
           Running
@@ -27,11 +27,11 @@
           @click.ctrl.stop="select(execution, { multiple: true })"
         >
           <div
-            class="shadow-xs group flex h-[40px] w-full flex-col items-start rounded-lg border
+            class="shadow-2xs group flex h-[40px] w-full flex-col items-start rounded-lg border
               py-0.5 pl-2 pr-1 transition-all dark:bg-slate-800 dark:hover:bg-slate-700
               dark:hover:bg-opacity-60"
             :class="{
-              [`border-slate-300 bg-white hover:bg-slate-50 hover:shadow-sm
+              [`border-slate-300 bg-white hover:bg-slate-50 hover:shadow-xs
               dark:border-slate-600`]: !selection.includes(execution.id),
               'bg-slate-50 ring-2 ring-primary dark:bg-slate-700':
                 selection.includes(execution.id)
@@ -39,14 +39,14 @@
           >
             <div class="flex w-full items-center">
               <p
-                class="truncate text-sm font-[600] leading-[17px] text-slate-800 dark:text-slate-200"
+                class="truncate text-sm font-semibold leading-[17px] text-slate-800 dark:text-slate-200"
               >
                 {{ execution.namespace }}
               </p>
               <p
                 v-if="execution.mode == 'get-options'"
                 class="ml-0.5 rounded-md bg-blue-300 px-1 text-[12px] leading-[17px] text-slate-800
-                  shadow-sm "
+                  shadow-xs "
               >
                 O
               </p>
@@ -70,7 +70,7 @@
           </div>
         </Button>
         <p
-          class="text-xs font-[600] italic text-slate-400"
+          class="text-xs font-semibold italic text-slate-400"
           v-if="endedExecutions.length"
         >
           Ended
@@ -84,11 +84,11 @@
           @click.ctrl.stop="select(execution, { multiple: true })"
         >
           <div
-            class="shadow-xs group flex h-[40px] w-full flex-col items-start rounded-lg border
+            class="shadow-2xs group flex h-[40px] w-full flex-col items-start rounded-lg border
               py-0.5 pl-2 pr-1 transition-all dark:bg-slate-800 dark:hover:bg-slate-700
               dark:hover:bg-opacity-60"
             :class="{
-              [`border-slate-300 bg-slate-100 hover:bg-slate-50 hover:shadow-sm
+              [`border-slate-300 bg-slate-100 hover:bg-slate-50 hover:shadow-xs
               dark:border-slate-600`]: !selection.includes(execution.id),
               'bg-slate-50 ring-2 ring-primary dark:bg-slate-700':
                 selection.includes(execution.id)
@@ -96,14 +96,14 @@
           >
             <div class="flex w-full items-center gap-0.5">
               <p
-                class="truncate text-sm font-[600] leading-[17px] text-slate-800 dark:text-slate-200"
+                class="truncate text-sm font-semibold leading-[17px] text-slate-800 dark:text-slate-200"
               >
                 {{ execution.namespace }}
               </p>
               <p
                 v-if="execution.mode == 'get-options'"
                 class="ml-0.5 rounded-md bg-blue-300 px-1 text-[12px] leading-[17px] text-slate-800
-                  shadow-sm"
+                  shadow-xs"
               >
                 O
               </p>
@@ -130,7 +130,7 @@
     </div>
     <div class="flex w-full flex-col">
       <div
-        class="flex-grow overflow-auto bg-slate-200 shadow-inner dark:bg-slate-800"
+        class="grow overflow-auto bg-slate-200 shadow-inner dark:bg-slate-800"
       >
         <div
           v-for="(log, i) in showedLogs"
@@ -153,7 +153,7 @@
         </div>
       </div>
       <div
-        class="flex h-[22px] w-full items-center bg-slate-300 px-2 dark:bg-slate-900 flex-shrink-0"
+        class="flex h-[22px] w-full items-center bg-slate-300 px-2 dark:bg-slate-900 shrink-0"
       >
         <div class="flex items-center gap-1">
           <MiniSwitch
@@ -164,7 +164,7 @@
         </div>
         <Button
           class="ml-auto flex h-[18px] w-[18px] items-center justify-center p-2.5 text-slate-500
-            hover:text-slate-800 hover:dark:text-slate-200"
+            hover:text-slate-800 dark:hover:text-slate-200"
           variant="ghost"
           title="Clear logs"
           :disabled="showedLogs.length === 0"

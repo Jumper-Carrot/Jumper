@@ -7,7 +7,7 @@
         role="combobox"
         :class="cn('justify-between gap-0 pl-3 pr-2', props.class)"
       >
-        <div class="flex flex-grow items-center gap-2 truncate text-start">
+        <div class="flex grow items-center gap-2 truncate text-start">
           <slot name="selection" :item="selectedItem" :label="itemLabel">
             <p class="mr-2">{{ itemLabel ?? placeholder }}</p>
           </slot>
@@ -50,13 +50,13 @@
               @select="select(key)"
             >
               <div
-                class="mr-auto flex flex-grow items-center gap-2 truncate text-start"
+                class="mr-auto flex grow items-center gap-2 truncate text-start"
               >
                 <slot name="list-item" :item="item" :label="getLabel(item)">
                   {{ getLabel(item) }}
                 </slot>
               </div>
-              <div class="w-[23px] flex-shrink-0" v-if="!props.disableCheck">
+              <div class="w-[23px] shrink-0" v-if="!props.disableCheck">
                 <Check v-if="selectedKey == key" class="ml-auto h-4 w-4" />
               </div>
             </CommandItem>

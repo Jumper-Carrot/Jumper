@@ -86,7 +86,7 @@
         </div>
       </div>
     </div>
-    <div class="flex w-full flex-shrink-0 items-end justify-end gap-2 border-t">
+    <div class="flex w-full shrink-0 items-end justify-end gap-2 border-t">
       <Button size="sm" class="mt-2" @click="onSubmit">
         <Save />
         Save

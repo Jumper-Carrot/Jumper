@@ -32,7 +32,7 @@
           </Select>
         </div>
       </div>
-      <div class="flex flex-grow flex-col gap-2 pl-1">
+      <div class="flex grow flex-col gap-2 pl-1">
         <div
           v-if="
             systemInfo &&
@@ -91,7 +91,7 @@
         </div>
       </div>
       <div
-        class="flex w-full flex-shrink-0 items-end justify-end gap-2 border-t"
+        class="flex w-full shrink-0 items-end justify-end gap-2 border-t"
       >
         <Button size="sm" class="mt-2" @click="onSubmit">
           <Save />

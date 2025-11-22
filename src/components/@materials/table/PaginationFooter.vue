@@ -1,7 +1,7 @@
 <template>
   <div class="flex h-[39px] items-center gap-6">
     <template v-if="itemCount">
-      <p class="flex-grow text-sm font-semibold text-slate-500">
+      <p class="grow text-sm font-semibold text-slate-500">
         {{ (currentPage - 1) * itemsPerPage + 1 }} -
         {{ Math.min(currentPage * itemsPerPage, itemCount || 0) }} of
         {{ itemCount }}
@@ -44,7 +44,7 @@
             >
               <Button
                 class="h-7 w-7 p-0"
-                :variant="item.value === page ? 'default' : 'outline'"
+                :variant="item.value === page ? 'default' : 'outline-solid'"
                 :class="item.value !== page ? 'text-slate-700 dark:text-slate-500' : ''"
                 @click="currentPage = item.value"
               >

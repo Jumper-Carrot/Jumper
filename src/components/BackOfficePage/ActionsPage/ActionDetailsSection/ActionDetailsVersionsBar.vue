@@ -4,7 +4,7 @@
   >
     <div
       class="h-[30px] flex items-center bg-slate-50 dark:bg-slate-800 dark:text-slate-300 p-1 px-2 font-semibold italic text-slate-500
-        shadow-sm"
+        shadow-xs"
     >
       Versions
     </div>
@@ -14,7 +14,7 @@
     >
       <button
         v-for="(version, i) in versions"
-        class="h-[50px] w-full flex-shrink-0 border-b p-1 px-2 text-left transition-colors"
+        class="h-[50px] w-full shrink-0 border-b p-1 px-2 text-left transition-colors"
         :class="{
           'bg-primary text-white':
             selectedVersion?.history.id === version.history.id,

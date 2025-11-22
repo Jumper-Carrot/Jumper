@@ -74,7 +74,7 @@
       </Tooltip>
     </TooltipProvider>
   </TableCell>
-  <TableCell class="float-end flex-grow">
+  <TableCell class="float-end grow">
     <RoleDropdownMenuButton
       v-if="authUserStore.isAdmin || authUserStore.isUserManager"
       :role="role"

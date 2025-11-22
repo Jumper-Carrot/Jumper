@@ -18,7 +18,7 @@
           :key="i"
           variant="outline"
           class="flex items-center gap-1 rounded-lg bg-slate-100 px-1.5 py-0.5 text-xs
-            text-slate-800 shadow-sm dark:bg-slate-800 dark:text-slate-400"
+            text-slate-800 shadow-xs dark:bg-slate-800 dark:text-slate-400"
         >
           <template v-if="'username' in item">
             <UserIcon :size="14" />
@@ -38,7 +38,7 @@
           v-if="permissions.length > visibleCount"
           variant="outline"
           class="flex items-center gap-1 rounded-lg bg-slate-100 px-1.5 py-0.5 text-xs
-            text-slate-800 shadow-sm dark:bg-slate-800 dark:text-slate-400"
+            text-slate-800 shadow-xs dark:bg-slate-800 dark:text-slate-400"
         >
           + {{ permissions.length - visibleCount }} autres
         </Badge>

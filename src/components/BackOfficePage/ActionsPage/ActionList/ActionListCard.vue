@@ -1,9 +1,9 @@
 <template>
   <button
-    class="shadow-xs flex h-[60px] w-full flex-col rounded-md border p-[6px] transition-all
+    class="shadow-2xs flex h-[60px] w-full flex-col rounded-md border p-[6px] transition-all
       dark:bg-slate-800 dark:hover:bg-slate-700 dark:hover:bg-opacity-60"
     :class="{
-      [`border-slate-300 bg-white hover:bg-slate-50 hover:shadow-sm
+      [`border-slate-300 bg-white hover:bg-slate-50 hover:shadow-xs
       dark:border-slate-600`]: !isSelected,
       'ring-2 ring-primary bg-slate-50 dark:bg-slate-700': isSelected
     }"
@@ -11,19 +11,19 @@
     <div class="flex items-center gap-1">
       <div
         class="flex h-5 w-5 items-center justify-center rounded-md bg-slate-100 p-[2px]
-          shadow-sm dark:bg-slate-900"
+          shadow-xs dark:bg-slate-900"
       >
         <Link v-if="action.data.type == 'Link'" :size="12" />
         <img v-else-if="action.data.type == 'Python'" src="/actions/python.png" />
         <img v-else src="/actions/windows-cmd.png" />
       </div>
       <h3
-        class="truncate text-sm font-[500] text-slate-800 dark:text-slate-300"
+        class="truncate text-sm font-medium text-slate-800 dark:text-slate-300"
       >
         {{ action.name }}
       </h3>
       <div
-        class="ml-auto flex h-2 w-2 items-center justify-center rounded-md mb-2 flex-shrink-0"
+        class="ml-auto flex h-2 w-2 items-center justify-center rounded-md mb-2 shrink-0"
         :title="action.isActive ? 'Active' : 'Inactive'"
         :class="{
           'bg-green-400 ':

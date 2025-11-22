@@ -1,9 +1,9 @@
 <template>
   <div
-    class="flex h-[145px] w-[130px] flex-shrink-0 flex-col items-center gap-2 rounded-md
-      bg-slate-100 p-2 pb-1 shadow-sm dark:bg-slate-800"
+    class="flex h-[145px] w-[130px] shrink-0 flex-col items-center gap-2 rounded-md
+      bg-slate-100 p-2 pb-1 shadow-xs dark:bg-slate-800"
   >
-    <div class="h-[78px] w-[78px] flex-shrink-0 p-[2px]">
+    <div class="h-[78px] w-[78px] shrink-0 p-[2px]">
       <img
         v-if="actionDetailed?.thumbnailUrl"
         :src="actionDetailed?.thumbnailUrl"
@@ -13,7 +13,7 @@
         <Carrot :size="60" class="ml-2 text-slate-300" />
       </div>
     </div>
-    <div class="flex flex-grow flex-col items-center gap-0.5">
+    <div class="flex grow flex-col items-center gap-0.5">
       <h2
         class="text-md w-full overflow-hidden break-all text-center font-semibold
           text-slate-700 dark:text-slate-200"
@@ -31,7 +31,7 @@
           hover:text-slate-700 dark:bg-slate-700 dark:text-slate-400"
         :items="cardOptions ?? []"
         disable-check
-        list-item-class="cursor-pointer p-1 data-[highlighted]:bg-slate-200 dark:data-[highlighted]:bg-slate-800"
+        list-item-class="cursor-pointer p-1 data-highlighted:bg-slate-200 dark:data-highlighted:bg-slate-800"
         pop-ever-class="bg-slate-100 dark:bg-slate-700"
       >
         <template #selection

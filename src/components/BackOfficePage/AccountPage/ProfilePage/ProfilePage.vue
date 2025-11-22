@@ -4,7 +4,7 @@
       :title="user ? getUserDisplayName(user) : 'Profile'"
       description="Edit your profile."
     />
-    <div class="w-full flex-grow overflow-auto pr-3">
+    <div class="w-full grow overflow-auto pr-3">
       <form class="flex max-w-[400px] flex-col pl-1 pt-2">
         <InputField fieldName="username" label="Username" />
         <InputField fieldName="email" label="Email" type="email" />

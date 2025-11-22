@@ -4,7 +4,7 @@
     <div class="flex items-center gap-4">
       <SearchBar
         v-model="search"
-        class="mr-auto w-[280px] flex-shrink"
+        class="mr-auto w-[280px] shrink"
       />
     </div>
     <TableLayout

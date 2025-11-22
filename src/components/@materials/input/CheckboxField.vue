@@ -5,7 +5,7 @@
         <Checkbox
           :checked="value"
           @update:checked="handleChange"
-          :class="cn('mt-[1px] placeholder:text-sm', props.class)"
+          :class="cn('mt-px placeholder:text-sm', props.class)"
           :disabled="disabled"
         />
       </FormControl>

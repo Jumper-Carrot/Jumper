@@ -11,7 +11,7 @@
     @click="execAction(null)"
   >
     <div
-      class="flex h-[78px] w-[78px] flex-shrink-0 items-center justify-center rounded-md
+      class="flex h-[78px] w-[78px] shrink-0 items-center justify-center rounded-md
         p-[2px]"
     >
       <img
@@ -24,7 +24,7 @@
         <Carrot :size="60" class="ml-2 text-slate-300" />
       </div>
     </div>
-    <div class="flex flex-grow flex-col gap-0.5">
+    <div class="flex grow flex-col gap-0.5">
       <h2
         class="text-md w-full overflow-hidden break-all text-center font-semibold
           text-slate-700 dark:text-slate-200"
@@ -46,7 +46,7 @@
               !optionsExec?.options.value?.length || readonly
           }"
           :items="optionsExec?.options.value ?? []"
-          list-item-class="cursor-pointer p-1 data-[highlighted]:bg-slate-200 dark:data-[highlighted]:bg-slate-800"
+          list-item-class="cursor-pointer p-1 data-highlighted:bg-slate-200 dark:data-highlighted:bg-slate-800"
           pop-ever-class="bg-slate-100 dark:bg-slate-700"
           disableCheck
           popover-custom-width

@@ -7,7 +7,7 @@
         role="combobox"
         :class="cn(selectVariants({ variant, size }), props.class)"
       >
-        <div class="flex flex-grow items-center gap-2 truncate text-start">
+        <div class="flex grow items-center gap-2 truncate text-start">
           <slot
             name="selection"
             :item="modelValue && getItem(modelValue)"
@@ -64,7 +64,7 @@
                 "
               >
                 <div
-                  class="mr-auto flex flex-grow items-center gap-2 truncate text-start"
+                  class="mr-auto flex grow items-center gap-2 truncate text-start"
                 >
                   <slot
                     name="list-item"
@@ -74,7 +74,7 @@
                     {{ getItemLabel(item) }}
                   </slot>
                 </div>
-                <div class="w-[23px] flex-shrink-0">
+                <div class="w-[23px] shrink-0">
                   <Check
                     v-if="
                       JSON.stringify(modelValue) ==

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative min-w-[0px] px-2 transition-all duration-300 focus-within:opacity-100
+    class="relative min-w-0 px-2 transition-all duration-300 focus-within:opacity-100
       hover:opacity-100"
     :class="{
       'opacity-50': !search
@@ -12,7 +12,7 @@
         type="search"
         placeholder="Search..."
         class="h-[20px] max-w-full rounded-[4px] text-xs transition-all duration-300
-          focus:w-[400px] !pl-[19px]"
+          focus:w-[400px] pl-[19px]!"
         :class="{
           'w-[120px]': !search,
           'w-[400px]': search

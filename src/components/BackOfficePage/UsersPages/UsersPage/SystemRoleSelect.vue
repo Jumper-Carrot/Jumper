@@ -5,7 +5,7 @@
   >
     <PopoverTrigger as-child>
       <Button variant="outline" class="w-full px-3 text-sm max-xl:w-28">
-        <p class="flex-grow truncate text-left">
+        <p class="grow truncate text-left">
           {{ getRoleDisplayText(role) }}
         </p>
         <ChevronDownIcon class="ml-2 h-4 w-4 text-muted-foreground" />

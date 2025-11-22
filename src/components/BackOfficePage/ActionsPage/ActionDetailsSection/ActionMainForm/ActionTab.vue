@@ -8,10 +8,10 @@
             <Badge
               variant="outline"
               class="ml-1 flex items-center gap-1 rounded-md border-none bg-slate-100 px-2 py-1
-                text-sm shadow-sm dark:bg-slate-800"
+                text-sm shadow-xs dark:bg-slate-800"
             >
               <div
-                class="flex h-4 w-4 flex-shrink-0 items-center justify-center"
+                class="flex h-4 w-4 shrink-0 items-center justify-center"
                 :title="actionDetailed.data.type"
               >
                 <Link v-if="actionDetailed.data.type == 'Link'" :size="12" />
@@ -105,13 +105,13 @@
             <slot />
           </div>
           <div
-            class="group relative flex h-[78px] w-[78px] flex-shrink-0 flex-col items-center gap-2
+            class="group relative flex h-[78px] w-[78px] shrink-0 flex-col items-center gap-2
               rounded-md border-slate-300 bg-slate-100 hover:cursor-pointer
-              hover:border-slate-400 hover:shadow-sm dark:border-slate-700 dark:bg-slate-800"
+              hover:border-slate-400 hover:shadow-xs dark:border-slate-700 dark:bg-slate-800"
           >
             <button
               @click.prevent="() => open()"
-              class="h-full w-full flex-shrink-0"
+              class="h-full w-full shrink-0"
             >
               <div
                 class="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center

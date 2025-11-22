@@ -8,9 +8,9 @@
       <SearchBar
         v-model="search"
         :debounce="400"
-        class="mr-auto w-[280px] flex-shrink"
+        class="mr-auto w-[280px] shrink"
       />
-      <div class="flex flex-shrink-0 items-center gap-2">
+      <div class="flex shrink-0 items-center gap-2">
         <Label class="text-[13px] text-slate-700 dark:text-slate-500"
           >Active only</Label
         >

@@ -8,8 +8,8 @@
       <div class="flex w-full flex-col">
         <div class="w-s flex items-center gap-3">
           <div
-            class="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-slate-100
-              p-1 shadow-sm dark:bg-slate-800"
+            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-slate-100
+              p-1 shadow-xs dark:bg-slate-800"
             :title="actionDetailed.data.type"
           >
             <Link v-if="actionDetailed.data.type == 'Link'" :size="12" />
@@ -25,10 +25,10 @@
           <Badge
             v-if="workspaces && actionDetailed.workspace"
             variant="outline"
-            class="ml-1 flex max-w-[150px] flex-shrink-0 items-center gap-1 rounded-md border-none
-              bg-slate-100 py-0.5 text-sm shadow-sm dark:bg-slate-800"
+            class="ml-1 flex max-w-[150px] shrink-0 items-center gap-1 rounded-md border-none
+              bg-slate-100 py-0.5 text-sm shadow-xs dark:bg-slate-800"
           >
-            <ComponentIcon :size="12" class="flex-shrink-0" />
+            <ComponentIcon :size="12" class="shrink-0" />
             <p class="truncate">
               {{
                 workspaces?.find((ws) => ws.id === actionDetailed?.workspace)
@@ -37,7 +37,7 @@
             </p>
           </Badge>
           <div
-            class="ml-auto size-2 flex-shrink-0 animate-pulse rounded-full"
+            class="ml-auto size-2 shrink-0 animate-pulse rounded-full"
             :class="{
               'bg-green-400': actionDetailed.isActive,
               'bg-slate-300': !actionDetailed.isActive

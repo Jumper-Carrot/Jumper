@@ -10,7 +10,7 @@
         />
         <div class="relative flex h-full overflow-hidden">
           <div
-            class="relative flex h-full flex-grow flex-col transition-all ease-in-out"
+            class="relative flex h-full grow flex-col transition-all ease-in-out"
             :class="[isVersionBarOpen ? 'md:mr-[244px]' : 'md:mr-0']"
           >
             <div class="mt-4 flex h-full w-full flex-col gap-2 overflow-hidden">
@@ -23,7 +23,7 @@
               />
             </div>
             <div
-              class="flex w-full flex-shrink-0 items-end justify-end gap-2 border-t"
+              class="flex w-full shrink-0 items-end justify-end gap-2 border-t"
             >
               <div class="mr-auto">
                 <DeleteActionButton

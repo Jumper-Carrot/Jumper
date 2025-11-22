@@ -30,7 +30,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     :class="
       cn(
         `peer inline-flex h-[36px] w-[66px] shrink-0 cursor-pointer items-center rounded-lg
-        border-2 border-transparent transition-colors focus-visible:outline-none
+        border-2 border-transparent transition-colors focus-visible:outline-hidden
         focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
         focus-visible:ring-offset-background disabled:cursor-not-allowed px-0.5
         disabled:opacity-50
@@ -43,7 +43,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
       :class="
         cn(
           `pointer-events-none block h-[30px] w-[30px] rounded-md bg-background shadow-lg ring-0
-          transition-transform data-[state=checked]:translate-x-[calc(100%_-_2px)]`
+          transition-transform data-[state=checked]:translate-x-[calc(100%-2px)]`
         )
       "
     >
