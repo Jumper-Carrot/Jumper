@@ -1,26 +1,13 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { fileURLToPath } from 'url'
 import tailwindcss from "@tailwindcss/vite";
+import tsconfigPaths from 'vite-tsconfig-paths';
 
-// @ts-expect-error process is a nodejs global
 const host = process.env.TAURI_DEV_HOST;
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
-  plugins: [vue(), tailwindcss()],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-      '@@types': fileURLToPath(new URL('./src/@types', import.meta.url)),
-      '@@materials': fileURLToPath(
-        new URL('./src/components/@materials', import.meta.url)
-      ),
-      '@@common': fileURLToPath(
-        new URL('./src/components/@common', import.meta.url)
-      )
-    }
-  },
+  plugins: [vue(), tailwindcss(), tsconfigPaths()],
   clearScreen: false,
   server: {
     port: 5173,

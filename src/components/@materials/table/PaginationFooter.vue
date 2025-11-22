@@ -44,7 +44,7 @@
             >
               <Button
                 class="h-7 w-7 p-0"
-                :variant="item.value === page ? 'default' : 'outline-solid'"
+                :variant="item.value === page ? 'default' : 'outline'"
                 :class="item.value !== page ? 'text-slate-700 dark:text-slate-500' : ''"
                 @click="currentPage = item.value"
               >

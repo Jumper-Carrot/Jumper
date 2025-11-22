@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Typescript
+*.tsbuildinfo
+*.config.d.ts
+
+# Sidecar build files
+.spec
