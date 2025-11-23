@@ -5,7 +5,7 @@
     class="flex h-full w-full flex-col items-center justify-center gap-4"
   >
     <img
-      class="pointer-events-none ml-[2px] mt-px h-[80px]"
+      class="pointer-events-none mt-px ml-[2px] h-[80px]"
       src="@/assets/jumper-logo.png"
       alt="Jumper Logo"
     />

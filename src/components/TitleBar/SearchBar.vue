@@ -11,7 +11,7 @@
         v-model="search"
         type="search"
         placeholder="Search..."
-        class="h-[20px] max-w-full rounded-[4px] text-xs transition-all duration-300
+        class="h-5 max-w-full rounded-sm text-xs transition-all duration-300
           focus:w-[400px] pl-[19px]!"
         :class="{
           'w-[120px]': !search,
@@ -20,7 +20,7 @@
         size="sm"
       />
       <Search
-        class="absolute left-[13px] top-[4px] h-[12px] w-[12px] text-muted-foreground"
+        class="absolute left-[13px] top-1 h-3 w-3 text-muted-foreground"
       />
     </template>
   </div>

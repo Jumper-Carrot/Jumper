@@ -18,13 +18,13 @@
       />
     </div>
     <div
-      class="flex w-full flex-col gap-4 rounded-md bg-white p-8 shadow-md dark:bg-slate-900
-        sm:max-w-sm"
+      class="flex w-full flex-col gap-4 rounded-md bg-white p-8 shadow-md sm:max-w-sm
+        dark:bg-slate-900"
     >
       <div class="flex flex-col gap-3">
         <h1
-          class="mb-8 scroll-m-20 text-4xl font-extrabold tracking-tight dark:text-slate-200
-            lg:text-5xl"
+          class="mb-8 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl
+            dark:text-slate-200"
         >
           Jumper
         </h1>
@@ -64,12 +64,7 @@
           </div>
           <div class="grid w-full items-center gap-1.5">
             <Label for="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              required
-              v-model.trim="password"
-            />
+            <Input id="password" type="password" required v-model.trim="password" />
           </div>
 
           <div value="flex flex-col">
@@ -82,8 +77,8 @@
           <div class="absolute inset-0 flex items-center">
             <span class="w-full border-t" />
           </div>
-          <div class="relative flex justify-center text-xs uppercase ">
-            <span class="bg-background px-2 text-muted-foreground dark:bg-slate-900">
+          <div class="relative flex justify-center text-xs uppercase">
+            <span class="bg-background text-muted-foreground px-2 dark:bg-slate-900">
               Or continue with
             </span>
           </div>
@@ -101,15 +96,15 @@
       </template>
     </div>
     <div
-      class="absolute bottom-1 left-2 flex items-center gap-1 text-center text-xs italic
-        text-slate-400/80 dark:text-slate-500/80"
+      class="absolute bottom-1 left-2 flex items-center gap-1 text-center text-xs
+        text-slate-400/80 italic dark:text-slate-500/80"
     >
       <p>Version : {{ appVersion }}</p>
     </div>
     <div
       v-if="isBackendReachable"
-      class="absolute bottom-1 right-2 flex items-center gap-1 text-center text-xs italic
-        text-slate-400/80 dark:text-slate-500/80"
+      class="absolute right-2 bottom-1 flex items-center gap-1 text-center text-xs
+        text-slate-400/80 italic dark:text-slate-500/80"
     >
       <p>host : {{ backendUrl }}</p>
       <button
@@ -228,13 +223,13 @@ const setBackendUrl = async () => {
 const unsetBackendUrl = () => {
   jumper.client.jumperClient.defaults.baseURL = undefined
   isBackendReachable.value = false
-
 }
 </script>
 
 <style>
 .fade-border {
-  mask-image: linear-gradient(
+  mask-image:
+    linear-gradient(
       to right,
       transparent 0px,
       black 20px,
@@ -249,7 +244,8 @@ const unsetBackendUrl = () => {
       transparent 100%
     );
   mask-composite: intersect;
-  -webkit-mask-image: linear-gradient(
+  -webkit-mask-image:
+    linear-gradient(
       to right,
       transparent 0px,
       black 20px,
@@ -267,7 +263,8 @@ const unsetBackendUrl = () => {
 }
 
 .fade-border-black {
-  mask-image: linear-gradient(
+  mask-image:
+    linear-gradient(
       to right,
       transparent 0px,
       black 50px,
@@ -282,7 +279,8 @@ const unsetBackendUrl = () => {
       transparent 100%
     );
   mask-composite: intersect;
-  -webkit-mask-image: linear-gradient(
+  -webkit-mask-image:
+    linear-gradient(
       to right,
       transparent 0px,
       black 50px,

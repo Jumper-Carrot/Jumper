@@ -15,8 +15,7 @@
         <div class="mb-2 px-2">
           <h2
             v-if="isManySections"
-            class="border-b border-secondary text-sm font-semibold italic text-slate-400
-              dark:text-slate-300"
+            class="border-secondary border-b text-sm font-semibold text-slate-400 italic dark:text-slate-300"
           >
             {{ sectionName }}
           </h2>
@@ -38,27 +37,30 @@
       </div>
     </div>
     <div v-else class="flex h-full items-center justify-center">
-      <Loader2 class="h-8 w-8 animate-spin text-muted-foreground" />
+      <Loader2 class="text-muted-foreground h-8 w-8 animate-spin" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { PlayableAction } from '@@types'
+
 import { computed } from 'vue'
-import jumper from '@/services/jumper'
-import { useQuery } from '@/composables'
 import { Loader2 } from 'lucide-vue-next'
-import ActionCard from './ActionCard.vue'
-import ThemingBar from './ThemingBar.vue'
-// import HideActionButton from './HideActionButton.vue'
-import {
-  useSystemStore,
-  useAuthUserStore,
-  useTitleBarOptionsStore
-} from '@/stores'
 import { storeToRefs } from 'pinia'
 
+import jumper from '@/services/jumper'
+import {
+  useAuthUserStore,
+  useSystemStore,
+  useTitleBarOptionsStore
+} from '@/stores'
+import { useQuery } from '@/composables'
+
+import ActionCard from './ActionCard.vue'
+import ThemingBar from './ThemingBar.vue'
+
+// import HideActionButton from './HideActionButton.vue'
 const { systemInfo } = storeToRefs(useSystemStore())
 const { search, isThemingBarOpen } = storeToRefs(useTitleBarOptionsStore())
 const { user } = storeToRefs(useAuthUserStore())
@@ -84,7 +86,7 @@ const { data: actions, isFetched } = useQuery<PlayableAction[]>(
 
 const actionsBySection = computed(() => {
   const sections: Record<string, PlayableAction[]> = {}
-  actions.value?.forEach((action) => {
+  actions.value?.forEach(action => {
     let section = 'Others'
     if (systemInfo.value?.allowActionSections && action.section) {
       section = action.section

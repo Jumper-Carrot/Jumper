@@ -1,7 +1,5 @@
 <template>
-  <svg
-    viewBox="0 0 15 15"
-  >
+  <svg viewBox="0 0 15 15">
     <path
       fill="currentColor"
       fill-rule="evenodd"
@@ -11,5 +9,4 @@
   </svg>
 </template>
 
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
