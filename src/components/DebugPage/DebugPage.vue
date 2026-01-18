@@ -5,6 +5,7 @@
       <Logs :showedLogs="showedLogs" />
       <BottomBar
         :showedLogs="showedLogs"
+        v-model:search="logSearch"
         v-model:showOptionsExec="showOptionsExec"
         v-model:showStrOut="showStdOut"
         v-model:showStrErr="showStdErr"
@@ -30,6 +31,7 @@ const executionsStore = useExecutionsStore()
 const logsStore = useLogsStore()
 
 const showOptionsExec = ref(false)
+const logSearch = ref('')
 const selection = ref<CodeExec['id'][]>([])
 const showStdOut = useStorage('debug-show-stdout', true)
 const showStdErr = useStorage('debug-show-stderr', true)
@@ -42,6 +44,17 @@ const showedLogs = computed(() => {
     )
     if (exec && exec.mode !== 'get-options') return true
   })
+  if (logSearch.value) {
+    return logs.filter(log => {
+      return (
+        log.message.toLowerCase().includes(logSearch.value.toLowerCase()) ||
+        log.namespace.toLowerCase().includes(logSearch.value.toLowerCase()) ||
+        (log.option &&
+          log.option.toLowerCase().includes(logSearch.value.toLowerCase())) ||
+        log.execId.toLowerCase().includes(logSearch.value.toLowerCase())
+      )
+    })
+  }
   return logs.filter(log => {
     if (log.level !== 'error' && !showStdOut.value) return false
     if (log.level === 'error' && !showStdErr.value) return false
