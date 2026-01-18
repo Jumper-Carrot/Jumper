@@ -2,7 +2,7 @@ import type { User } from '@@types'
 import type { Child } from '@tauri-apps/plugin-shell'
 import type { MaybeRefOrGetter } from 'vue'
 
-import { onUnmounted, ref, toRef, watch } from 'vue'
+import { computed, onUnmounted, ref, toRef, watch } from 'vue'
 import { invoke } from '@tauri-apps/api/core'
 import { Command } from '@tauri-apps/plugin-shell'
 import { storeToRefs } from 'pinia'
@@ -30,6 +30,7 @@ export type CodeExec = {
   namespace: string
   isRunning: boolean
   options: string[] | null
+  selectedOption: string | null
   process: Child | null
   runTimestamp: string | null
 }
@@ -49,6 +50,7 @@ export const useCodeExec = (
   const namespaceRef = toRef(namespace)
   const isRunning = ref(false)
   const options = ref<string[] | null>(null)
+  const selectedOption = ref<string | null>(null)
   const process = ref<Child | null>(null)
   const commandId = uuidv4()
   const runTimestamp = ref<string | null>(null)
@@ -56,6 +58,7 @@ export const useCodeExec = (
   const exec = async (option: string | null = null) => {
     if (isRunning.value) await kill()
     const userInfo = getUserInfo()
+    selectedOption.value = option
     const preInstructions = getCodePreInstructions(
       modeRef.value,
       commandId,
@@ -178,6 +181,7 @@ export const useCodeExec = (
     id: commandId,
     exec,
     kill,
+    selectedOption: computed(() => selectedOption.value),
     namespace: namespaceRef,
     mode: modeRef,
     isRunning,

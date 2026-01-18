@@ -55,8 +55,10 @@
             </Button>
           </div>
           <p class="truncate text-xs italic text-slate-400">
-            {{ getExecTime(execution.runTimestamp) }} -
-            {{ execution.id.slice(0, 6) }}
+            {{ getExecTime(execution.runTimestamp) }}
+            <span v-if="execution.selectedOption">
+              - {{ execution.selectedOption }}</span
+            >
           </p>
         </div>
       </Button>
@@ -108,8 +110,10 @@
             </Button>
           </div>
           <p class="truncate text-xs italic text-slate-400">
-            {{ getExecTime(execution.runTimestamp) }} -
-            {{ execution.id.slice(0, 6) }}
+            {{ getExecTime(execution.runTimestamp) }}
+            <span v-if="execution.selectedOption">
+              - {{ execution.selectedOption }}</span
+            >
           </p>
         </div>
       </Button>

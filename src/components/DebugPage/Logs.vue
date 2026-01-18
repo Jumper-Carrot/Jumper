@@ -56,7 +56,6 @@ const { handleScroll } = useScrollToBottom(
 }
 
 .log-scrollbar::-webkit-scrollbar-thumb {
-  background-color:;
   border-radius: 0;
 }
 
