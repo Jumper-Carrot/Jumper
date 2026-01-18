@@ -1,9 +1,8 @@
 <template>
   <button
     ref="card"
-    class="custom-shadow flex flex-col items-center justify-center gap-2 rounded-md bg-slate-100 p-2 pb-1 transition-all dark:bg-slate-800"
+    class="custom-shadow flex flex-col items-center dark:shadow-slate-900 hover:dark:shadow-slate-800 justify-center gap-2 rounded-md bg-slate-100 p-2 pb-1 transition-transform duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md active:translate-y-0.5 active:shadow-none dark:bg-slate-800 hover:bg-slate-200/60 dark:hover:bg-slate-700/80"
     :class="{
-      'hover:shadow-md': !hasOptions || optionsExec?.options.value,
       'pointer-events-none cursor-not-allowed opacity-65':
         hasOptions && !optionsExec?.options.value?.length,
       'pointer-events-none cursor-not-allowed': readonly

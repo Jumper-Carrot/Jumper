@@ -150,13 +150,12 @@
   body {
     @apply bg-background text-foreground;
   }
+  .custom-shadow {
+    @apply shadow-[0px_1px_4px_rgba(0,0,0,0.16)];
+  }
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
-
-.custom-shadow {
-  @apply shadow-[0px_1px_4px_rgba(0,0,0,0.16)];
-}
 
 /* Scrollbar styles */
 *::-webkit-scrollbar {
