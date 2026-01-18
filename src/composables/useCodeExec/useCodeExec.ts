@@ -94,6 +94,7 @@ export const useCodeExec = (
             level: 'info',
             execId: commandId,
             namespace: namespaceRef.value,
+            option: selectedOption.value,
             message: `--- options received => ${optionsString} ---`
           })
         }
@@ -107,6 +108,7 @@ export const useCodeExec = (
       level: 'info',
       execId: commandId,
       namespace: namespaceRef.value,
+      option: selectedOption.value,
       message: '--- starting execution ---'
     })
     return options
@@ -121,6 +123,7 @@ export const useCodeExec = (
         level: 'info',
         execId: commandId,
         namespace: execNamespace,
+        option: selectedOption.value,
         message: data.toString()
       })
     })
@@ -129,6 +132,7 @@ export const useCodeExec = (
         level: 'error',
         execId: commandId,
         namespace: execNamespace,
+        option: selectedOption.value,
         message: data.toString()
       })
     })
@@ -137,6 +141,7 @@ export const useCodeExec = (
         level: 'error',
         execId: commandId,
         namespace: execNamespace,
+        option: selectedOption.value,
         message: error.toString()
       })
     )
@@ -145,6 +150,7 @@ export const useCodeExec = (
         level: 'info',
         execId: commandId,
         namespace: execNamespace,
+        option: selectedOption.value,
         message: '--- execution finished ---'
       })
     })

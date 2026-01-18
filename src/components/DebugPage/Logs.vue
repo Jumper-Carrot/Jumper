@@ -19,10 +19,10 @@
           log.level === 'warn'
       }"
     >
-      {{ log.level.toLocaleUpperCase() }} - {{ log.timestamp }} [{{
-        log.namespace
-      }}
-      - {{ log.execId.slice(0, 6) }}]: {{ log.message }}
+      {{ log.timestamp }} [{{ log.namespace
+      }}<span> {{ log.option ? ` | ${log.option}` : '' }} </span> -
+      {{ log.execId.slice(0, 4) }}]:
+      {{ log.message }}
     </div>
   </div>
 </template>

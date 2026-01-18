@@ -7,6 +7,7 @@ export type Log = {
   execId: string
   timestamp: string
   namespace: string
+  option: string | null
   message: string
 }
 
