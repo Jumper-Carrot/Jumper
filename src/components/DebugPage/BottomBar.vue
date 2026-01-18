@@ -4,11 +4,28 @@
   >
     <div class="flex items-center gap-1">
       <MiniSwitch
-        class="data-[state=checked]:bg-blue-300"
+        class="dark:data-[state=checked]:bg-blue-300 data-[state=checked]:bg-blue-400"
         v-model="showOptionsExec"
       />
-      <p class="text-xs italic text-slate-400">Get Options</p>
+      <p class="text-xs italic text-slate-500 mb-0.5">Get Options</p>
     </div>
+    <div class="flex items-center justify-center gap-1 h-full ml-6">
+      <Checkbox
+        v-model:checked="showStrOut"
+        class="dark:data-[state=checked]:bg-slate-800 data-[state=checked]:bg-slate-400 dark:border-slate-800 border-slate-400 size-3.5"
+      />
+      <p class="text-xs italic text-slate-500 mb-0.5">stdout</p>
+    </div>
+    <div class="flex items-center justify-center gap-1 h-full ml-3">
+      <Checkbox
+        v-model:checked="showStrErr"
+        class="dark:data-[state=checked]:bg-slate-800 data-[state=checked]:bg-slate-400 dark:border-slate-800 border-slate-400 size-3.5"
+      />
+      <p class="text-xs italic dark:text-slate-400 text-slate-500 mb-0.5">
+        stderr
+      </p>
+    </div>
+
     <Button
       class="ml-auto flex h-[18px] w-[18px] items-center justify-center p-2.5 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
       variant="ghost"
@@ -28,6 +45,7 @@ import { useExecutionsStore } from '@/stores'
 import { type Log } from '@/stores/logsStore'
 
 import { Button } from '@@materials/ui/button'
+import { Checkbox } from '@@materials/ui/checkbox'
 import { MiniSwitch } from '@@materials/ui/switch'
 
 const executionsStore = useExecutionsStore()
@@ -38,5 +56,11 @@ defineProps<{
 
 const showOptionsExec = defineModel<boolean>('showOptionsExec', {
   default: false
+})
+const showStrOut = defineModel<boolean>('showStrOut', {
+  default: true
+})
+const showStrErr = defineModel<boolean>('showStrErr', {
+  default: true
 })
 </script>

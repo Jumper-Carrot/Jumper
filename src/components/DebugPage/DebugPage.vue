@@ -6,6 +6,8 @@
       <BottomBar
         :showedLogs="showedLogs"
         v-model:showOptionsExec="showOptionsExec"
+        v-model:showStrOut="showStdOut"
+        v-model:showStrErr="showStdErr"
       />
     </div>
   </div>
@@ -15,6 +17,7 @@
 import type { CodeExec } from '@/composables/useCodeExec/useCodeExec'
 
 import { computed, ref, watch } from 'vue'
+import { useStorage } from '@vueuse/core'
 
 import { useExecutionsStore } from '@/stores'
 import { useLogsStore } from '@/stores/logsStore'
@@ -28,6 +31,8 @@ const logsStore = useLogsStore()
 
 const showOptionsExec = ref(false)
 const selection = ref<CodeExec['id'][]>([])
+const showStdOut = useStorage('debug-show-stdout', true)
+const showStdErr = useStorage('debug-show-stderr', true)
 
 const showedLogs = computed(() => {
   const logs = logsStore.logs.filter(log => {
@@ -37,8 +42,13 @@ const showedLogs = computed(() => {
     )
     if (exec && exec.mode !== 'get-options') return true
   })
-  if (!selection.value.length) return logs
-  return logs.filter(log => selection.value.includes(log.execId))
+  return logs.filter(log => {
+    if (log.level !== 'error' && !showStdOut.value) return false
+    if (log.level === 'error' && !showStdErr.value) return false
+    if (selection.value.length && !selection.value.includes(log.execId))
+      return false
+    return true
+  })
 })
 
 watch(
