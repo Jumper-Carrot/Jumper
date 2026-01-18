@@ -1,7 +1,10 @@
 import type { BackendInfo } from '@@types'
+
 import { computed, ref } from 'vue'
-import jumper from '@/services/jumper'
 import { defineStore } from 'pinia'
+
+import jumper from '@/services/jumper'
+import { jumperClient } from '@/services/jumper/client'
 
 export const useBackendInfoStore = defineStore('backendInfo', () => {
   const backendInfo = ref<BackendInfo | null>(null)
@@ -14,21 +17,25 @@ export const useBackendInfoStore = defineStore('backendInfo', () => {
     backendInfo.value = (await jumper.client.setBackendUrl()) ?? null
   }
 
+  const getBackendHost = () => {
+    return jumperClient.defaults.baseURL || ''
+  }
+
   const isScimEnabled = computed(() => backendInfo.value?.scimEnabled ?? false)
   const isOidcEnabled = computed(() =>
-    backendInfo.value?.providers?.some((provider) => provider.id === 'oidc')
+    backendInfo.value?.providers?.some(provider => provider.id === 'oidc')
   )
   const isEmailEnabled = computed(() =>
-    backendInfo.value?.providers?.some((provider) => provider.id === 'email')
+    backendInfo.value?.providers?.some(provider => provider.id === 'email')
   )
   const ssoDiplayName = computed(
     () =>
-      backendInfo.value?.providers.find((provider) => provider.id === 'oidc')
+      backendInfo.value?.providers.find(provider => provider.id === 'oidc')
         ?.name ?? 'SSO'
   )
   const oidcRedirectUrl = computed(() => {
     const authUrl =
-      backendInfo.value?.providers.find((provider) => provider.id === 'oidc')
+      backendInfo.value?.providers.find(provider => provider.id === 'oidc')
         ?.authUrl ?? ''
     return authUrl
       ? `${jumper.client.jumperClient.defaults.baseURL}/v1${authUrl}?client=jumper`
@@ -42,6 +49,7 @@ export const useBackendInfoStore = defineStore('backendInfo', () => {
     backendInfo,
     isBackendSetup,
     setBackendInfo,
+    getBackendHost,
     isScimEnabled,
     isSSOEnabled,
     isOidcEnabled,

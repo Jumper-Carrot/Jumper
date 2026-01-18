@@ -178,7 +178,7 @@ const isBackendReachable = ref(
   jumper.client.jumperClient.defaults.baseURL !== undefined
 )
 
-const backendUrl = ref(jumper.client.jumperClient.defaults.baseURL || '')
+const backendUrl = ref(backendInfoStore.getBackendHost())
 const isCheckingBackendUrl = ref(false)
 const email = ref('')
 const password = ref('')
