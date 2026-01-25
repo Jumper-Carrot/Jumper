@@ -1,7 +1,7 @@
 <template>
   <BaseModal
     :title="`'${group.name}' members`"
-    :open="open"
+    v-model:open="open"
     class="p-6 w-[500px]"
   >
     <div class="flex flex-col space-y-3 flex-1 min-h-0">

@@ -18,7 +18,7 @@
     </Button>
   </TableCell>
   <TableCell></TableCell>
-  <GroupMembersModal :group="group" :open="isGroupMemberModalOpen" />
+  <GroupMembersModal :group="group" v-model:open="isGroupMemberModalOpen" />
 </template>
 
 <script setup lang="ts">

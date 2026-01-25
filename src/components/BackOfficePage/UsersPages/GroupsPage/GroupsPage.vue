@@ -25,7 +25,7 @@
         <TableHead></TableHead>
       </template>
       <template #default="{ item: group }">
-        <GroupRow :group="group" @group-updated="refetch" />
+        <GroupRow :group="group" />
       </template>
     </TableLayout>
     <PaginationFooter
@@ -52,7 +52,6 @@ const {
   data: groupsPage,
   isFetching,
   errorMessage,
-  refetch,
   limit,
   search,
   orderBy,
