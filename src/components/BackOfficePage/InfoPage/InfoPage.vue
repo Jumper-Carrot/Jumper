@@ -70,7 +70,7 @@
               Please visit our GitHub repositories:
             </div>
             <div
-              class="flex items-center gap-1 ml-1 text-sm font-semibold text-slate-600 dark:text-slate-400"
+              class="flex items-center gap-1 text-sm font-semibold text-slate-600 dark:text-slate-400"
             >
               Jumper:
               <a
@@ -82,7 +82,7 @@
               >
             </div>
             <div
-              class="flex items-center gap-1 ml-1 text-sm font-semibold text-slate-600 dark:text-slate-400"
+              class="flex items-center gap-1 text-sm font-semibold text-slate-600 dark:text-slate-400"
             >
               Carrot:
               <a
