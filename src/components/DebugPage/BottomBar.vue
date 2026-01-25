@@ -29,6 +29,17 @@
         stderr
       </p>
     </div>
+    <div
+      class="flex items-center justify-center gap-1 h-full ml-3 max-sm:hidden"
+    >
+      <Checkbox
+        v-model:checked="showLineInfo"
+        class="dark:data-[state=checked]:bg-slate-800 data-[state=checked]:bg-slate-400 dark:border-slate-800 border-slate-400 size-3.5"
+      />
+      <p class="text-xs italic dark:text-slate-400 text-slate-500 mb-0.5">
+        show ligne info
+      </p>
+    </div>
     <div class="ml-auto flex items-center">
       <Input
         v-model="search"
@@ -76,6 +87,10 @@ const showStrOut = defineModel<boolean>('showStrOut', {
   default: true
 })
 const showStrErr = defineModel<boolean>('showStrErr', {
+  default: true
+})
+
+const showLineInfo = defineModel<boolean>('showLineInfo', {
   default: true
 })
 </script>

@@ -2,13 +2,14 @@
   <div class="flex h-full">
     <SideBar v-model:selection="selection" :showOptionsExec="showOptionsExec" />
     <div class="flex w-full flex-col">
-      <Logs :showedLogs="showedLogs" />
+      <Logs :showedLogs="showedLogs" :showLineInfo="showLineInfo" />
       <BottomBar
         :showedLogs="showedLogs"
         v-model:search="logSearch"
         v-model:showOptionsExec="showOptionsExec"
         v-model:showStrOut="showStdOut"
         v-model:showStrErr="showStdErr"
+        v-model:showLineInfo="showLineInfo"
       />
     </div>
   </div>
@@ -35,6 +36,7 @@ const logSearch = ref('')
 const selection = ref<CodeExec['id'][]>([])
 const showStdOut = useStorage('debug-show-stdout', true)
 const showStdErr = useStorage('debug-show-stderr', true)
+const showLineInfo = useStorage('debug-show-line-info', true)
 
 const showedLogs = computed(() => {
   const logs = logsStore.logs.filter(log => {

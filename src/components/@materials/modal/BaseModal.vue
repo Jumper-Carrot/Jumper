@@ -33,7 +33,6 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogScrollContent,
   DialogTitle,
   DialogTrigger
 } from '@@materials/ui/dialog'

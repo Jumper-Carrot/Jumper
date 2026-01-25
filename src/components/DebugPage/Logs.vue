@@ -11,18 +11,18 @@
       :class="{
         'text-slate-800 dark:text-slate-300':
           log.level !== 'error' && log.level !== 'warn',
-        'bg-slate-300/50 bg-opacity-60 dark:bg-slate-700 dark:bg-opacity-30':
+        'bg-slate-300/50 dark:bg-slate-700/40':
           i % 2 === 0 && log.level !== 'error' && log.level !== 'warn',
-        'bg-red-100 font-semibold text-red-500 dark:bg-slate-800':
-          log.level === 'error',
-        'bg-orange-100 font-semibold text-orange-500 dark:bg-slate-800':
-          log.level === 'warn'
+        'bg-red-100 font-semibold dark:text-red-400/80 text-red-500/70 dark:bg-slate-800':
+          log.level === 'error'
       }"
     >
-      {{ log.timestamp }} [{{ log.namespace
-      }}<span> {{ log.option ? ` | ${log.option}` : '' }} </span> -
-      {{ log.execId.slice(0, 4) }}]:
-      {{ log.message }}
+      <template v-if="showLineInfo"
+        >{{ log.timestamp }} [{{ log.namespace }}]
+        <span> {{ log.option ? ` | ${log.option}` : '' }} </span> -
+        {{ log.execId.slice(0, 4) }}]:</template
+      >
+      <span v-html="formatAnsi(log.message)"></span>
     </div>
   </div>
 </template>
@@ -31,35 +31,26 @@
 import type { Log } from '@/stores/logsStore'
 
 import { ref } from 'vue'
+import { AnsiUp } from 'ansi_up' // Import de la bibliothèque
 
 import { useScrollToBottom } from './useScrollToBottom'
 
 const props = defineProps<{
   showedLogs: Log[]
+  showLineInfo: boolean
 }>()
 
-const logsContainer = ref<HTMLDivElement | null>(null)
+const ansiUp = new AnsiUp()
+ansiUp.use_classes = false // Utilise des styles inline (plus simple pour débuter)
 
+// Fonction pour transformer l'ANSI en HTML
+const formatAnsi = (message: string) => {
+  return ansiUp.ansi_to_html(message)
+}
+
+const logsContainer = ref<HTMLDivElement | null>(null)
 const { handleScroll } = useScrollToBottom(
   logsContainer,
   () => props.showedLogs.length
 )
 </script>
-
-<style scoped>
-.log-scrollbar::-webkit-scrollbar {
-  -webkit-appearance: none;
-}
-
-.log-scrollbar::-webkit-scrollbar:vertical {
-  width: 12px;
-}
-
-.log-scrollbar::-webkit-scrollbar-thumb {
-  border-radius: 0;
-}
-
-.log-scrollbar::-webkit-scrollbar-track {
-  border-radius: 0;
-}
-</style>
