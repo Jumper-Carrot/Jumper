@@ -1,5 +1,13 @@
-import type { User, DetailedUser, Group, Page, UserPreferences } from '@@types'
-import { jumperClient, JumperBackendError } from '@/services/jumper/client'
+import type {
+  DetailedUser,
+  Group,
+  Page,
+  ShortUser,
+  User,
+  UserPreferences
+} from '@@types'
+
+import { JumperBackendError, jumperClient } from '@/services/jumper/client'
 
 export const getAuthUser = async () => {
   const response = await jumperClient.get<DetailedUser>('/v1/users/me')
@@ -10,16 +18,26 @@ export const getAuthUser = async () => {
   return response.data
 }
 
-export const getUsers = async (params: {
+type UserQueryParams = {
   page?: number
   limit?: number
   active?: boolean
   search?: string
   ordering?: string
-}) => {
-  const { page = 1, limit = 25, active, search, ordering } = params
+  groups?: Group['id']
+}
+export async function getUsers(
+  params: UserQueryParams & { short: true }
+): Promise<Page<ShortUser>>
+export async function getUsers(
+  params: UserQueryParams & { short?: false }
+): Promise<Page<User>>
+export async function getUsers(
+  params: UserQueryParams & { short?: boolean } = {}
+): Promise<Page<User> | Page<ShortUser>> {
+  const { page = 1, limit = 25, active, search, ordering, groups } = params
   const response = await jumperClient.get<Page<User>>('/v1/users', {
-    params: { page, limit, is_active: active, search, ordering }
+    params: { page, limit, is_active: active, search, ordering, groups }
   })
   if (response.status !== 200) throw new JumperBackendError(response)
   return response.data

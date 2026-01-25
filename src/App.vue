@@ -28,7 +28,7 @@ if (window.label === 'main') {
       id="main"
       :class="{
         'h-full': route.name === 'updater',
-        'mt-[32px] h-[calc(100%-32px)]': route.name !== 'updater'
+        'mt-8 h-[calc(100%-32px)]': route.name !== 'updater'
       }"
     >
       <RouterView />

@@ -29,11 +29,11 @@ export const useGroupsQuery = (
   )
 
   const query = useQuery<Page<Group>>(
-    ['roles', currentPage, limit, debouncedSearch, orderBy],
+    ['groups', currentPage, limit, debouncedSearch, orderBy],
     catchPageError(() => {
       if (options.searchNeeded && search.value === '')
         return Promise.resolve({ count: 0, results: [] })
-      return jumper.groups.getDetailedGroups({
+      return jumper.groups.getGroups({
         page: currentPage.value,
         limit: limit.value,
         search: debouncedSearch.value || undefined,
