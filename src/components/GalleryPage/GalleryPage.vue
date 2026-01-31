@@ -2,6 +2,7 @@
   <ThemingBar />
   <div
     class="h-full overflow-auto bg-cover bg-center"
+    v-if="user"
     :style="{
       backgroundImage: backgroundImage
     }"
@@ -20,7 +21,7 @@
             {{ sectionName }}
           </h2>
           <div
-            class="flex flex-wrap gap-4 p-4 px-3"
+            class="flex flex-wrap p-4 px-3"
             :class="[isMultiSections ? 'justify-start' : 'justify-center']"
           >
             <div
@@ -29,7 +30,7 @@
               class="relative"
             >
               <ActionCard
-                class="h-[145px] w-[130px]"
+                class="h-[145px] w-[130px] m-2"
                 :action="action"
                 :readonly="isThemingBarOpen"
                 @hover-change="
@@ -40,7 +41,11 @@
                   }
                 "
               />
-              <!-- <HideActionButton v-if="isThemingBarOpen" /> -->
+              <HideActionButton
+                v-if="isThemingBarOpen && systemInfo?.allowUsersToHideActions"
+                :action-id="action.id"
+                v-model:userPreferences="user.preferences"
+              />
             </div>
           </div>
         </div>
@@ -79,9 +84,9 @@ import { useQuery } from '@/composables'
 
 import ActionCard from './ActionCard.vue'
 import DescriptionInfoCard from './DescriptionInfoCard.vue'
+import HideActionButton from './HideActionButton.vue'
 import ThemingBar from './ThemingBar.vue'
 
-// import HideActionButton from './HideActionButton.vue'
 const { systemInfo } = storeToRefs(useSystemStore())
 const { search, isThemingBarOpen } = storeToRefs(useTitleBarOptionsStore())
 const { user } = storeToRefs(useAuthUserStore())

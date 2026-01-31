@@ -1,13 +1,15 @@
 <template>
   <button
     ref="card"
-    class="custom-shadow flex flex-col items-center dark:shadow-slate-900 hover:dark:shadow-slate-800 justify-center gap-2 rounded-md bg-slate-100 p-2 pb-1 transition-transform duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md active:translate-y-0.5 active:shadow-none dark:bg-slate-800 hover:bg-slate-200/60 dark:hover:bg-slate-700/80"
+    v-if="!isHidden || readonly"
+    class="custom-shadow flex flex-col items-center dark:shadow-slate-900 hover:dark:shadow-slate-800 justify-center gap-2 rounded-md bg-slate-100 p-2 pb-1 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md active:translate-y-0.5 active:shadow-none dark:bg-slate-800 hover:bg-slate-200/60 dark:hover:bg-slate-700/80"
     :class="{
       'pointer-events-none cursor-not-allowed opacity-65':
-        hasOptions && !optionsExec?.options.value?.length,
+        (hasOptions && !optionsExec?.options.value?.length) || isHidden,
       'pointer-events-none cursor-not-allowed': readonly
     }"
     @click="execAction(null)"
+    :title="action.name"
   >
     <div
       class="flex h-[78px] w-[78px] shrink-0 items-center justify-center rounded-md p-0.5"
@@ -24,7 +26,7 @@
     </div>
     <div class="flex grow flex-col gap-0.5">
       <h2
-        class="text-md w-full overflow-hidden text-center font-semibold break-all text-slate-700 dark:text-slate-200"
+        class="text-md w-full overflow-hidden text-center font-semibold break-after-all text-slate-700 dark:text-slate-200"
         :class="{
           'line-clamp-2': !hasOptions,
           'line-clamp-1': hasOptions
@@ -91,11 +93,12 @@
 <script setup lang="ts">
 import type { PlayableAction } from '@@types'
 
-import { useTemplateRef, watch } from 'vue'
+import { computed, useTemplateRef, watch } from 'vue'
 import { useElementHover } from '@vueuse/core'
 import { Carrot, Loader2, Minus, X } from 'lucide-vue-next'
+import { storeToRefs } from 'pinia'
 
-import { useActionExecStore } from '@/stores'
+import { useActionExecStore, useAuthUserStore, useSystemStore } from '@/stores'
 
 import { Combobox } from '@@materials/input'
 import { useToast } from '@@materials/ui/toast'
@@ -106,11 +109,20 @@ const props = defineProps<{
 }>()
 
 const useActionExec = useActionExecStore()
-
+const { user } = storeToRefs(useAuthUserStore())
+const { systemInfo } = storeToRefs(useSystemStore())
 const { toast } = useToast()
 
 const cardElement = useTemplateRef<HTMLButtonElement>('card')
 const isHovered = useElementHover(cardElement)
+
+const isHidden = computed(() => {
+  return (
+    user.value &&
+    systemInfo.value?.allowUsersToHideActions &&
+    user.value.preferences.hiddenActions.includes(props.action.id)
+  )
+})
 
 const emits = defineEmits<{
   (e: 'hover-change', value: boolean): void

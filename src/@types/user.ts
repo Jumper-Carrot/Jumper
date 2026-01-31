@@ -62,4 +62,5 @@ export type UserPreferences = {
   allowShowingDescription: boolean
   disableDefaultBackgroundImage: boolean
   customBackgroundImageUrl: string | null
+  hiddenActions: Action['id'][]
 }
