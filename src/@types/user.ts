@@ -36,7 +36,7 @@ export type Group = {
 }
 
 export type DetailedGroup = Omit<Group, 'userSet'> & {
-  userSet: User[]
+  userSet: ShortUser[]
 }
 
 export type Role = {

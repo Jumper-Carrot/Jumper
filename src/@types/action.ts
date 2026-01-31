@@ -1,4 +1,5 @@
-import type { ShortUser, User, DetailedRole, DetailedGroup } from './user'
+import type { DetailedGroup, DetailedRole, ShortUser, User } from './user'
+
 import { Workspace } from './workspace'
 
 export const ACTION_TYPES = ['Python', 'Link', 'Windows CMD'] as const
@@ -24,9 +25,9 @@ export type PlayableAction = Action & {
 
 export type DetailedAction = Action & {
   data: ActionData
-  createBy: User
-  users: User[]
-  user_ids?: User['id'][]
+  createBy: ShortUser
+  users: ShortUser[]
+  user_ids?: ShortUser['id'][]
   groups: DetailedGroup[]
   group_ids?: DetailedGroup['id'][]
   roles: DetailedRole[]

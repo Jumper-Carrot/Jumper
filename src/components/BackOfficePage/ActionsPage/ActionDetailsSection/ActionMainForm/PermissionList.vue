@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-4 flex items-center gap-[2px]">
+  <div class="mt-4 flex items-center gap-0.5">
     <span
       class="pl-1 text-sm italic text-slate-800 dark:text-slate-400"
       v-if="props.actionDetailed.isPublic"
@@ -12,13 +12,23 @@
       class="flex max-h-12 flex-wrap gap-1 overflow-hidden"
       v-else
     >
+      <button
+        class="dark:hover:bg-slate-800 p-0.5 rounded-md transition-colors text-slate-500 hover:text-slate-800 hover:bg-slate-200 dark:hover:text-slate-100"
+        title="View permissions"
+        @click.prevent="isActionsUsersModalOpen = true"
+      >
+        <ScanEyeIcon :size="20" />
+      </button>
+      <ActionsUsersModal
+        :action="props.actionDetailed"
+        v-model:open="isActionsUsersModalOpen"
+      />
       <template v-if="visibleCount !== null">
         <Badge
-          v-for="item, i in permissions.slice(0, visibleCount)"
+          v-for="(item, i) in permissions.slice(0, visibleCount)"
           :key="i"
           variant="outline"
-          class="flex items-center gap-1 rounded-lg bg-slate-100 px-1.5 py-0.5 text-xs
-            text-slate-800 shadow-xs dark:bg-slate-800 dark:text-slate-400"
+          class="flex items-center gap-1 rounded-lg bg-slate-100 px-1.5 py-0.5 text-xs text-slate-800 shadow-xs dark:bg-slate-800 dark:text-slate-400"
         >
           <template v-if="'username' in item">
             <UserIcon :size="14" />
@@ -37,8 +47,7 @@
         <Badge
           v-if="permissions.length > visibleCount"
           variant="outline"
-          class="flex items-center gap-1 rounded-lg bg-slate-100 px-1.5 py-0.5 text-xs
-            text-slate-800 shadow-xs dark:bg-slate-800 dark:text-slate-400"
+          class="flex items-center gap-1 rounded-lg bg-slate-100 px-1.5 py-0.5 text-xs text-slate-800 shadow-xs dark:bg-slate-800 dark:text-slate-400"
         >
           + {{ permissions.length - visibleCount }} autres
         </Badge>
@@ -47,12 +56,11 @@
 
     <div
       ref="measureRef"
-      class="pointer-events-none invisible absolute left-0 top-0 flex max-h-12 flex-wrap
-        gap-1 overflow-hidden"
+      class="pointer-events-none invisible absolute left-0 top-0 flex max-h-12 flex-wrap gap-1 overflow-hidden"
       aria-hidden="true"
     >
       <Badge
-        v-for="item, i in permissions"
+        v-for="(item, i) in permissions"
         :key="i"
         class="flex items-center gap-1 rounded-lg px-1.5 py-0.5 text-xs"
       >
@@ -81,24 +89,27 @@
 
 <script setup lang="ts">
 import type { DetailedAction } from '@@types'
+
 import {
-  ref,
-  nextTick,
   computed,
-  onMounted,
+  nextTick,
   onBeforeUnmount,
-  watch,
-  useTemplateRef
+  onMounted,
+  ref,
+  useTemplateRef,
+  watch
 } from 'vue'
+import { ScanEyeIcon, UserCogIcon, UserIcon, UsersIcon } from 'lucide-vue-next'
 
 import { Badge } from '@@materials/ui/badge'
-import { UserCogIcon, UsersIcon, UserIcon } from 'lucide-vue-next'
+import ActionsUsersModal from './modals/ActionsUsersModal.vue'
 
 const containerRef = ref<HTMLElement | null>(null)
 const measureRef = ref<HTMLElement | null>(null)
 const measureOverflowRef = useTemplateRef<HTMLElement>('measureOverflowRef')
 
 const visibleCount = ref<number | null>(null)
+const isActionsUsersModalOpen = ref(false)
 
 const props = defineProps<{
   actionDetailed: DetailedAction
@@ -137,10 +148,10 @@ const measure = async () => {
   const total = permissions.value.length
 
   const children = Array.from(m.children).filter(
-    (c) => c !== overflow
+    c => c !== overflow
   ) as HTMLElement[]
 
-  children.forEach((c) => (c.style.display = ''))
+  children.forEach(c => (c.style.display = ''))
   overflow.style.display = 'none'
 
   if (m.scrollHeight <= m.clientHeight) {
@@ -175,7 +186,7 @@ const measure = async () => {
     }
   }
 
-  children.forEach((c) => (c.style.display = ''))
+  children.forEach(c => (c.style.display = ''))
   overflow.style.display = 'none'
 
   visibleCount.value = low
@@ -194,7 +205,7 @@ watch(
 
 watch(
   () => props.actionDetailed.isPublic,
-  (v) => {
+  v => {
     if (!v) measure()
     else visibleCount.value = permissions.value.length
   }
