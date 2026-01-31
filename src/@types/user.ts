@@ -52,7 +52,7 @@ export type Role = {
 }
 
 export type DetailedRole = Omit<Role, 'users' | 'groups'> & {
-  users: User[]
+  users: ShortUser[]
   groups: Group[]
   actions: Action[]
 }

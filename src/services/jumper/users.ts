@@ -2,6 +2,7 @@ import type {
   DetailedUser,
   Group,
   Page,
+  Role,
   ShortUser,
   User,
   UserPreferences
@@ -25,6 +26,7 @@ type UserQueryParams = {
   search?: string
   ordering?: string
   groups?: Group['id']
+  roles?: Role['id']
 }
 export async function getUsers(
   params: UserQueryParams & { short: true }
@@ -35,9 +37,8 @@ export async function getUsers(
 export async function getUsers(
   params: UserQueryParams & { short?: boolean } = {}
 ): Promise<Page<User> | Page<ShortUser>> {
-  const { page = 1, limit = 25, active, search, ordering, groups } = params
   const response = await jumperClient.get<Page<User>>('/v1/users', {
-    params: { page, limit, is_active: active, search, ordering, groups }
+    params
   })
   if (response.status !== 200) throw new JumperBackendError(response)
   return response.data
