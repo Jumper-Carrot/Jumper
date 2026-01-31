@@ -35,7 +35,7 @@
       <div class="flex w-full items-center justify-center" @click.stop>
         <Combobox
           v-if="hasOptions"
-          class="text-md ml-0!important h-[18px] w-[115px] gap-0 truncate border-none bg-slate-100 px-0.5 text-xs text-slate-400 italic hover:bg-slate-50 hover:text-slate-700 dark:bg-slate-700 dark:text-slate-400"
+          class="text-md ml-0!important h-[18px] w-[115px] gap-0 truncate border-none bg-slate-100 px-0.5 text-xs text-slate-400 italic hover:bg-slate-50 dark:hover:bg-slate-600 dark:hover:text-slate-200 hover:text-slate-700 dark:bg-slate-700 dark:text-slate-400"
           :class="{
             'pointer-events-none cursor-not-allowed':
               !optionsExec?.options.value?.length || readonly
