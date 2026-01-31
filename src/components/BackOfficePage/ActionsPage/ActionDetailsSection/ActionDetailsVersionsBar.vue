@@ -3,13 +3,15 @@
     class="ml-4 h-full w-[230px] border-l border-r bg-white dark:bg-slate-900 transition-transform"
   >
     <div
-      class="h-[30px] flex items-center bg-slate-50 dark:bg-slate-800 dark:text-slate-300 p-1 px-2 font-semibold italic text-slate-500
-        shadow-xs"
+      class="h-[30px] flex items-center bg-slate-50 dark:bg-slate-800 dark:text-slate-300 p-1 px-2 font-semibold italic text-slate-500 shadow-xs"
     >
       Versions
     </div>
+    <div v-if="!versionsQuery.isFetched.value">
+      <Loader2 class="animate-spin text-slate-500 size-8 m-auto mt-8" />
+    </div>
     <div
-      v-if="versionsQuery.isFetched"
+      v-if="versionsQuery.isFetched.value"
       class="flex h-[calc(100%-30px)] w-full flex-col items-center overflow-auto"
     >
       <button
@@ -39,6 +41,8 @@
 </template>
 
 <script setup lang="ts">
+import { Loader2 } from 'lucide-vue-next'
+
 import { VersionsComposable } from './useVersions'
 
 const props = defineProps<{

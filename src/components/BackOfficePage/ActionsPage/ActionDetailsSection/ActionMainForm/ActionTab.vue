@@ -85,7 +85,7 @@
             />
             <div class="flex flex-col gap-1">
               <PermissionTagsField v-if="!isPublic" field-name="permissions" />
-              <div class="flex items-center gap-[2px]">
+              <div class="flex items-center gap-0.5">
                 <div class="pl-1">
                   <CheckboxField
                     class="h-[13px] w-[13px]"

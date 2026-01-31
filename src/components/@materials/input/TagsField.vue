@@ -10,7 +10,7 @@
             <span
               class="absolute inset-y-0 start-0 flex items-center justify-center"
             >
-              <slot name="icon">
+              <slot name="icon" :items="fields">
                 <Tags class="size-6 text-muted-foreground" />
               </slot>
             </span>
@@ -24,7 +24,10 @@
             <slot :item="item">
               <TagsInputItemText />
             </slot>
-            <TagsInputItemDelete @click="remove(i)" class="hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" />
+            <TagsInputItemDelete
+              @click="remove(i)"
+              class="hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+            />
           </TagsInputItem>
           <ComboboxRoot
             v-model:open="open"
@@ -44,12 +47,7 @@
               <ComboboxContent>
                 <CommandList
                   position="popper"
-                  class="z-50 mt-2 w-[150px] max-h-[150px] rounded-md bg-popover text-popover-foreground shadow-md
-                    outline-hidden data-[state=open]:animate-in data-[state=closed]:animate-out
-                    data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0
-                    data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95
-                    data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2
-                    data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
+                  class="z-50 mt-2 w-[150px] max-h-[150px] rounded-md bg-popover text-popover-foreground shadow-md outline-hidden data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
                 >
                   <slot
                     name="search-list"
@@ -74,17 +72,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type HTMLAttributes } from 'vue'
+import type { HTMLAttributes } from 'vue'
+
+import { ref } from 'vue'
 import { Tags } from 'lucide-vue-next'
-import { useFieldArray } from 'vee-validate'
-import { CommandList } from '@@materials/ui/command'
-import {
-  TagsInput,
-  TagsInputInput,
-  TagsInputItem,
-  TagsInputItemDelete,
-  TagsInputItemText
-} from '@@materials/ui/tags-input'
 import {
   ComboboxAnchor,
   ComboboxContent,
@@ -92,6 +83,9 @@ import {
   ComboboxPortal,
   ComboboxRoot
 } from 'radix-vue'
+import { useFieldArray } from 'vee-validate'
+
+import { CommandList } from '@@materials/ui/command'
 import {
   FormControl,
   FormDescription,
@@ -100,6 +94,13 @@ import {
   FormLabel,
   FormMessage
 } from '@@materials/ui/form'
+import {
+  TagsInput,
+  TagsInputInput,
+  TagsInputItem,
+  TagsInputItemDelete,
+  TagsInputItemText
+} from '@@materials/ui/tags-input'
 
 const props = withDefaults(
   defineProps<{

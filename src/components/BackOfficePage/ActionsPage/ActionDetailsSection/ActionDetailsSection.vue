@@ -50,26 +50,32 @@
           </transition>
         </div>
       </div>
+      <div v-else class="flex h-full w-full items-center justify-center">
+        <Loader2 class="animate-spin text-slate-500 size-8" />
+      </div>
     </form>
   </BackOfficePageLayout>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
 import type { ActionsComposable } from '../useActions'
-import { useSystemStore } from '@/stores'
-import { useToast } from '@@materials/ui/toast'
-import Button from '@@materials/ui/button/Button.vue'
-import { Save } from 'lucide-vue-next'
-import { useActionDetailedForm } from './useActionDetailedForm'
-import ActionHeaderForm from './ActionMainForm/ActionHeaderForm.vue'
-import { ACTION_DATA_COMPONENTS } from './ActionDataForm'
-import DeleteActionButton from './DeleteActionButton.vue'
-import BackOfficePageLayout from '../../@common/BackOfficePageLayout.vue'
-import ActionDetailsVersionsBar from './ActionDetailsVersionsBar.vue'
-import { useVersions } from './useVersions'
+
+import { ref, watch } from 'vue'
+import { Loader2, Save } from 'lucide-vue-next'
+
 import jumper from '@/services/jumper'
+import { useSystemStore } from '@/stores'
 import { useQuery } from '@/composables'
+
+import Button from '@@materials/ui/button/Button.vue'
+import { useToast } from '@@materials/ui/toast'
+import BackOfficePageLayout from '../../@common/BackOfficePageLayout.vue'
+import { ACTION_DATA_COMPONENTS } from './ActionDataForm'
+import ActionDetailsVersionsBar from './ActionDetailsVersionsBar.vue'
+import ActionHeaderForm from './ActionMainForm/ActionHeaderForm.vue'
+import DeleteActionButton from './DeleteActionButton.vue'
+import { useActionDetailedForm } from './useActionDetailedForm'
+import { useVersions } from './useVersions'
 
 const { toast } = useToast()
 
@@ -105,7 +111,7 @@ const { data: workspaces } = useQuery(
   }
 )
 
-const onSubmit = handleSubmit(async (values) => {
+const onSubmit = handleSubmit(async values => {
   try {
     if (!actionDetailed.value) return
     await props.actionsComposable.update(actionDetailed.value.id, {
@@ -118,15 +124,13 @@ const onSubmit = handleSubmit(async (values) => {
               comboboxCode: values.data.comboboxCode ?? ''
             }
           : values.data,
-      user_ids: values.permissions
-        .filter((p) => 'username' in p)
-        .map((p) => p.id),
+      user_ids: values.permissions.filter(p => 'username' in p).map(p => p.id),
       group_ids: values.permissions
-        .filter((p) => 'isAdminGroup' in p)
-        .map((p) => p.id),
+        .filter(p => 'isAdminGroup' in p)
+        .map(p => p.id),
       role_ids: values.permissions
-        .filter((p) => 'description' in p)
-        .map((p) => p.id)
+        .filter(p => 'description' in p)
+        .map(p => p.id)
     })
     versionsQuery.refetch()
   } catch (error) {

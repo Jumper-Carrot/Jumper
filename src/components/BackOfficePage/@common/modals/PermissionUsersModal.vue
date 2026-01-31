@@ -1,6 +1,6 @@
 <template>
   <BaseModal
-    :title="`'${action.name}' allowed users`"
+    title="Action allowed users"
     v-model:open="open"
     class="p-6 w-[500px]"
   >
@@ -83,7 +83,14 @@
 </template>
 
 <script setup lang="ts">
-import type { DetailedAction, Group, Role, ShortUser } from '@@types'
+import type {
+  DetailedGroup,
+  DetailedRole,
+  Group,
+  Role,
+  ShortUser
+} from '@@types'
+import type { Ref } from 'vue'
 
 import { computed, ref } from 'vue'
 import { useVirtualList } from '@vueuse/core'
@@ -100,7 +107,7 @@ import {
 } from '@@materials/ui/table'
 
 const props = defineProps<{
-  action: DetailedAction
+  permissions: Array<Ref<ShortUser> | Ref<DetailedGroup> | Ref<DetailedRole>>
 }>()
 
 const open = defineModel<boolean>('open')
@@ -116,30 +123,45 @@ const filteredUsers = computed(() => {
     }
   })
 
-  const usersIndex = props.action.users.reduce(
+  const usersList = props.permissions.filter(
+    (item): item is Ref<ShortUser> =>
+      (item as Ref<ShortUser>).value.username !== undefined
+  )
+  const groupsList = props.permissions.filter(
+    (item): item is Ref<DetailedGroup> =>
+      (item as Ref<DetailedGroup>).value.isAdminGroup !== undefined
+  )
+  const rolesList = props.permissions.filter(
+    (item): item is Ref<DetailedRole> =>
+      (item as Ref<DetailedRole>).value.users !== undefined
+  )
+
+  const usersIndex = usersList.reduce(
     (acc, user) => {
-      acc[user.id] = getNewUser(user)
+      acc[user.value.id] = getNewUser(user.value)
       return acc
     },
     {} as Record<
       ShortUser['id'],
-      ShortUser & { via: { groups: Group['name'][]; roles: Role['name'][] } }
+      ShortUser & {
+        via: { groups: DetailedGroup['name'][]; roles: DetailedRole['name'][] }
+      }
     >
   )
-  props.action.groups.forEach(group => {
-    group.userSet.forEach(user => {
+  groupsList.forEach(group => {
+    group.value.userSet.forEach(user => {
       if (!usersIndex[user.id]) {
         usersIndex[user.id] = getNewUser(user)
       }
-      usersIndex[user.id].via.groups.push(group.name)
+      usersIndex[user.id].via.groups.push(group.value.name)
     })
   })
-  props.action.roles.forEach(role => {
-    role.users.forEach(user => {
+  rolesList.forEach(role => {
+    role.value.users.forEach(user => {
       if (!usersIndex[user.id]) {
         usersIndex[user.id] = getNewUser(user)
       }
-      usersIndex[user.id].via.roles.push(role.name)
+      usersIndex[user.id].via.roles.push(role.value.name)
     })
   })
 

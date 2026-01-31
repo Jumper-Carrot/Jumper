@@ -1,15 +1,25 @@
 <template>
   <TagsField
-    class=" max-w-[600px] max-h-[100px] overflow-auto p-[6px] gap-[6px]"
+    class="max-w-[600px] max-h-[100px] overflow-auto p-1.5 gap-1.5"
     :field-name="fieldName"
     :label="label || 'Permissions'"
     :show-error-message="false"
     placeholder="Access..."
     v-model:search-term="search"
   >
-  <template #icon>
-    <ScanEyeIcon  class="text-slate-400 size-6"/>
-  </template>
+    <template #icon="{ items }">
+      <button
+        class="dark:hover:bg-slate-800 p-0.5 rounded-md transition-colors text-slate-500 hover:text-slate-800 hover:bg-slate-200 dark:hover:text-slate-100"
+        title="View permissions"
+        @click.prevent="isPermissionUsersModalOpen = true"
+      >
+        <ScanEyeIcon class="text-slate-400 size-6" />
+      </button>
+      <PermissionUsersModal
+        :permissions="items as any"
+        v-model:open="isPermissionUsersModalOpen"
+      />
+    </template>
     <template #default="{ item }">
       <span class="flex items-center gap-1 px-1" v-if="item.value.username">
         <UserIcon :size="16" />
@@ -48,7 +58,7 @@
             <CommandItem
               v-if="
                 !items.some(
-                  (item) => item.value.username && item.value.id === user.id
+                  item => item.value.username && item.value.id === user.id
                 )
               "
               class="flex gap-1"
@@ -74,7 +84,7 @@
             <CommandItem
               v-if="
                 !items.some(
-                  (item) =>
+                  item =>
                     item.value.isAdminGroup !== undefined &&
                     item.value.id === group.id
                 )
@@ -100,7 +110,7 @@
             <CommandItem
               v-if="
                 !items.some(
-                  (item) =>
+                  item =>
                     item.value.description !== undefined &&
                     item.value.id === role.id
                 )
@@ -121,20 +131,30 @@
 
 <script setup lang="ts">
 import type { Permissions } from '@@types'
+
 import { ref } from 'vue'
-import { useQuery } from '@/composables'
+import {
+  Loader2,
+  ScanEyeIcon,
+  UserCogIcon,
+  UserIcon,
+  UsersIcon
+} from 'lucide-vue-next'
+
 import jumper from '@/services/jumper'
+import { useQuery } from '@/composables'
+
 import TagsField from '@@materials/input/TagsField.vue'
-import { Loader2, UserIcon, UsersIcon, UserCogIcon, ScanEyeIcon } from 'lucide-vue-next'
-import { CommandItem, CommandGroup } from '@@materials/ui/command'
+import { CommandGroup, CommandItem } from '@@materials/ui/command'
+import PermissionUsersModal from './modals/PermissionUsersModal.vue'
 
 const search = ref('')
+const isPermissionUsersModalOpen = ref(false)
 
 defineProps<{
   fieldName: string
   label?: string
 }>()
-
 
 const searchedPermissions = useQuery<Permissions>(
   ['action-permissions-search', search],
