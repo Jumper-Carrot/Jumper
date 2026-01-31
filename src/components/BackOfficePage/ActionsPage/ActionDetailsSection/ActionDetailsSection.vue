@@ -62,13 +62,13 @@ import type { ActionsComposable } from '../useActions'
 
 import { ref, watch } from 'vue'
 import { Loader2, Save } from 'lucide-vue-next'
+import { toast } from 'vue-sonner'
 
 import jumper from '@/services/jumper'
 import { useSystemStore } from '@/stores'
 import { useQuery } from '@/composables'
 
 import Button from '@@materials/ui/button/Button.vue'
-import { useToast } from '@@materials/ui/toast'
 import BackOfficePageLayout from '../../@common/BackOfficePageLayout.vue'
 import { ACTION_DATA_COMPONENTS } from './ActionDataForm'
 import ActionDetailsVersionsBar from './ActionDetailsVersionsBar.vue'
@@ -76,8 +76,6 @@ import ActionHeaderForm from './ActionMainForm/ActionHeaderForm.vue'
 import DeleteActionButton from './DeleteActionButton.vue'
 import { useActionDetailedForm } from './useActionDetailedForm'
 import { useVersions } from './useVersions'
-
-const { toast } = useToast()
 
 const systemStore = useSystemStore()
 
@@ -135,16 +133,17 @@ const onSubmit = handleSubmit(async values => {
     versionsQuery.refetch()
   } catch (error) {
     if (error instanceof Error) {
-      toast({
-        title: 'Failed to update action.',
-        description: error.message,
-        variant: 'destructive'
+      toast.error('Failed to update action.', {
+        duration: 1500,
+        description: error.message
       })
     }
     return false
   }
-  toast({
-    title: `'${values.name}' action updated.`
+  toast(`'${values.name}' action updated.`, {
+    duration: 1500,
+    position: 'top-center',
+    style: { 'margin-top': '15px' }
   })
   return true
 })

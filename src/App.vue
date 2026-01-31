@@ -3,7 +3,10 @@ import { getCurrentWindow } from '@tauri-apps/api/window'
 import { useColorMode } from '@vueuse/core'
 import { RouterView, useRoute } from 'vue-router'
 
-import Toaster from '@@materials/ui/toast/Toaster.vue'
+import 'vue-sonner/style.css'
+
+import { Toaster } from '@@materials/ui/sonner'
+import OldToaster from '@@materials/ui/toast/Toaster.vue'
 import DebugTitleBar from './components/TitleBar/DebugTitleBar.vue'
 import TitleBar from './components/TitleBar/TitleBar.vue'
 import { useUpdater } from './composables/useUpdater'
@@ -35,4 +38,5 @@ if (window.label === 'main') {
     </main>
   </div>
   <Toaster />
+  <OldToaster />
 </template>
