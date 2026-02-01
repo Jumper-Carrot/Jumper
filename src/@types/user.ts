@@ -63,4 +63,5 @@ export type UserPreferences = {
   disableDefaultBackgroundImage: boolean
   customBackgroundImageUrl: string | null
   hiddenActions: Action['id'][]
+  customOrder: number[]
 }
