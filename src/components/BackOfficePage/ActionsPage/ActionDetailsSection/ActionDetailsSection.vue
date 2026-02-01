@@ -114,6 +114,8 @@ const onSubmit = handleSubmit(async values => {
     if (!actionDetailed.value) return
     await props.actionsComposable.update(actionDetailed.value.id, {
       ...values,
+      hasDelayBeforeRelaunch: values.hasDelayBeforeRelaunch,
+      delayBeforeRelaunch: values.delayBeforeRelaunch,
       data:
         values.data &&
         (values.data.type === 'Python' || values.data.type === 'Windows CMD')

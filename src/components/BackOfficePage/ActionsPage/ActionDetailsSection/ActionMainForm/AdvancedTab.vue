@@ -2,16 +2,15 @@
   <div class="flex flex-col gap-2">
     <div class="flex items-center gap-3">
       <Switch
-        v-model="hasDelaybeforeRelaunch"
+        v-model="hasDelayBeforeRelaunch"
         class="h-5 w-[35px] rounded-full data-[state=checked]:bg-green-600 data-[state=unchecked]:bg-slate-300 dark:data-[state=unchecked]:bg-slate-500"
-        field-name="hasDelaybeforeRelaunch"
       >
         <template #thumb>
           <div
             class="flex h-full w-full items-center justify-center rounded-full"
           >
             <Check
-              v-if="hasDelaybeforeRelaunch"
+              v-if="hasDelayBeforeRelaunch"
               class="size-3 text-green-600"
             />
             <div
@@ -32,7 +31,7 @@
         label="Delay (ms)"
         type="number"
         min="0"
-        :disabled="!hasDelaybeforeRelaunch"
+        :disabled="!hasDelayBeforeRelaunch"
         :show-error-message="false"
       />
     </div>
@@ -40,22 +39,13 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import { Check } from 'lucide-vue-next'
 import { useField } from 'vee-validate'
 
 import { InputField } from '@@materials/input'
 import { Switch } from '@@materials/ui/switch'
 
-const { value: hasDelaybeforeRelaunch } = useField<boolean>(
-  'hasDelaybeforeRelaunch'
+const { value: hasDelayBeforeRelaunch } = useField<boolean>(
+  'hasDelayBeforeRelaunch'
 )
-const { value: delayBeforeRelaunch, setValue: setDelayBeforeRelaunch } =
-  useField<number | null>('delayBeforeRelaunch')
-
-onMounted(() => {
-  if (delayBeforeRelaunch.value == null) {
-    setDelayBeforeRelaunch(1000)
-  }
-})
 </script>

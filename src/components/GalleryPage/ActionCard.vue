@@ -2,17 +2,20 @@
   <button
     ref="card"
     v-if="!isHidden || readonly"
-    class="custom-shadow flex flex-col items-center dark:shadow-slate-900 hover:dark:shadow-slate-800 justify-center gap-2 rounded-md bg-slate-100 p-2 pb-1 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md active:translate-y-0.5 active:shadow-none dark:bg-slate-800 hover:bg-slate-200/60 dark:hover:bg-slate-700/80"
-    :class="{
-      'pointer-events-none cursor-not-allowed opacity-65':
-        (hasOptions && !optionsExec?.options.value?.length) || isHidden,
-      'pointer-events-none cursor-not-allowed': readonly
-    }"
-    @click="execAction(null)"
+    :class="[
+      'custom-shadow flex flex-col items-center justify-center gap-2 rounded-md bg-slate-100 p-2 pb-1',
+      readonly || isDelayActive
+        ? 'dark:shadow-slate-900 pointer-events-none cursor-not-allowed opacity-65 dark:bg-slate-800'
+        : 'dark:shadow-slate-900 hover:dark:shadow-slate-800 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md active:translate-y-0.5 active:shadow-none dark:bg-slate-800 hover:bg-slate-200/60 dark:hover:bg-slate-700/80',
+      (hasOptions && !optionsExec?.options.value?.length) || isHidden
+        ? 'pointer-events-none cursor-not-allowed opacity-65'
+        : ''
+    ]"
+    @click="!isDelayActive ? execAction(null) : undefined"
     :title="action.name"
   >
     <div
-      class="flex h-[78px] w-[78px] shrink-0 items-center justify-center rounded-md p-0.5"
+      class="flex h-[78px] w-[78px] shrink-0 items-center justify-center rounded-md p-0.5 relative"
     >
       <img
         v-if="action.thumbnailUrl"
@@ -22,6 +25,12 @@
       />
       <div v-else class="flex h-full w-full items-center justify-center">
         <Carrot :size="60" class="ml-2 text-slate-300" />
+      </div>
+      <div
+        v-if="isDelayActive"
+        class="absolute inset-0 flex items-center justify-center bg-slate-200/70 dark:bg-slate-800/70 rounded-md"
+      >
+        <Loader2 class="animate-spin text-slate-500" :size="36" />
       </div>
     </div>
     <div class="flex grow flex-col gap-0.5">
@@ -93,7 +102,7 @@
 <script setup lang="ts">
 import type { PlayableAction } from '@@types'
 
-import { computed, useTemplateRef, watch } from 'vue'
+import { computed, ref, useTemplateRef, watch } from 'vue'
 import { useElementHover } from '@vueuse/core'
 import { Carrot, Loader2, Minus, X } from 'lucide-vue-next'
 import { storeToRefs } from 'pinia'
@@ -144,8 +153,19 @@ if (
   optionsExec?.exec()
 }
 
+const isDelayActive = ref(false)
+let delayTimeout: ReturnType<typeof setTimeout> | null = null
+
+const hasDelay = computed(
+  () =>
+    props.action.hasDelayBeforeRelaunch &&
+    props.action.delayBeforeRelaunch &&
+    props.action.delayBeforeRelaunch > 0
+)
+
 const execAction = async (option: string | null) => {
-  if (optionsExec?.isRunning.value || props.readonly) return
+  if (isDelayActive.value || optionsExec?.isRunning.value || props.readonly)
+    return
   if (hasOptions.value && !optionsExec?.options.value) return
   const opt = option || optionsExec?.options.value?.[0] || null
   await exec(opt)
@@ -157,5 +177,12 @@ const execAction = async (option: string | null) => {
     title,
     duration: 2000
   })
+  if (hasDelay.value) {
+    isDelayActive.value = true
+    if (delayTimeout) clearTimeout(delayTimeout)
+    delayTimeout = setTimeout(() => {
+      isDelayActive.value = false
+    }, props.action.delayBeforeRelaunch)
+  }
 }
 </script>

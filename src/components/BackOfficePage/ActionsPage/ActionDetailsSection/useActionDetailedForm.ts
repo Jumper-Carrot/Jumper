@@ -51,6 +51,8 @@ export const useActionDetailedForm = (
         permissions: z
           .array(z.custom<User | DetailedGroup | DetailedRole>())
           .default([]),
+        hasDelayBeforeRelaunch: z.boolean().default(false),
+        delayBeforeRelaunch: z.number().min(0).default(2000),
         data: actionRef.value
           ? dataSchema[actionRef.value.data.type]
           : linkDataSchema
@@ -68,7 +70,9 @@ export const useActionDetailedForm = (
         data: newValue.data,
         section: newValue.section,
         workspace: newValue.workspace,
-        permissions: [...newValue.users, ...newValue.groups, ...newValue.roles]
+        permissions: [...newValue.users, ...newValue.groups, ...newValue.roles],
+        hasDelayBeforeRelaunch: newValue.hasDelayBeforeRelaunch ?? false,
+        delayBeforeRelaunch: newValue.delayBeforeRelaunch ?? 1000
       }
     }
   }

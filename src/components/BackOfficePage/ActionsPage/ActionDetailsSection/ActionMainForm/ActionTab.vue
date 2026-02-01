@@ -165,17 +165,7 @@ const { actionDetailed } = props.actionsComposable
 const { value: isPublic } = useField<boolean>('isPublic')
 const { value: isActive } = useField<boolean>('isActive')
 const { value: thumbnailKey } = useField<string | null>('thumbnailKey')
-const { value: hasDelaybeforeRelaunch } = useField<boolean>(
-  'hasDelaybeforeRelaunch'
-)
-const { value: delayBeforeRelaunch, setValue: setDelayBeforeRelaunch } =
-  useField<number | null>('delayBeforeRelaunch')
 
-onMounted(() => {
-  if (delayBeforeRelaunch.value == null) {
-    setDelayBeforeRelaunch(1000)
-  }
-})
 const newThumbnailUrl = ref<string | null>(null)
 
 const { open, onChange } = useFileDialog({
