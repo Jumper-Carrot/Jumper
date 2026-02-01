@@ -100,6 +100,7 @@
                 </span>
               </div>
             </div>
+            <!-- Delay fields moved to Advanced tab -->
             <slot />
           </div>
           <div
@@ -137,7 +138,7 @@
 import type { Workspace } from '@@types'
 import type { ActionsComposable } from '../../useActions'
 
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useFileDialog } from '@vueuse/core'
 import { Carrot, Check, ImagePlus, Link } from 'lucide-vue-next'
 import { storeToRefs } from 'pinia'
@@ -164,6 +165,17 @@ const { actionDetailed } = props.actionsComposable
 const { value: isPublic } = useField<boolean>('isPublic')
 const { value: isActive } = useField<boolean>('isActive')
 const { value: thumbnailKey } = useField<string | null>('thumbnailKey')
+const { value: hasDelaybeforeRelaunch } = useField<boolean>(
+  'hasDelaybeforeRelaunch'
+)
+const { value: delayBeforeRelaunch, setValue: setDelayBeforeRelaunch } =
+  useField<number | null>('delayBeforeRelaunch')
+
+onMounted(() => {
+  if (delayBeforeRelaunch.value == null) {
+    setDelayBeforeRelaunch(1000)
+  }
+})
 const newThumbnailUrl = ref<string | null>(null)
 
 const { open, onChange } = useFileDialog({

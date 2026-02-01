@@ -14,6 +14,8 @@ export type Action = {
   lastUpdate: string
   thumbnailUrl: string
   section: string | null
+  hasDelaybeforeRelaunch: boolean
+  delayBeforeRelaunch: number | null
   data: {
     type: ActionData['type']
   }
