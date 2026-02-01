@@ -6,4 +6,5 @@ export type SystemInfo = {
   defaultBackgroundImageUrl: string | null
   allowActionSections: boolean
   allowUsersToHideActions: boolean
+  allowCustomOrder: boolean
 }

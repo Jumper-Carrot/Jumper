@@ -3,7 +3,7 @@
     <div class="flex h-full flex-col gap-4">
       <div class="flex flex-col gap-2">
         <h2 class="font-semibold">Actions advanced settings</h2>
-        <div class="pl-2">
+        <div class="pl-2 flex flex-col gap-2">
           <div
             class="flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400"
           >
@@ -80,14 +80,20 @@
         <div
           class="flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400"
         >
+          <Switch v-model="allowUsersToHideActions" />
+          Allow users to hide actions
+        </div>
+        <div
+          class="flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400"
+        >
           <Switch v-model="allowActionSections" />
           Allow action sections
         </div>
         <div
           class="flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400"
         >
-          <Switch v-model="allowUsersToHideActions" />
-          Allow users to hide actions
+          <Switch v-model="allowCustomOrder" />
+          Allow users to customize action card order
         </div>
       </div>
     </div>
@@ -125,6 +131,7 @@ const { handleSubmit } = useSystemForm(props.systemInfo)
 const { value: allowActionWorkspaces } = useField<boolean>(
   'allowActionWorkspaces'
 )
+const { value: allowCustomOrder } = useField<boolean>('allowCustomOrder')
 const { value: allowShowingDescription } = useField<boolean>(
   'allowShowingDescription'
 )

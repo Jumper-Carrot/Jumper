@@ -14,7 +14,8 @@ export const useSystemForm = (
       allowBackgroundImage: z.boolean(),
       allowUserCustomBackgroundImage: z.boolean(),
       allowActionSections: z.boolean(),
-      allowUsersToHideActions: z.boolean()
+      allowUsersToHideActions: z.boolean(),
+      allowCustomOrder: z.boolean()
     })
   )
   return useForm({
