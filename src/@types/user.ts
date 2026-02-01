@@ -61,6 +61,8 @@ export type UserPreferences = {
   readonly id: number
   allowShowingDescription: boolean
   disableDefaultBackgroundImage: boolean
+  allowCustomOrder: boolean
+  allowSections: boolean
   customBackgroundImageUrl: string | null
   hiddenActions: Action['id'][]
   customOrder: number[]
