@@ -21,35 +21,40 @@
           >
             {{ sectionName }}
           </h2>
-          <div
+          <draggable
             class="flex flex-wrap p-4 px-3"
             :class="[isMultiSections ? 'justify-start' : 'justify-center']"
+            :list="visibleActionsBySection[sectionName]"
+            :group="sectionName"
+            item-key="id"
+            :move="(evt: any) => evt.to === evt.from"
+            ghost-class="drag-ghost"
+            chosen-class="drag-chosen"
+            @end="onDragEnd()"
           >
-            <div
-              v-for="action in visibleActionsBySection[sectionName]"
-              :key="action.id"
-              class="relative"
-            >
-              <ActionCard
-                class="m-2 h-[145px] w-[130px]"
-                :action="action"
-                :readonly="isThemingBarOpen"
-                :force-show="isThemingBarOpen"
-                @hover-change="
-                  (isHover: boolean) => {
-                    if (action.description.length == 0) return
-                    isActionHovered = isHover
-                    if (isHover) lastHoveredAction = action
-                  }
-                "
-              />
-              <HideActionButton
-                v-if="isThemingBarOpen && systemInfo?.allowUsersToHideActions"
-                :action-id="action.id"
-                v-model:userPreferences="user.preferences"
-              />
-            </div>
-          </div>
+            <template #item="{ element: action }">
+              <div class="relative transition-all" :key="action.id">
+                <ActionCard
+                  class="m-2 h-[145px] w-[130px]"
+                  :action="action"
+                  :readonly="isThemingBarOpen"
+                  :force-show="isThemingBarOpen"
+                  @hover-change="
+                    (isHover: boolean) => {
+                      if (action.description.length == 0) return
+                      isActionHovered = isHover
+                      if (isHover) lastHoveredAction = action
+                    }
+                  "
+                />
+                <HideActionButton
+                  v-if="isThemingBarOpen && systemInfo?.allowUsersToHideActions"
+                  :action-id="action.id"
+                  v-model:userPreferences="user.preferences"
+                />
+              </div>
+            </template>
+          </draggable>
         </div>
       </div>
     </div>
@@ -75,6 +80,7 @@ import type { PlayableAction } from '@@types'
 import { computed, ref } from 'vue'
 import { Loader2 } from 'lucide-vue-next'
 import { storeToRefs } from 'pinia'
+import draggable from 'vuedraggable'
 
 import jumper from '@/services/jumper'
 import {
@@ -88,6 +94,19 @@ import ActionCard from './ActionCard.vue'
 import DescriptionInfoCard from './DescriptionInfoCard.vue'
 import HideActionButton from './HideActionButton.vue'
 import ThemingBar from './ThemingBar.vue'
+
+const authUserStore = useAuthUserStore()
+
+function onDragEnd() {
+  const allOrderedIds: number[] = []
+  Object.values(visibleActionsBySection.value).forEach(actions => {
+    actions.forEach(a => allOrderedIds.push(a.id))
+  })
+  if (user.value?.preferences) {
+    user.value.preferences.customOrder = allOrderedIds
+    authUserStore.updateUserPreferences({ customOrder: allOrderedIds })
+  }
+}
 
 const { systemInfo } = storeToRefs(useSystemStore())
 const { search, isThemingBarOpen } = storeToRefs(useTitleBarOptionsStore())
@@ -117,16 +136,29 @@ const { data: actions, isFetched } = useQuery<PlayableAction[]>(
 
 // Utility to check if an action is hidden for the current user
 const isActionHidden = (action: PlayableAction): boolean => {
-  return (
+  return Boolean(
     user.value &&
-    systemInfo.value?.allowUsersToHideActions &&
-    user.value.preferences.hiddenActions.includes(action.id)
+      systemInfo.value?.allowUsersToHideActions &&
+      user.value.preferences.hiddenActions.includes(action.id)
   )
 }
 
 const actionsBySection = computed(() => {
   const sections: Record<string, PlayableAction[]> = {}
-  actions.value?.forEach(action => {
+  if (!actions.value) return sections
+  const customOrder = user.value?.preferences?.customOrder || []
+  const actionsSorted = [...actions.value]
+  actionsSorted.sort((a, b) => {
+    const ia = customOrder.indexOf(a.id)
+    const ib = customOrder.indexOf(b.id)
+    if (ia === -1 && ib === -1) {
+      return a.name.localeCompare(b.name)
+    }
+    if (ia === -1) return 1
+    if (ib === -1) return -1
+    return ia - ib
+  })
+  actionsSorted.forEach(action => {
     let section = 'Others'
     if (systemInfo.value?.allowActionSections && action.section) {
       section = action.section
@@ -172,3 +204,15 @@ const orderedSections = computed(() => {
   return sections
 })
 </script>
+
+<style scoped>
+.drag-ghost {
+  opacity: 0;
+  pointer-events: none;
+}
+.drag-chosen {
+  transform: scale(1.05);
+  transition: all 0.2s;
+  z-index: 20;
+}
+</style>

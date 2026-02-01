@@ -74,15 +74,14 @@ export const useAuthUserStore = defineStore('authUser', () => {
     preferences: Partial<UserPreferences>
   ) => {
     if (!user.value) throw new Error('User not found')
-    const result = await jumper.users.updateUserPreferences(
+    setUser(old => {
+      if (!old) return undefined
+      return { ...old, preferences: { ...old.preferences, ...preferences } }
+    })
+    await jumper.users.updateUserPreferences(
       user.value.preferences.id,
       preferences
     )
-    setUser(old => {
-      if (!old) return undefined
-      return { ...old, preferences: result }
-    })
-    return result
   }
 
   const updateUserPreferenceBackgroundImage = async (file: File) => {
