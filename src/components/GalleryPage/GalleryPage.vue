@@ -27,13 +27,21 @@
             :list="visibleActionsBySection[sectionName]"
             :group="sectionName"
             item-key="id"
-            :move="(evt: any) => evt.to === evt.from"
+            :move="(evt: any) => isThemingBarOpen && evt.to === evt.from"
+            :disabled="!isThemingBarOpen"
             ghost-class="drag-ghost"
             chosen-class="drag-chosen"
+            @start="onDragStart"
             @end="onDragEnd()"
           >
             <template #item="{ element: action }">
-              <div class="relative transition-all" :key="action.id">
+              <div
+                class="relative transition-all"
+                :key="action.id"
+                :class="{
+                  'cursor-grab': isThemingBarOpen && !grabbing
+                }"
+              >
                 <ActionCard
                   class="m-2 h-[145px] w-[130px]"
                   :action="action"
@@ -97,6 +105,7 @@ import ThemingBar from './ThemingBar.vue'
 
 const authUserStore = useAuthUserStore()
 
+const grabbing = ref(false)
 function onDragEnd() {
   const allOrderedIds: number[] = []
   Object.values(visibleActionsBySection.value).forEach(actions => {
@@ -106,6 +115,7 @@ function onDragEnd() {
     user.value.preferences.customOrder = allOrderedIds
     authUserStore.updateUserPreferences({ customOrder: allOrderedIds })
   }
+  grabbing.value = false
 }
 
 const { systemInfo } = storeToRefs(useSystemStore())
@@ -141,6 +151,10 @@ const isActionHidden = (action: PlayableAction): boolean => {
       systemInfo.value?.allowUsersToHideActions &&
       user.value.preferences.hiddenActions.includes(action.id)
   )
+}
+
+function onDragStart() {
+  document.body.classList.add('dragging')
 }
 
 const actionsBySection = computed(() => {
@@ -214,5 +228,10 @@ const orderedSections = computed(() => {
   transform: scale(1.05);
   transition: all 0.2s;
   z-index: 20;
+}
+
+.dragging,
+.dragging * {
+  cursor: grabbing !important;
 }
 </style>
