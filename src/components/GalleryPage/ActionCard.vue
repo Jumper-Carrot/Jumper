@@ -1,13 +1,14 @@
 <template>
   <button
     ref="card"
-    v-if="!isHidden || readonly"
+    v-if="!isHidden || readonly || forceShow"
     :class="[
       'custom-shadow flex flex-col items-center justify-center gap-2 rounded-md bg-slate-100 p-2 pb-1',
       readonly || isDelayActive
         ? 'dark:shadow-slate-900 pointer-events-none cursor-not-allowed opacity-65 dark:bg-slate-800'
         : 'dark:shadow-slate-900 hover:dark:shadow-slate-800 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md active:translate-y-0.5 active:shadow-none dark:bg-slate-800 hover:bg-slate-200/60 dark:hover:bg-slate-700/80',
-      (hasOptions && !optionsExec?.options.value?.length) || isHidden
+      (hasOptions && !optionsExec?.options.value?.length) ||
+      (isHidden && !forceShow)
         ? 'pointer-events-none cursor-not-allowed opacity-65'
         : ''
     ]"
@@ -115,6 +116,7 @@ import { useToast } from '@@materials/ui/toast'
 const props = defineProps<{
   action: PlayableAction
   readonly?: boolean
+  forceShow?: boolean
 }>()
 
 const useActionExec = useActionExecStore()

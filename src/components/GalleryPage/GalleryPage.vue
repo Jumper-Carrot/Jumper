@@ -25,7 +25,7 @@
             :class="[isMultiSections ? 'justify-start' : 'justify-center']"
           >
             <div
-              v-for="action in actionsBySection[sectionName]"
+              v-for="action in visibleActionsBySection[sectionName]"
               :key="action.id"
               class="relative"
             >
@@ -33,6 +33,7 @@
                 class="h-[145px] w-[130px] m-2"
                 :action="action"
                 :readonly="isThemingBarOpen"
+                :force-show="isThemingBarOpen"
                 @hover-change="
                   (isHover: boolean) => {
                     if (action.description.length == 0) return
@@ -113,6 +114,15 @@ const { data: actions, isFetched } = useQuery<PlayableAction[]>(
   }
 )
 
+// Utility to check if an action is hidden for the current user
+const isActionHidden = (action: PlayableAction): boolean => {
+  return (
+    user.value &&
+    systemInfo.value?.allowUsersToHideActions &&
+    user.value.preferences.hiddenActions.includes(action.id)
+  )
+}
+
 const actionsBySection = computed(() => {
   const sections: Record<string, PlayableAction[]> = {}
   actions.value?.forEach(action => {
@@ -128,15 +138,30 @@ const actionsBySection = computed(() => {
   return sections
 })
 
+// Only show non-hidden actions unless theming bar is open
+const visibleActionsBySection = computed(() => {
+  const result: Record<string, PlayableAction[]> = {}
+  Object.entries(actionsBySection.value).forEach(([section, actions]) => {
+    if (isThemingBarOpen.value) {
+      result[section] = actions
+    } else {
+      const visible = actions.filter(a => !isActionHidden(a))
+      if (visible.length > 0) {
+        result[section] = visible
+      }
+    }
+  })
+  return result
+})
+
 const isMultiSections = computed(() => {
-  return (
-    Object.keys(actionsBySection.value).length > 1 ||
-    Object.keys(actionsBySection.value)[0] !== 'Others'
-  )
+  const keys = Object.keys(visibleActionsBySection.value)
+  if (keys.length === 0) return false
+  return keys.length > 1 || keys[0] !== 'Others'
 })
 
 const orderedSections = computed(() => {
-  const sections = Object.keys(actionsBySection.value)
+  const sections = Object.keys(visibleActionsBySection.value)
   sections.sort((a, b) => {
     if (sections.includes('Others')) {
       return sections.indexOf('Others') === 0 ? -1 : 1
