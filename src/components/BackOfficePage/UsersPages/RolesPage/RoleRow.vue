@@ -1,7 +1,8 @@
 <template>
   <TableCell class="w-[250px]">
     <h3
-      class="overflow-hidden truncate whitespace-nowrap font-medium text-slate-700 dark:text-slate-400"
+      class="truncate overflow-hidden font-medium whitespace-nowrap
+        text-slate-700 dark:text-slate-400"
       :title="role.name"
     >
       {{ role.name }}
@@ -12,7 +13,10 @@
       <Tooltip>
         <TooltipTrigger>
           <button
-            class="flex w-[45px] items-center justify-center gap-1 rounded-sm p-2 font-semibold text-slate-700 transition-colors hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 disabled:opacity-50 disabled:pointer-events-none"
+            class="flex w-[45px] items-center justify-center gap-1 rounded-sm
+              p-2 font-semibold text-slate-700 transition-colors
+              hover:bg-slate-100 disabled:pointer-events-none
+              disabled:opacity-50 dark:text-slate-400 dark:hover:bg-slate-800"
             @click="isRoleMemberModalOpen = true"
             :disabled="role.users.length == 0"
           >
@@ -46,7 +50,10 @@
       <Tooltip>
         <TooltipTrigger>
           <button
-            class="flex w-[45px] items-center justify-center gap-1 rounded-sm p-2 font-semibold text-slate-700 transition-colors hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 disabled:opacity-50 disabled:pointer-events-none"
+            class="flex w-[45px] items-center justify-center gap-1 rounded-sm
+              p-2 font-semibold text-slate-700 transition-colors
+              hover:bg-slate-100 disabled:pointer-events-none
+              disabled:opacity-50 dark:text-slate-400 dark:hover:bg-slate-800"
             @click="isRoleGroupsModalOpen = true"
             :disabled="role.groups.length == 0"
           >

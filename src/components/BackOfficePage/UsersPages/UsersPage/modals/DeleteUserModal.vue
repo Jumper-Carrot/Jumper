@@ -20,10 +20,13 @@
 
 <script setup lang="ts">
 import type { User } from '@@types'
+
+import { Trash2 } from 'lucide-vue-next'
+
 import jumper from '@/services/jumper'
 import { useConfirmToast } from '@/composables'
+
 import { ConfirmModal } from '@@materials/modal'
-import { Trash2 } from 'lucide-vue-next'
 
 const emit = defineEmits<{
   accountDeleted: []

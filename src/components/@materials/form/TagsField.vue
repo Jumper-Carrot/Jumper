@@ -48,7 +48,7 @@
 <script setup lang="ts">
 import { type HTMLAttributes } from 'vue'
 import { useField } from 'vee-validate'
-import TagsInput from './TagsInput.vue'
+
 import { cn } from '@/services/utils'
 
 import {
@@ -59,6 +59,7 @@ import {
   FormLabel,
   FormMessage
 } from '@@materials/ui/form'
+import TagsInput from './TagsInput.vue'
 
 const props = withDefaults(
   defineProps<{

@@ -7,7 +7,7 @@
       <FormControl>
         <Combobox
           :modelValue="value"
-          @update:modelValue="(val) => setValue(val)"
+          @update:modelValue="val => setValue(val)"
           v-bind="{
             ...$slots,
             ...{
@@ -43,8 +43,6 @@
 import { type HTMLAttributes } from 'vue'
 import { AcceptableValue } from 'reka-ui'
 
-import Combobox from './Combobox.vue'
-
 import {
   FormControl,
   FormDescription,
@@ -53,6 +51,7 @@ import {
   FormLabel,
   FormMessage
 } from '@@materials/ui/form'
+import Combobox from './Combobox.vue'
 
 defineProps<
   {

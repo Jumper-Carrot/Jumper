@@ -1,4 +1,5 @@
 import type { Workspace, DetailedWorkspace, Page } from '@@types'
+
 import { jumperClient, JumperBackendError } from '@/services/jumper/client'
 
 type WorkspacesQueryParams = {

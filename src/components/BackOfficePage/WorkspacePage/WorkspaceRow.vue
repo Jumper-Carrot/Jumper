@@ -1,7 +1,8 @@
 <template>
   <TableCell class="w-[250px]">
     <div
-      class="flex w-full gap-4 text-lg font-semibold text-slate-700 dark:text-slate-400"
+      class="flex w-full gap-4 text-lg font-semibold text-slate-700
+        dark:text-slate-400"
     >
       {{ workspace.name }}
     </div>
@@ -16,7 +17,7 @@
     <div class="flex justify-end">
       <WorkspaceDropdownMenuButton
         :workspace="workspace"
-        @workspace-updated="(e) => $emit('workspaceUpdated', e)"
+        @workspace-updated="e => $emit('workspaceUpdated', e)"
       />
     </div>
   </TableCell>
@@ -24,7 +25,9 @@
 
 <script setup lang="ts">
 import type { DetailedWorkspace } from '@@types'
+
 import { Check } from 'lucide-vue-next'
+
 import { TableCell } from '@@materials/ui/table'
 import WorkspaceDropdownMenuButton from './modals/WorkspaceDropdownMenuButton.vue'
 

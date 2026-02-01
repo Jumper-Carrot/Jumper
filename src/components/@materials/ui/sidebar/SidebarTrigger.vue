@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
-import { Button } from '@/components/@materials/ui/button'
-import { cn } from '@/services/utils'
+
 import { PanelLeft } from 'lucide-vue-next'
+
+import { cn } from '@/services/utils'
+
+import { Button } from '@/components/@materials/ui/button'
 import { useSidebar } from './utils'
 
 const props = defineProps<{

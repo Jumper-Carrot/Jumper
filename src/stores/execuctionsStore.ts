@@ -1,8 +1,10 @@
-import { ref } from 'vue'
 import type { CodeExec } from '@/composables/useCodeExec/useCodeExec'
-import { defineStore } from 'pinia'
-import { useLogsStore } from './logsStore'
+
+import { ref } from 'vue'
 import { invoke } from '@tauri-apps/api/core'
+import { defineStore } from 'pinia'
+
+import { useLogsStore } from './logsStore'
 
 export const useExecutionsStore = defineStore('executions', () => {
   const executions = ref<CodeExec[]>([])
@@ -13,7 +15,7 @@ export const useExecutionsStore = defineStore('executions', () => {
   }
 
   const removeExecution = async (id: CodeExec['id']) => {
-    const index = executions.value.findIndex((exec) => exec.id === id)
+    const index = executions.value.findIndex(exec => exec.id === id)
     if (index !== -1) {
       const exec = executions.value.splice(index, 1)[0]
       if (exec.isRunning) {
@@ -29,7 +31,7 @@ export const useExecutionsStore = defineStore('executions', () => {
   }
 
   const clear = () => {
-    executions.value = executions.value.filter((exec) => exec.isRunning)
+    executions.value = executions.value.filter(exec => exec.isRunning)
     logsStore.clearAll()
   }
 

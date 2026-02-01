@@ -1,6 +1,7 @@
 import { VersionInfo } from '@@types'
-import { jumperClient, JumperBackendError } from '@/services/jumper/client'
+
 import jumper from '@/services/jumper'
+import { jumperClient, JumperBackendError } from '@/services/jumper/client'
 
 export const getLastVersionInfo = async (): Promise<VersionInfo | null> => {
   await jumper.client.setBackendUrl()

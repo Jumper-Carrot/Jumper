@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import type { HTMLAttributes } from 'vue'
+
 import { cn } from '@/services/utils'
+
 import { useFormField } from './useFormField'
 
 const props = defineProps<{
@@ -13,7 +15,7 @@ const { formDescriptionId } = useFormField()
 <template>
   <p
     :id="formDescriptionId"
-    :class="cn('text-sm text-muted-foreground', props.class)"
+    :class="cn('text-muted-foreground text-sm', props.class)"
   >
     <slot />
   </p>

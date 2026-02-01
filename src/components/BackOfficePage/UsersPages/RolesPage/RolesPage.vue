@@ -61,8 +61,8 @@ import {
   BackOfficeHeader,
   BackOfficePageLayout
 } from '@/components/BackOfficePage/@common'
-import { AddRoleButton } from './modals'
 import RoleRow from './RoleRow.vue'
+import { AddRoleButton } from './modals'
 
 const authUserStore = useAuthUserStore()
 const { isScimEnabled } = storeToRefs(useBackendInfoStore())

@@ -10,7 +10,8 @@
         />
         <div class="relative flex h-full overflow-hidden">
           <div
-            class="relative flex h-full grow flex-col transition-all ease-in-out"
+            class="relative flex h-full grow flex-col transition-all
+              ease-in-out"
             :class="[isVersionBarOpen ? 'md:mr-[244px]' : 'md:mr-0']"
           >
             <div class="mt-4 flex h-full w-full flex-col gap-2 overflow-hidden">
@@ -51,7 +52,7 @@
         </div>
       </div>
       <div v-else class="flex h-full w-full items-center justify-center">
-        <Loader2 class="animate-spin text-slate-500 size-8" />
+        <Loader2 class="size-8 animate-spin text-slate-500" />
       </div>
     </form>
   </BackOfficePageLayout>

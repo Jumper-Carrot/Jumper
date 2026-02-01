@@ -35,8 +35,8 @@
           />
           <div
             v-else
-            class="flex h-full w-full items-center justify-center text-sm text-slate-400
-              dark:text-slate-500"
+            class="flex h-full w-full items-center justify-center text-sm
+              text-slate-400 dark:text-slate-500"
           >
             <Carrot class="h-9 w-9 text-slate-300 dark:text-slate-500" />
           </div>
@@ -56,19 +56,22 @@
 
 <script setup lang="ts">
 import type { UserPreferences } from '@@types'
+
 import { ref, watch } from 'vue'
-import { toTypedSchema } from '@vee-validate/zod'
-import { Button } from '@@materials/ui/button'
-import { FormModal } from '@@materials/modal'
-import * as z from 'zod'
-import { useForm } from 'vee-validate'
-import { Carrot } from 'lucide-vue-next'
-import { open } from '@tauri-apps/plugin-dialog'
 import { convertFileSrc } from '@tauri-apps/api/core'
+import { open } from '@tauri-apps/plugin-dialog'
 import { readFile } from '@tauri-apps/plugin-fs'
-import { useConfirmToast } from '@/composables/useConfirmToast'
-import AspectRatio from '@@materials/ui/aspect-ratio/AspectRatio.vue'
+import { toTypedSchema } from '@vee-validate/zod'
+import { Carrot } from 'lucide-vue-next'
+import { useForm } from 'vee-validate'
+import * as z from 'zod'
+
 import { useAuthUserStore } from '@/stores'
+import { useConfirmToast } from '@/composables/useConfirmToast'
+
+import { FormModal } from '@@materials/modal'
+import AspectRatio from '@@materials/ui/aspect-ratio/AspectRatio.vue'
+import { Button } from '@@materials/ui/button'
 
 const authUserStore = useAuthUserStore()
 
@@ -108,7 +111,7 @@ const selectImage = async () => {
   )
 }
 
-const onSubmit = backgroundImageForm.handleSubmit(async (values) => {
+const onSubmit = backgroundImageForm.handleSubmit(async values => {
   await useConfirmToast(
     async () => {
       if (!values.backgroundImage) return
@@ -124,7 +127,7 @@ const onSubmit = backgroundImageForm.handleSubmit(async (values) => {
   return true
 })
 
-watch(isModalOpen, (newVal) => {
+watch(isModalOpen, newVal => {
   if (newVal === false) {
     newBackgroundImageUrl.value = null
     backgroundImageForm.resetForm()

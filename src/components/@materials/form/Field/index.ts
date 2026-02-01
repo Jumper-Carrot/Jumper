@@ -12,63 +12,50 @@ const variants = {
   }
 }
 
-export const itemVariants = cva(
-  '',
-  {
-    variants: {
-      variant: {
-        default: variants.default.item,
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
+export const itemVariants = cva('', {
+  variants: {
+    variant: {
+      default: variants.default.item
     }
+  },
+  defaultVariants: {
+    variant: 'default'
   }
-)
+})
 
-export const labelVariants = cva(
-  '',
-  {
-    variants: {
-      variant: {
-        default: variants.default.label,
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
+export const labelVariants = cva('', {
+  variants: {
+    variant: {
+      default: variants.default.label
     }
+  },
+  defaultVariants: {
+    variant: 'default'
   }
-)
+})
 
-export const descriptionVariants = cva(
-  '',
-  {
-    variants: {
-      variant: {
-        default: variants.default.description,
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
+export const descriptionVariants = cva('', {
+  variants: {
+    variant: {
+      default: variants.default.description
     }
+  },
+  defaultVariants: {
+    variant: 'default'
   }
-)
+})
 
-
-export const errorVariants = cva(
-  '',
-  {
-    variants: {
-      variant: {
-        default: variants.default.error,
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
+export const errorVariants = cva('', {
+  variants: {
+    variant: {
+      default: variants.default.error
     }
+  },
+  defaultVariants: {
+    variant: 'default'
   }
-)
+})
 
 export type FieldVariants = {
-  variant : "default" | undefined
+  variant: 'default' | undefined
 }

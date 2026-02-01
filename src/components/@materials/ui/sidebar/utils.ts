@@ -1,4 +1,5 @@
 import type { ComputedRef, Ref } from 'vue'
+
 import { createContext } from 'radix-vue'
 
 export const SIDEBAR_COOKIE_NAME = 'sidebar:state'

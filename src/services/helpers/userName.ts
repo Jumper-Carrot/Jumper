@@ -1,6 +1,6 @@
 import { User, DetailedUser } from '@@types'
 
-export const getUserDisplayName = (user: User | DetailedUser ): string => {
+export const getUserDisplayName = (user: User | DetailedUser): string => {
   let displayName = ''
   if (user.firstName) {
     displayName = `${user.firstName}`

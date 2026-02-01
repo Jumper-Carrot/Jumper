@@ -12,7 +12,9 @@
       </Button>
     </template>
     <h2 class="font-semibold">Are you sure you want to delete this account?</h2>
-    <p class="text-slate-800 dark:text-slate-400">You will permanently delete this account. This action cannot be undone.</p>
+    <p class="text-slate-800 dark:text-slate-400">
+      You will permanently delete this account. This action cannot be undone.
+    </p>
     <template #confirm-button>
       <Trash2 class="h-6 w-6" />
       Delete
@@ -21,12 +23,14 @@
 </template>
 
 <script setup lang="ts">
-import jumper from '@/services/jumper'
-import { useConfirmToast } from '@/composables'
-import { Button } from '@@materials/ui/button'
-import { ConfirmModal } from '@@materials/modal'
 import { Trash2 } from 'lucide-vue-next'
+
+import jumper from '@/services/jumper'
 import { useAuthUserStore } from '@/stores'
+import { useConfirmToast } from '@/composables'
+
+import { ConfirmModal } from '@@materials/modal'
+import { Button } from '@@materials/ui/button'
 
 const authUserStore = useAuthUserStore()
 

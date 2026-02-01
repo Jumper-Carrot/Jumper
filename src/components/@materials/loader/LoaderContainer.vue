@@ -1,7 +1,9 @@
 <template>
   <template v-if="isLoading">
     <div class="flex h-full w-full items-center justify-center">
-      <Loader2 class="h-10 w-10 text-slate-500 dark:text-slate-400 animate-spin" />
+      <Loader2
+        class="h-10 w-10 animate-spin text-slate-500 dark:text-slate-400"
+      />
     </div>
   </template>
   <template v-else>

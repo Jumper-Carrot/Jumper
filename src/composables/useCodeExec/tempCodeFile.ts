@@ -1,7 +1,8 @@
 import type { ExecMode } from './useCodeExec'
-import { v4 as uuidv4 } from 'uuid'
+
 import { tempDir, join } from '@tauri-apps/api/path'
 import { writeTextFile, remove } from '@tauri-apps/plugin-fs'
+import { v4 as uuidv4 } from 'uuid'
 
 export async function writeTempCodeFile(
   mode: ExecMode,

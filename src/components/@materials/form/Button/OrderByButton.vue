@@ -2,7 +2,7 @@
   <Button
     @click="changeOrder"
     variant="ghost"
-    class="relative -left-1 p-2 gap-1"
+    class="relative -left-1 gap-1 p-2"
   >
     <slot />
     <ChevronDown
@@ -18,8 +18,10 @@
 
 <script setup lang="ts">
 import type { Order } from '@@types'
-import { Button } from '@@materials/ui/button'
+
 import { ChevronDown } from 'lucide-vue-next'
+
+import { Button } from '@@materials/ui/button'
 
 const order = defineModel<Order | null>('order', {
   default: null

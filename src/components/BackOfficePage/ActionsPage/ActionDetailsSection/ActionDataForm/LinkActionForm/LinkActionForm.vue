@@ -20,8 +20,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Workspace } from '@@types'
 import type { ActionsComposable } from '../../../useActions'
+import type { Workspace } from '@@types'
+
 import InputField from '@@materials/input/InputField.vue'
 import ActionMainForm from '../../ActionMainForm/ActionMainForm.vue'
 

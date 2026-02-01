@@ -10,11 +10,11 @@
         <div class="flex grow items-center gap-2 truncate text-start">
           <slot
             name="selection"
-            :items="modelValue.map((key) => getItem(key))"
-            :labels="modelValue.map((key) => getLabelFromKey(key))"
+            :items="modelValue.map(key => getItem(key))"
+            :labels="modelValue.map(key => getLabelFromKey(key))"
           >
             {{
-              modelValue.map((key) => getLabelFromKey(key)).join(', ') ??
+              modelValue.map(key => getLabelFromKey(key)).join(', ') ??
               placeholder
             }}
           </slot>
@@ -74,10 +74,11 @@
 <script setup lang="ts" generic="T, U">
 import { ref, type HTMLAttributes } from 'vue'
 import { useElementSize } from '@vueuse/core'
-import { cn } from '@/services/utils'
-import { type SelectVariants, selectVariants } from '.'
-
 import { Check, ChevronDown, X } from 'lucide-vue-next'
+
+import { cn } from '@/services/utils'
+
+import { Button } from '@@materials/ui/button'
 import {
   Command,
   CommandEmpty,
@@ -86,8 +87,8 @@ import {
   CommandItem,
   CommandList
 } from '@@materials/ui/command'
-import { Button } from '@@materials/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@@materials/ui/popover'
+import { type SelectVariants, selectVariants } from '.'
 import { useItems } from '../useItems'
 
 const modelValue = defineModel<U[]>('modelValue', {
@@ -121,7 +122,7 @@ const { getItemKey, getItemLabel, getItem, getLabelFromKey } = useItems<T, U>(
 const select = (item: T) => {
   const itemKey = getItemKey(item)
   const index = modelValue.value.findIndex(
-    (i) => JSON.stringify(i) === JSON.stringify(itemKey)
+    i => JSON.stringify(i) === JSON.stringify(itemKey)
   )
   if (index === -1) {
     modelValue.value.push(itemKey)
@@ -132,7 +133,7 @@ const select = (item: T) => {
 
 const isSelected = (item: T) => {
   return modelValue.value.some(
-    (i) => JSON.stringify(i) === JSON.stringify(getItemKey(item))
+    i => JSON.stringify(i) === JSON.stringify(getItemKey(item))
   )
 }
 
@@ -142,7 +143,7 @@ const filterItems = (
 ) => {
   if (!term) return vals
   const lowerTerm = term.toLowerCase()
-  return vals.filter((key) =>
+  return vals.filter(key =>
     getLabelFromKey(key as U)
       ?.toLowerCase()
       .includes(lowerTerm)

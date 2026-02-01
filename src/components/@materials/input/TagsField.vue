@@ -8,16 +8,17 @@
         <TagsInput :class="props.class">
           <div v-if="icon" class="relative w-6 max-w-sm items-center">
             <span
-              class="absolute inset-y-0 start-0 flex items-center justify-center"
+              class="absolute inset-y-0 start-0 flex items-center
+                justify-center"
             >
               <slot name="icon" :items="fields">
-                <Tags class="size-6 text-muted-foreground" />
+                <Tags class="text-muted-foreground size-6" />
               </slot>
             </span>
           </div>
           <TagsInputItem
             v-for="(item, i) in fields"
-            class="shadow-xs text-slate-800 dark:text-slate-300"
+            class="text-slate-800 shadow-xs dark:text-slate-300"
             :key="item.key"
             :value="item"
           >
@@ -26,7 +27,8 @@
             </slot>
             <TagsInputItemDelete
               @click="remove(i)"
-              class="hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+              class="transition-colors hover:bg-slate-200
+                dark:hover:bg-slate-700"
             />
           </TagsInputItem>
           <ComboboxRoot
@@ -37,7 +39,8 @@
             <ComboboxAnchor as-child>
               <ComboboxInput as-child>
                 <TagsInputInput
-                  class="text-md w-full max-w-sm px-0 placeholder:text-muted-foreground"
+                  class="text-md placeholder:text-muted-foreground w-full
+                    max-w-sm px-0"
                   :placeholder="placeholder"
                   @keyup.enter="!disableKeyEnter && addTag(searchTerm)"
                 />
@@ -47,7 +50,15 @@
               <ComboboxContent>
                 <CommandList
                   position="popper"
-                  class="z-50 mt-2 w-[150px] max-h-[150px] rounded-md bg-popover text-popover-foreground shadow-md outline-hidden data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
+                  class="bg-popover text-popover-foreground
+                    data-[state=open]:animate-in data-[state=closed]:animate-out
+                    data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0
+                    data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95
+                    data-[side=bottom]:slide-in-from-top-2
+                    data-[side=left]:slide-in-from-right-2
+                    data-[side=right]:slide-in-from-left-2
+                    data-[side=top]:slide-in-from-bottom-2 z-50 mt-2
+                    max-h-[150px] w-[150px] rounded-md shadow-md outline-hidden"
                 >
                   <slot
                     name="search-list"

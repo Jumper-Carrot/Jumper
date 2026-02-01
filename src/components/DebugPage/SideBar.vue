@@ -1,6 +1,8 @@
 <template>
   <div
-    class="flex h-full w-[210px] shrink-0 scroll-py-36 flex-col items-center border-r bg-slate-100 pb-3 pt-2 dark:border-slate-700 dark:bg-slate-800 dark:bg-opacity-60"
+    class="dark:bg-opacity-60 flex h-full w-[210px] shrink-0 scroll-py-36
+      flex-col items-center border-r bg-slate-100 pt-2 pb-3
+      dark:border-slate-700 dark:bg-slate-800"
     @click="() => (selection = [])"
   >
     <div class="w-full px-2" @click.stop>
@@ -8,7 +10,7 @@
     </div>
     <div class="my-2 flex w-full grow flex-col gap-2 overflow-auto px-2 py-2">
       <p
-        class="text-xs font-semibold italic text-slate-400"
+        class="text-xs font-semibold text-slate-400 italic"
         v-if="executionsRunning.length"
       >
         Running
@@ -22,29 +24,34 @@
         @click.ctrl.stop="select(execution, { multiple: true })"
       >
         <div
-          class="shadow-2xs group flex h-10 w-full flex-col items-start rounded-lg border py-0.5 pl-2 pr-1 transition-all dark:bg-slate-800 dark:hover:bg-slate-700 dark:hover:bg-opacity-60"
+          class="group dark:hover:bg-opacity-60 flex h-10 w-full flex-col
+            items-start rounded-lg border py-0.5 pr-1 pl-2 shadow-2xs
+            transition-all dark:bg-slate-800 dark:hover:bg-slate-700"
           :class="{
             [`border-slate-300 bg-white hover:bg-slate-50 hover:shadow-xs
-              dark:border-slate-600`]: !selection.includes(execution.id),
-            'bg-slate-50 ring-2 ring-primary dark:bg-slate-700':
+            dark:border-slate-600`]: !selection.includes(execution.id),
+            'ring-primary bg-slate-50 ring-2 dark:bg-slate-700':
               selection.includes(execution.id)
           }"
         >
           <div class="flex w-full items-center">
             <p
-              class="truncate text-sm font-semibold leading-[17px] text-slate-800 dark:text-slate-200"
+              class="truncate text-sm leading-[17px] font-semibold
+                text-slate-800 dark:text-slate-200"
             >
               {{ execution.namespace }}
             </p>
             <p
               v-if="execution.mode == 'get-options'"
-              class="ml-0.5 rounded-md bg-blue-300 px-1 text-[12px] leading-[17px] text-slate-800 shadow-xs"
+              class="ml-0.5 rounded-md bg-blue-300 px-1 text-[12px]
+                leading-[17px] text-slate-800 shadow-xs"
             >
               O
             </p>
             <Button
               variant="ghost"
-              class="ml-auto h-4 p-0 text-slate-500 opacity-0 hover:bg-slate-200 hover:text-slate-800 group-hover:opacity-100"
+              class="ml-auto h-4 p-0 text-slate-500 opacity-0
+                group-hover:opacity-100 hover:bg-slate-200 hover:text-slate-800"
               size="sm"
               title="Stop execution"
               @click.stop.prevent="
@@ -54,7 +61,7 @@
               <X />
             </Button>
           </div>
-          <p class="truncate text-xs italic text-slate-400">
+          <p class="truncate text-xs text-slate-400 italic">
             {{ getExecTime(execution.runTimestamp) }}
             <span v-if="execution.selectedOption">
               - {{ execution.selectedOption }}</span
@@ -63,7 +70,7 @@
         </div>
       </Button>
       <p
-        class="text-xs font-semibold italic text-slate-400"
+        class="text-xs font-semibold text-slate-400 italic"
         v-if="endedExecutions.length"
       >
         Ended
@@ -77,29 +84,34 @@
         @click.ctrl.stop="select(execution, { multiple: true })"
       >
         <div
-          class="shadow-2xs group flex h-10 w-full flex-col items-start rounded-lg border py-0.5 pl-2 pr-1 transition-all dark:bg-slate-800 dark:hover:bg-slate-700 dark:hover:bg-opacity-60"
+          class="group dark:hover:bg-opacity-60 flex h-10 w-full flex-col
+            items-start rounded-lg border py-0.5 pr-1 pl-2 shadow-2xs
+            transition-all dark:bg-slate-800 dark:hover:bg-slate-700"
           :class="{
             [`border-slate-300 bg-slate-100 hover:bg-slate-50 hover:shadow-xs
-              dark:border-slate-600`]: !selection.includes(execution.id),
-            'bg-slate-50 ring-2 ring-primary dark:bg-slate-700':
+            dark:border-slate-600`]: !selection.includes(execution.id),
+            'ring-primary bg-slate-50 ring-2 dark:bg-slate-700':
               selection.includes(execution.id)
           }"
         >
           <div class="flex w-full items-center gap-0.5">
             <p
-              class="truncate text-sm font-semibold leading-[17px] text-slate-800 dark:text-slate-200"
+              class="truncate text-sm leading-[17px] font-semibold
+                text-slate-800 dark:text-slate-200"
             >
               {{ execution.namespace }}
             </p>
             <p
               v-if="execution.mode == 'get-options'"
-              class="ml-0.5 rounded-md bg-blue-300 px-1 text-[12px] leading-[17px] text-slate-800 shadow-xs"
+              class="ml-0.5 rounded-md bg-blue-300 px-1 text-[12px]
+                leading-[17px] text-slate-800 shadow-xs"
             >
               O
             </p>
             <Button
               variant="ghost"
-              class="ml-auto h-4 p-0 text-slate-500 opacity-0 hover:bg-slate-200 hover:text-slate-800 group-hover:opacity-100"
+              class="ml-auto h-4 p-0 text-slate-500 opacity-0
+                group-hover:opacity-100 hover:bg-slate-200 hover:text-slate-800"
               size="sm"
               title="Stop execution"
               @click.stop.prevent="
@@ -109,7 +121,7 @@
               <X />
             </Button>
           </div>
-          <p class="truncate text-xs italic text-slate-400">
+          <p class="truncate text-xs text-slate-400 italic">
             {{ getExecTime(execution.runTimestamp) }}
             <span v-if="execution.selectedOption">
               - {{ execution.selectedOption }}</span

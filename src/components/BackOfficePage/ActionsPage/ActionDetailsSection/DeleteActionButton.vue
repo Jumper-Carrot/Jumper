@@ -24,10 +24,13 @@
 
 <script setup lang="ts">
 import type { ActionsComposable } from '../useActions'
-import { useConfirmToast } from '@/composables'
-import { Button } from '@@materials/ui/button'
-import { ConfirmModal } from '@@materials/modal'
+
 import { Trash2 } from 'lucide-vue-next'
+
+import { useConfirmToast } from '@/composables'
+
+import { ConfirmModal } from '@@materials/modal'
+import { Button } from '@@materials/ui/button'
 
 const props = defineProps<{
   actionsComposable: ActionsComposable

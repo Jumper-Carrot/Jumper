@@ -1,4 +1,5 @@
 import type { VariantProps } from 'class-variance-authority'
+
 import { cva } from 'class-variance-authority'
 
 export { default as Button } from './Button.vue'
@@ -8,7 +9,8 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground shadow-sm hover:opacity-90',
+        default:
+          'bg-primary text-primary-foreground shadow-sm hover:opacity-90',
         destructive:
           'bg-destructive text-destructive-foreground shadow-xs hover:bg-destructive/90',
         outline:

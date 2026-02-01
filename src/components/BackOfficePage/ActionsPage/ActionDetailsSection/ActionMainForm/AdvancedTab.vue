@@ -3,7 +3,9 @@
     <div class="flex items-center gap-3">
       <Switch
         v-model="hasDelayBeforeRelaunch"
-        class="h-5 w-[35px] rounded-full data-[state=checked]:bg-green-600 data-[state=unchecked]:bg-slate-300 dark:data-[state=unchecked]:bg-slate-500"
+        class="h-5 w-[35px] rounded-full data-[state=checked]:bg-green-600
+          data-[state=unchecked]:bg-slate-300
+          dark:data-[state=unchecked]:bg-slate-500"
       >
         <template #thumb>
           <div
@@ -24,7 +26,7 @@
         >Delay before relaunch</span
       >
     </div>
-    <div class="flex items-center mt-1">
+    <div class="mt-1 flex items-center">
       <InputField
         class="w-32 px-2"
         field-name="delayBeforeRelaunch"

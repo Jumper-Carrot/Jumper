@@ -1,7 +1,7 @@
 <template>
   <FormField v-slot="{ componentField }" :name="fieldName">
-    <FormItem class="space-y-0 flex w-full flex-col">
-      <FormLabel v-if="fieldLabel" class="ml-1 dark:text-slate-200 mb-1">{{
+    <FormItem class="flex w-full flex-col space-y-0">
+      <FormLabel v-if="fieldLabel" class="mb-1 ml-1 dark:text-slate-200">{{
         fieldLabel
       }}</FormLabel>
       <FormControl>
@@ -40,7 +40,7 @@
 
 <script setup lang="ts" generic="T, U">
 import type { HTMLAttributes } from 'vue'
-import { Select, type SelectVariants } from './Select'
+
 import {
   FormControl,
   FormDescription,
@@ -49,6 +49,7 @@ import {
   FormLabel,
   FormMessage
 } from '@@materials/ui/form'
+import { Select, type SelectVariants } from './Select'
 
 const props = withDefaults(
   defineProps<{

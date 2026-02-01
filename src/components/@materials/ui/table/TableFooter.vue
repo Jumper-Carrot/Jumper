@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
+
 import { cn } from '@/services/utils'
 
 const props = defineProps<{
@@ -8,7 +9,11 @@ const props = defineProps<{
 </script>
 
 <template>
-  <tfoot :class="cn('border-t bg-muted/50 font-medium last:[&>tr]:border-b-0', props.class)">
+  <tfoot
+    :class="
+      cn('bg-muted/50 border-t font-medium last:[&>tr]:border-b-0', props.class)
+    "
+  >
     <slot />
   </tfoot>
 </template>

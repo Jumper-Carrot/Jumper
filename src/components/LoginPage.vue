@@ -1,6 +1,7 @@
 <template>
   <div
-    class="relative flex h-full items-center justify-center gap-[150px] bg-slate-50 dark:bg-[#0e1c24]"
+    class="relative flex h-full items-center justify-center gap-[150px]
+      bg-slate-50 dark:bg-[#0e1c24]"
   >
     <div class="relative w-[300px] max-lg:hidden">
       <img
@@ -17,11 +18,13 @@
       />
     </div>
     <div
-      class="flex w-full flex-col gap-4 rounded-md bg-white p-8 shadow-md sm:max-w-sm dark:bg-slate-900"
+      class="flex w-full flex-col gap-4 rounded-md bg-white p-8 shadow-md
+        sm:max-w-sm dark:bg-slate-900"
     >
       <div class="flex flex-col gap-3">
         <h1
-          class="mb-8 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl dark:text-slate-200"
+          class="mb-8 scroll-m-20 text-4xl font-extrabold tracking-tight
+            lg:text-5xl dark:text-slate-200"
         >
           Jumper
         </h1>
@@ -100,13 +103,15 @@
       </template>
     </div>
     <div
-      class="absolute bottom-1 left-2 flex items-center gap-1 text-center text-xs text-slate-400/80 italic dark:text-slate-500/80"
+      class="absolute bottom-1 left-2 flex items-center gap-1 text-center
+        text-xs text-slate-400/80 italic dark:text-slate-500/80"
     >
       <p>Version : {{ appVersion }}</p>
     </div>
     <div
       v-if="isBackendReachable"
-      class="absolute right-2 bottom-1 flex items-center gap-1 text-center text-xs text-slate-400/80 italic dark:text-slate-500/80"
+      class="absolute right-2 bottom-1 flex items-center gap-1 text-center
+        text-xs text-slate-400/80 italic dark:text-slate-500/80"
     >
       <p>host : {{ backendUrl }}</p>
       <button

@@ -24,9 +24,10 @@
 </template>
 
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue';
+import type { HTMLAttributes } from 'vue'
+
 import { cn } from '@/services/utils'
-import Input from '@@materials/ui/input/Input.vue'
+
 import {
   FormControl,
   FormDescription,
@@ -35,7 +36,7 @@ import {
   FormLabel,
   FormMessage
 } from '@@materials/ui/form'
-
+import Input from '@@materials/ui/input/Input.vue'
 
 const props = withDefaults(
   defineProps<{

@@ -14,7 +14,7 @@
         language="python"
         :namespace="actionDetailed?.name + ' - Combobox'"
         @update:resultOptions="
-          (newOptions) => {
+          newOptions => {
             options = useCombobox ? newOptions : null
           }
         "
@@ -24,11 +24,13 @@
 </template>
 
 <script setup lang="ts">
-import { useField } from 'vee-validate'
-import CodeEditor from '../CodeEditor/CodeEditor.vue'
-import { Label } from '@@materials/ui/label'
-import { CheckboxField } from '@@materials/input'
 import type { ActionsComposable } from '../../../useActions'
+
+import { useField } from 'vee-validate'
+
+import { CheckboxField } from '@@materials/input'
+import { Label } from '@@materials/ui/label'
+import CodeEditor from '../CodeEditor/CodeEditor.vue'
 
 const props = defineProps<{
   actionComposable: ActionsComposable

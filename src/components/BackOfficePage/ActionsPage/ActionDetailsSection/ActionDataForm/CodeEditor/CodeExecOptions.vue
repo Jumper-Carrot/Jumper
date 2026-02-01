@@ -9,7 +9,7 @@
     />
     <div
       v-else-if="options != null"
-      class="mr-2 flex h-full items-center text-sm italic text-slate-500"
+      class="mr-2 flex h-full items-center text-sm text-slate-500 italic"
     >
       Run combobox code to get options
     </div>
@@ -42,10 +42,11 @@
 </template>
 
 <script setup lang="ts">
-import { Button } from '@@materials/ui/button'
-import { Play, Loader2, OctagonX } from 'lucide-vue-next'
-import { Combobox } from '@@materials/input'
 import { watch } from 'vue'
+import { Play, Loader2, OctagonX } from 'lucide-vue-next'
+
+import { Combobox } from '@@materials/input'
+import { Button } from '@@materials/ui/button'
 
 const props = defineProps<{
   isRunning: boolean
@@ -61,7 +62,7 @@ const selectedOption = defineModel<string | null>('selected-option')
 
 watch(
   () => props.options,
-  (newOptions) => {
+  newOptions => {
     if (newOptions && newOptions.length > 0) {
       if (selectedOption.value && newOptions.includes(selectedOption.value)) {
         selectedOption.value = newOptions[0]

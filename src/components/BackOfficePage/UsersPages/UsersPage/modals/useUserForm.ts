@@ -1,13 +1,14 @@
 import type { User } from '@@types'
-import { useForm } from 'vee-validate'
+
 import { toTypedSchema } from '@vee-validate/zod'
+import { useForm } from 'vee-validate'
 import * as z from 'zod'
 
-import { passwordSchema } from '@/composables/usePasswordUserForm'
 import {
   checkUniqueEmail,
   checkUniqueUsername
 } from '@/services/form-checks/userFormChecks'
+import { passwordSchema } from '@/composables/usePasswordUserForm'
 
 export const useUserForm = (user?: User): ReturnType<typeof useForm> => {
   const userSchema = toTypedSchema(
@@ -16,13 +17,13 @@ export const useUserForm = (user?: User): ReturnType<typeof useForm> => {
         .string()
         .min(4)
         .max(40)
-        .refine(async (username) => await checkUniqueUsername(user, username), {
+        .refine(async username => await checkUniqueUsername(user, username), {
           message: 'This username is already taken'
         }),
       email: z
         .string()
         .email()
-        .refine(async (email) => await checkUniqueEmail(user, email), {
+        .refine(async email => await checkUniqueEmail(user, email), {
           message: 'This email is already taken'
         }),
       password: user

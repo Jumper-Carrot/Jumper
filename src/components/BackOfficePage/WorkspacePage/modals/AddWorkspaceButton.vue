@@ -31,14 +31,16 @@
 </template>
 
 <script setup lang="ts">
-import { useWorkspaceDetailedForm } from './useWorkspaceDetailedForm'
-import jumper from '@/services/jumper'
-import { useToast } from '@@materials/ui/toast'
 import { ComponentIcon } from 'lucide-vue-next'
-import { Button } from '@@materials/ui/button'
-import { FormModal } from '@@materials/modal'
+
+import jumper from '@/services/jumper'
+
 import { InputField, TextareaField } from '@@materials/input'
+import { FormModal } from '@@materials/modal'
+import { Button } from '@@materials/ui/button'
+import { useToast } from '@@materials/ui/toast'
 import PermissionTagsField from '@/components/BackOfficePage/@common/PermissionTagsField.vue'
+import { useWorkspaceDetailedForm } from './useWorkspaceDetailedForm'
 
 const { toast } = useToast()
 
@@ -46,19 +48,17 @@ const workspaceForm = useWorkspaceDetailedForm()
 
 const emit = defineEmits<{ workspaceAdded: [] }>()
 
-const onSubmit = workspaceForm.handleSubmit(async (values) => {
+const onSubmit = workspaceForm.handleSubmit(async values => {
   try {
     await jumper.workspaces.create({
       ...values,
-      user_ids: values.permissions
-        .filter((p) => 'username' in p)
-        .map((p) => p.id),
+      user_ids: values.permissions.filter(p => 'username' in p).map(p => p.id),
       group_ids: values.permissions
-        .filter((p) => 'isAdminGroup' in p)
-        .map((p) => p.id),
+        .filter(p => 'isAdminGroup' in p)
+        .map(p => p.id),
       role_ids: values.permissions
-        .filter((p) => 'description' in p)
-        .map((p) => p.id)
+        .filter(p => 'description' in p)
+        .map(p => p.id)
     })
     emit('workspaceAdded')
   } catch (error) {

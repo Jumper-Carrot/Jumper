@@ -9,7 +9,7 @@
           class="placeholder:text-sm"
           v-bind="{
             ...componentField,
-            ...$attrs,
+            ...$attrs
           }"
           :placeholder="placeholder"
           :class="cn('w-full', props.class)"
@@ -28,7 +28,6 @@
 
 <script setup lang="ts">
 import { cn } from '@/services/utils'
-import Textarea from '@@materials/ui/textarea/Textarea.vue'
 
 import {
   FormControl,
@@ -38,6 +37,7 @@ import {
   FormLabel,
   FormMessage
 } from '@@materials/ui/form'
+import Textarea from '@@materials/ui/textarea/Textarea.vue'
 
 const props = withDefaults(
   defineProps<{

@@ -26,7 +26,6 @@
 
 <script setup lang="ts">
 import { cn } from '@/services/utils'
-import Input from '@@materials/ui/input/Input.vue'
 
 import {
   FormControl,
@@ -36,6 +35,7 @@ import {
   FormLabel,
   FormMessage
 } from '@@materials/ui/form'
+import Input from '@@materials/ui/input/Input.vue'
 
 const props = withDefaults(
   defineProps<{

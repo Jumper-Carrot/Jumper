@@ -18,11 +18,13 @@
 
 <script setup lang="ts">
 import type { User } from '@@types'
-import { usePasswordUserForm } from '@/composables'
+
 import jumper from '@/services/jumper'
-import { useToast } from '@@materials/ui/toast'
-import { FormModal } from '@@materials/modal'
+import { usePasswordUserForm } from '@/composables'
+
 import { InputField } from '@@materials/input'
+import { FormModal } from '@@materials/modal'
+import { useToast } from '@@materials/ui/toast'
 
 const { toast } = useToast()
 
@@ -32,7 +34,7 @@ const props = defineProps<{
 
 const passwordUserForm = usePasswordUserForm()
 
-const onSubmit = passwordUserForm.handleSubmit(async (values) => {
+const onSubmit = passwordUserForm.handleSubmit(async values => {
   try {
     await jumper.users.update(props.user.id, {
       password: values.password

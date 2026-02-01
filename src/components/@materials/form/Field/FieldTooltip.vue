@@ -3,7 +3,8 @@
     <Tooltip class="block">
       <TooltipTrigger as-child>
         <CircleHelp
-          class="size-[13px] cursor-help text-slate-500 transition-colors hover:text-slate-800"
+          class="size-[13px] cursor-help text-slate-500 transition-colors
+            hover:text-slate-800"
         />
       </TooltipTrigger>
       <TooltipContent side="right">
@@ -15,6 +16,7 @@
 
 <script setup lang="ts">
 import { CircleHelp } from 'lucide-vue-next'
+
 import {
   Tooltip,
   TooltipContent,

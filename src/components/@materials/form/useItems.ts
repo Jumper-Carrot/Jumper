@@ -37,13 +37,14 @@ export const useItems = <T, U>(
       typeof key === 'string' && !isNaN(Number(key)) ? Number(key) : key
     return (
       (itemsRef.value.find(
-        (item) =>
+        item =>
           JSON.stringify(getItemKey(item as T)) == JSON.stringify(normalizedKey)
       ) as T) ?? null
     )
   }
 
-  const getLabelFromKey = (key: U): string | undefined => getItemLabel(getItem(key))
+  const getLabelFromKey = (key: U): string | undefined =>
+    getItemLabel(getItem(key))
 
   return {
     getItem,

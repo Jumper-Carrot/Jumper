@@ -1,6 +1,6 @@
-import { z } from 'zod'
-import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
+import { useForm } from 'vee-validate'
+import { z } from 'zod'
 
 export const passwordSchema = z.string().min(5).max(50)
 
@@ -11,7 +11,7 @@ export const usePasswordUserForm: () => ReturnType<typeof useForm> = () => {
         password: passwordSchema,
         passwordConfirmation: passwordSchema
       })
-      .refine((data) => data.password === data.passwordConfirmation, {
+      .refine(data => data.password === data.passwordConfirmation, {
         message: "Passwords don't match",
         path: ['passwordConfirmation']
       })

@@ -1,6 +1,8 @@
 import type { Action, DetailedAction } from '@@types'
-import jumper from '@/services/jumper'
+
 import { computed, ref } from 'vue'
+
+import jumper from '@/services/jumper'
 import { useQuery } from '@/composables'
 
 export type ActionsComposable = ReturnType<typeof useActions>
@@ -31,7 +33,7 @@ export const useActions = () => {
   const create = async (action: Partial<Action>) => {
     const newAction = await jumper.actions.create(action)
     selectedAction.value = newAction
-    actionsQuery.setData((prev) => {
+    actionsQuery.setData(prev => {
       if (!prev) return [newAction]
       return [...prev, newAction]
     })

@@ -19,5 +19,3 @@ export type DetailedWorkspace = Workspace & {
   roles: DetailedRole[]
   role_ids?: DetailedRole['id'][]
 }
-
-

@@ -19,13 +19,15 @@
 <script setup lang="ts">
 import { SystemRole, type User } from '@@types'
 import { useField } from 'vee-validate'
-import { useUserForm } from './useUserForm'
+
 import jumper from '@/services/jumper'
-import { useToast } from '@@materials/ui/toast'
-import { FormModal } from '@@materials/modal'
+
 import { InputField } from '@@materials/input'
+import { FormModal } from '@@materials/modal'
 import { Label } from '@@materials/ui/label'
+import { useToast } from '@@materials/ui/toast'
 import SystemRoleSelect from '../SystemRoleSelect.vue'
+import { useUserForm } from './useUserForm'
 
 const { toast } = useToast()
 
@@ -38,7 +40,7 @@ const { value: systemRole } = useField<SystemRole>('systemRole')
 
 const emit = defineEmits<{ userUpdated: [user: User] }>()
 
-const onSubmit = userForm.handleSubmit(async (values) => {
+const onSubmit = userForm.handleSubmit(async values => {
   try {
     const userUpdated = await jumper.users.update(props.user.id, values)
     emit('userUpdated', userUpdated)

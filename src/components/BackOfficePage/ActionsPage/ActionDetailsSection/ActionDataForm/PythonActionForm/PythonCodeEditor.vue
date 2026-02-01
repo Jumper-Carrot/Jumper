@@ -15,11 +15,13 @@
 </template>
 
 <script setup lang="ts">
-import { useField } from 'vee-validate'
-import type { PythonActionData } from '@@types'
 import type { ActionsComposable } from '../../../useActions'
-import CodeEditor from '../CodeEditor/CodeEditor.vue'
+import type { PythonActionData } from '@@types'
+
+import { useField } from 'vee-validate'
+
 import { Label } from '@@materials/ui/label'
+import CodeEditor from '../CodeEditor/CodeEditor.vue'
 
 const props = defineProps<{
   actionComposable: ActionsComposable

@@ -1,4 +1,5 @@
 import type { Role, Page, DetailedRole } from '@@types'
+
 import { jumperClient, JumperBackendError } from '@/services/jumper/client'
 
 export const getDetailedRoles = async (params: {
@@ -21,7 +22,10 @@ export const create = async (role: Partial<Role>) => {
   return response.data
 }
 
-export const update = async (roleId: Role['id'], role: Partial<Role | DetailedRole>) => {
+export const update = async (
+  roleId: Role['id'],
+  role: Partial<Role | DetailedRole>
+) => {
   const response = await jumperClient.patch<Role>(`/v1/roles/${roleId}`, role)
   if (response.status !== 200) throw new JumperBackendError(response)
   return response.data

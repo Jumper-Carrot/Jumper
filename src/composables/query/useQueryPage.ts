@@ -1,4 +1,5 @@
 import type { Page } from '@@types'
+
 import { ref } from 'vue'
 
 export const useQueryPage = (
@@ -13,11 +14,9 @@ export const useQueryPage = (
 
   const catchPageError = (query: () => Promise<Page<any>>) => {
     return async () => {
-
-        const data = await query()
-        itemsCount.value = data.count
-        return data
-
+      const data = await query()
+      itemsCount.value = data.count
+      return data
     }
   }
 
@@ -26,6 +25,6 @@ export const useQueryPage = (
     limit,
     itemsCount,
     catchPageError,
-    keys: [currentPage, limit],
+    keys: [currentPage, limit]
   }
 }

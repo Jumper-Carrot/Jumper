@@ -1,6 +1,6 @@
 <template>
   <FormField v-slot="{ value, handleChange }" :name="fieldName">
-    <FormItem class="flex flex-row items-start gap-x-1 space-y-0">
+    <FormItem class="flex flex-row items-start space-y-0 gap-x-1">
       <FormControl>
         <Checkbox
           :checked="value"
@@ -26,8 +26,8 @@
 
 <script setup lang="ts">
 import { cn } from '@/services/utils'
-import { Checkbox } from '@@materials/ui/checkbox'
 
+import { Checkbox } from '@@materials/ui/checkbox'
 import {
   FormControl,
   FormDescription,

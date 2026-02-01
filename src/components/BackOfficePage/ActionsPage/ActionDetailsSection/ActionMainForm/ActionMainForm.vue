@@ -3,7 +3,14 @@
     <div class="mb-4 flex w-full items-center justify-between border-b">
       <TabsList class="gap-1 rounded-b-none border-b-0 bg-transparent p-0">
         <TabsTrigger
-          class="rounded-md rounded-b-none border border-b-2 border-transparent border-b-transparent hover:border-b-slate-200 hover:bg-slate-50 data-[state=active]:border-slate-100 data-[state=active]:border-b-slate-950 data-[state=active]:bg-slate-50 dark:hover:border-b-slate-700 dark:hover:bg-slate-800 dark:data-[state=active]:border-slate-800 dark:data-[state=active]:border-b-slate-200 dark:data-[state=active]:bg-slate-800"
+          class="rounded-md rounded-b-none border border-b-2 border-transparent
+            border-b-transparent hover:border-b-slate-200 hover:bg-slate-50
+            data-[state=active]:border-slate-100
+            data-[state=active]:border-b-slate-950
+            data-[state=active]:bg-slate-50 dark:hover:border-b-slate-700
+            dark:hover:bg-slate-800 dark:data-[state=active]:border-slate-800
+            dark:data-[state=active]:border-b-slate-200
+            dark:data-[state=active]:bg-slate-800"
           :value="'action'"
         >
           Action
@@ -11,13 +18,27 @@
         <TabsTrigger
           v-for="tab in tabsTriggers ?? []"
           :key="tab.value"
-          class="rounded-md rounded-b-none border border-b-2 border-transparent border-b-transparent hover:border-b-slate-200 hover:bg-slate-50 data-[state=active]:border-slate-100 data-[state=active]:border-b-slate-950 data-[state=active]:bg-slate-50 dark:hover:border-b-slate-700 dark:hover:bg-slate-800 dark:data-[state=active]:border-slate-800 dark:data-[state=active]:border-b-slate-200 dark:data-[state=active]:bg-slate-800"
+          class="rounded-md rounded-b-none border border-b-2 border-transparent
+            border-b-transparent hover:border-b-slate-200 hover:bg-slate-50
+            data-[state=active]:border-slate-100
+            data-[state=active]:border-b-slate-950
+            data-[state=active]:bg-slate-50 dark:hover:border-b-slate-700
+            dark:hover:bg-slate-800 dark:data-[state=active]:border-slate-800
+            dark:data-[state=active]:border-b-slate-200
+            dark:data-[state=active]:bg-slate-800"
           :value="tab.value"
         >
           {{ tab.label }}
         </TabsTrigger>
         <TabsTrigger
-          class="rounded-md rounded-b-none border border-b-2 border-transparent border-b-transparent hover:border-b-slate-200 hover:bg-slate-50 data-[state=active]:border-slate-100 data-[state=active]:border-b-slate-950 data-[state=active]:bg-slate-50 dark:hover:border-b-slate-700 dark:hover:bg-slate-800 dark:data-[state=active]:border-slate-800 dark:data-[state=active]:border-b-slate-200 dark:data-[state=active]:bg-slate-800"
+          class="rounded-md rounded-b-none border border-b-2 border-transparent
+            border-b-transparent hover:border-b-slate-200 hover:bg-slate-50
+            data-[state=active]:border-slate-100
+            data-[state=active]:border-b-slate-950
+            data-[state=active]:bg-slate-50 dark:hover:border-b-slate-700
+            dark:hover:bg-slate-800 dark:data-[state=active]:border-slate-800
+            dark:data-[state=active]:border-b-slate-200
+            dark:data-[state=active]:bg-slate-800"
           :value="'advanced'"
         >
           Advanced
@@ -35,7 +56,7 @@
         </ActionTab>
       </TabsContent>
       <TabsContent value="advanced">
-        <div class="p-4 flex flex-col gap-2">
+        <div class="flex flex-col gap-2 p-4">
           <slot name="advanced-tab">
             <AdvancedTab />
           </slot>
@@ -47,8 +68,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Workspace } from '@@types'
 import type { ActionsComposable } from '../../useActions'
+import type { Workspace } from '@@types'
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@@materials/ui/tabs'
 import ActionTab from './ActionTab.vue'

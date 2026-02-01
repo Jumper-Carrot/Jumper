@@ -5,7 +5,7 @@
         ref="triggerRef"
         variant="outline"
         role="combobox"
-        :class="cn('justify-between gap-0 pl-3 pr-2', props.class)"
+        :class="cn('justify-between gap-0 pr-2 pl-3', props.class)"
       >
         <div class="flex grow items-center gap-2 truncate text-start">
           <slot name="selection" :item="selectedItem" :label="itemLabel">
@@ -13,8 +13,8 @@
           </slot>
         </div>
         <Button
-          class="z-1000 h-4 w-4 shrink-0 rounded-full p-0 opacity-50 hover:bg-slate-300
-            hover:opacity-70"
+          class="z-1000 h-4 w-4 shrink-0 rounded-full p-0 opacity-50
+            hover:bg-slate-300 hover:opacity-70"
           v-if="modelValue && clear"
           variant="ghost"
           @click.stop="
@@ -69,8 +69,15 @@
 </template>
 
 <script setup lang="ts" generic="T, U">
+import type { AcceptableValue } from 'reka-ui'
+
 import { ref, computed, type HTMLAttributes } from 'vue'
+import { useElementSize } from '@vueuse/core'
+import { Check, ChevronDown, X } from 'lucide-vue-next'
+
 import { cn } from '@/services/utils'
+
+import { Button } from '@@materials/ui/button'
 import {
   Command,
   CommandEmpty,
@@ -79,11 +86,7 @@ import {
   CommandItem,
   CommandList
 } from '@@materials/ui/command'
-import { Button } from '@@materials/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@@materials/ui/popover'
-import { Check, ChevronDown, X } from 'lucide-vue-next'
-import type { AcceptableValue } from 'reka-ui'
-import { useElementSize } from '@vueuse/core'
 
 const modelValue = defineModel<U | null>('modelValue')
 

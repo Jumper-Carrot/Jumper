@@ -1,4 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority'
+
 export { default as Tags } from './Tags.vue'
 
 export const tagsVariants = cva('rounded-lg bg-background', {

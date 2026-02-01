@@ -1,5 +1,5 @@
 <template>
-  <div class="border-r bg-muted/40">
+  <div class="bg-muted/40 border-r">
     <div class="flex h-full max-h-screen flex-col gap-2">
       <div class="w-[200px] flex-1">
         <nav class="flex h-full w-full flex-col px-2 py-2 text-sm font-medium">
@@ -8,8 +8,8 @@
               as-child
               class="group/collapsible w-full"
               :defaultOpen="
-                item.children?.some((c) =>
-                  $route.matched.some((r) => r.name == c.page)
+                item.children?.some(c =>
+                  $route.matched.some(r => r.name == c.page)
                 )
               "
               v-slot="{ open }"
@@ -19,13 +19,16 @@
                 <component
                   :is="item.page ? 'router-link' : 'div'"
                   :to="{ name: item.page }"
-                  class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground
-                    transition-all hover:bg-slate-100 dark:hover:bg-slate-800"
+                  class="text-muted-foreground flex items-center gap-3
+                    rounded-lg px-3 py-2 transition-all hover:bg-slate-100
+                    dark:hover:bg-slate-800"
                   :class="{
-                    'bg-slate-100 text-primary dark:bg-slate-800 dark:text-primary':
-                      $route.matched.some((r) => r.name == item.page),
+                    [`text-primary dark:text-primary bg-slate-100
+                    dark:bg-slate-800`]: $route.matched.some(
+                      r => r.name == item.page
+                    ),
                     'dark:text-slate-300': !$route.matched.some(
-                      (r) => r.name == item.page
+                      r => r.name == item.page
                     )
                   }"
                 >
@@ -33,7 +36,8 @@
                   <p class="grow text-left">{{ item.title }}</p>
                   <ChevronRight
                     v-if="item.children"
-                    class="group/collapsible/trigger h-4 w-4 transition-transform duration-300"
+                    class="group/collapsible/trigger h-4 w-4
+                      transition-transform duration-300"
                     :class="{
                       'rotate-90': open
                     }"
@@ -42,19 +46,23 @@
               </CollapsibleTrigger>
               <CollapsibleContent
                 v-if="item.children"
-                class="mb-1 ml-5 border-l border-slate-200 pl-1 dark:border-slate-300"
+                class="mb-1 ml-5 border-l border-slate-200 pl-1
+                  dark:border-slate-300"
               >
                 <template v-for="child in item.children" :key="child.title">
                   <RouterLink
                     v-if="child.condition()"
                     :to="{ name: child.page }"
-                    class="mt-1 flex items-center gap-3 rounded-lg px-2 py-[6px] text-muted-foreground
-                      transition-all hover:bg-slate-100 dark:hover:bg-slate-800"
+                    class="text-muted-foreground mt-1 flex items-center gap-3
+                      rounded-lg px-2 py-[6px] transition-all hover:bg-slate-100
+                      dark:hover:bg-slate-800"
                     :class="{
-                      'bg-slate-100 text-primary dark:bg-slate-800 dark:text-primary':
-                        $route.matched.some((r) => r.name == child.page),
+                      [`text-primary dark:text-primary bg-slate-100
+                      dark:bg-slate-800`]: $route.matched.some(
+                        r => r.name == child.page
+                      ),
                       'dark:text-slate-300': !$route.matched.some(
-                        (r) => r.name == child.page
+                        r => r.name == child.page
                       )
                     }"
                   >
@@ -67,13 +75,14 @@
           <RouterLink :to="{ name: 'info' }" class="mt-auto w-full">
             <Button
               variant="ghost"
-              class="w-full justify-start px-3 text-sm text-slate-400 transition-colors
-                hover:text-primary dark:text-slate-500 dark:hover:text-primary"
+              class="hover:text-primary dark:hover:text-primary w-full
+                justify-start px-3 text-sm text-slate-400 transition-colors
+                dark:text-slate-500"
               :class="{
-                'bg-slate-100 text-primary dark:bg-slate-800 dark:text-primary':
-                  $route.matched.some((r) => r.name == 'info'),
+                'text-primary dark:text-primary bg-slate-100 dark:bg-slate-800':
+                  $route.matched.some(r => r.name == 'info'),
                 'dark:text-slate-300': !$route.matched.some(
-                  (r) => r.name == 'info'
+                  r => r.name == 'info'
                 )
               }"
             >
@@ -83,8 +92,9 @@
           </RouterLink>
           <Button
             variant="ghost"
-            class="mb-2 justify-start px-3 text-sm text-slate-400 transition-colors
-              hover:text-destructive dark:text-slate-500 dark:hover:text-destructive"
+            class="hover:text-destructive dark:hover:text-destructive mb-2
+              justify-start px-3 text-sm text-slate-400 transition-colors
+              dark:text-slate-500"
             @click="authUserStore.signOut"
           >
             <LogOut />
@@ -92,8 +102,9 @@
           </Button>
           <RouterLink
             :to="{ name: 'home' }"
-            class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground
-              transition-all hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+            class="text-muted-foreground flex items-center gap-3 rounded-lg px-3
+              py-2 transition-all hover:bg-slate-100 dark:text-slate-300
+              dark:hover:bg-slate-800"
           >
             <ChevronLeft class="h-4 w-4" />
             <p class="grow text-left">Back to home</p>
@@ -105,16 +116,6 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthUserStore, useBackendInfoStore, useSystemStore } from '@/stores'
-import { RouterLink } from 'vue-router'
-import { Button } from '@@materials/ui/button'
-
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger
-} from '@@materials/ui/collapsible'
-
 import {
   ChevronLeft,
   ChevronRight,
@@ -125,6 +126,16 @@ import {
   Info,
   Settings
 } from 'lucide-vue-next'
+import { RouterLink } from 'vue-router'
+
+import { useAuthUserStore, useBackendInfoStore, useSystemStore } from '@/stores'
+
+import { Button } from '@@materials/ui/button'
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger
+} from '@@materials/ui/collapsible'
 
 const authUserStore = useAuthUserStore()
 const backendInfoStore = useBackendInfoStore()
@@ -152,7 +163,10 @@ const menuItems = [
   {
     title: 'Users',
     icon: Users,
-    condition: () => authUserStore.isAdmin || authUserStore.isUserManager || authUserStore.isActionManager,
+    condition: () =>
+      authUserStore.isAdmin ||
+      authUserStore.isUserManager ||
+      authUserStore.isActionManager,
     children: [
       {
         title: 'Users',

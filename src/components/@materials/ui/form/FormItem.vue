@@ -1,8 +1,11 @@
 <script lang="ts" setup>
 import type { HTMLAttributes } from 'vue'
-import { cn } from '@/services/utils'
-import { useId } from 'radix-vue'
+
 import { provide } from 'vue'
+import { useId } from 'radix-vue'
+
+import { cn } from '@/services/utils'
+
 import { FORM_ITEM_INJECTION_KEY } from './injectionKeys'
 
 const props = defineProps<{

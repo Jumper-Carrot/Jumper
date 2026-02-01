@@ -6,6 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import MainMenu from './MainMenu.vue'
 import { RouterView } from 'vue-router'
+
+import MainMenu from './MainMenu.vue'
 </script>

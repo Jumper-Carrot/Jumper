@@ -64,7 +64,8 @@
                 "
               >
                 <div
-                  class="mr-auto flex grow items-center gap-2 truncate text-start"
+                  class="mr-auto flex grow items-center gap-2 truncate
+                    text-start"
                 >
                   <slot
                     name="list-item"
@@ -88,7 +89,7 @@
             </CommandGroup>
           </CommandList>
         </template>
-        <div v-else class="h-15 m-auto my-1 w-[150px] text-primary">
+        <div v-else class="text-primary m-auto my-1 h-15 w-[150px]">
           <Loader2 class="m-auto h-12 animate-spin" />
         </div>
       </Command>
@@ -99,10 +100,11 @@
 <script setup lang="ts" generic="T, U">
 import { ref, type HTMLAttributes } from 'vue'
 import { useElementSize } from '@vueuse/core'
-import { cn } from '@/services/utils'
-import { type SelectVariants, selectVariants } from '.'
-
 import { Check, ChevronDown, X, Loader2 } from 'lucide-vue-next'
+
+import { cn } from '@/services/utils'
+
+import { Button } from '@@materials/ui/button'
 import {
   Command,
   CommandEmpty,
@@ -111,8 +113,8 @@ import {
   CommandItem,
   CommandList
 } from '@@materials/ui/command'
-import { Button } from '@@materials/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@@materials/ui/popover'
+import { type SelectVariants, selectVariants } from '.'
 import { useItems } from '../useItems'
 
 const modelValue = defineModel<U | null>('modelValue', {
@@ -154,7 +156,7 @@ const filterItems = (
   if (!term) return vals
   const lowerTerm = term.toLowerCase()
   return props.items
-    .filter((item) => getItemLabel(item)?.toLowerCase().includes(lowerTerm))
-    .map((item) => JSON.stringify(getItemKey(item))) as typeof vals
+    .filter(item => getItemLabel(item)?.toLowerCase().includes(lowerTerm))
+    .map(item => JSON.stringify(getItemKey(item))) as typeof vals
 }
 </script>

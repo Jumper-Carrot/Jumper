@@ -23,7 +23,7 @@ export function camelToSnake(obj: Record<string, any>): Record<string, any> {
     Object.entries(obj).map(([key, value]) => {
       const snakeKey = key.replace(
         /(?<!^|\s)[A-Z]/g,
-        (match) => `_${match.toLowerCase()}`
+        match => `_${match.toLowerCase()}`
       )
       return [snakeKey, camelToSnake(value)]
     })

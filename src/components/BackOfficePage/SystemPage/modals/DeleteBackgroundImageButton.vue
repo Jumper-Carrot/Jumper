@@ -31,11 +31,13 @@
 </template>
 
 <script setup lang="ts">
-import { useConfirmToast } from '@/composables'
-import { Button } from '@@materials/ui/button'
-import { ConfirmModal } from '@@materials/modal'
 import { Trash2 } from 'lucide-vue-next'
+
 import { useSystemStore } from '@/stores'
+import { useConfirmToast } from '@/composables'
+
+import { ConfirmModal } from '@@materials/modal'
+import { Button } from '@@materials/ui/button'
 
 defineProps<{
   disabled: boolean

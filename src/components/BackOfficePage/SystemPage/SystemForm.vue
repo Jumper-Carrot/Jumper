@@ -3,9 +3,10 @@
     <div class="flex h-full flex-col gap-4">
       <div class="flex flex-col gap-2">
         <h2 class="font-semibold">Actions advanced settings</h2>
-        <div class="pl-2 flex flex-col gap-2">
+        <div class="flex flex-col gap-2 pl-2">
           <div
-            class="flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400"
+            class="flex items-center gap-2 text-sm font-semibold text-slate-600
+              dark:text-slate-400"
           >
             <Switch v-model="allowActionWorkspaces" />
             Allow action workspaces
@@ -15,13 +16,15 @@
       <div class="flex flex-col gap-2">
         <h2 class="font-semibold">Appearance preferences</h2>
         <div
-          class="pl-2 flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400"
+          class="flex items-center gap-2 pl-2 text-sm font-semibold
+            text-slate-600 dark:text-slate-400"
         >
           <Switch v-model="allowShowingDescription" />
           Show action description on card hover
         </div>
         <div
-          class="pl-2 flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400"
+          class="flex items-center gap-2 pl-2 text-sm font-semibold
+            text-slate-600 dark:text-slate-400"
         >
           <Switch v-model="allowBackgroundImage" />
           Use custom background images
@@ -43,7 +46,8 @@
               />
               <div
                 v-else
-                class="flex h-full w-full items-center justify-center text-sm text-slate-400 dark:text-slate-500"
+                class="flex h-full w-full items-center justify-center text-sm
+                  text-slate-400 dark:text-slate-500"
               >
                 <Carrot class="h-9 w-9 text-slate-300 dark:text-slate-500" />
               </div>
@@ -52,7 +56,8 @@
 
           <div class="flex flex-col items-start gap-2 pl-2">
             <div
-              class="flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400"
+              class="flex items-center gap-2 text-sm font-semibold
+                text-slate-600 dark:text-slate-400"
             >
               <Switch
                 v-model="allowUserCustomBackgroundImage"
@@ -78,19 +83,22 @@
       </div>
       <div class="flex flex-col gap-3 pl-2">
         <div
-          class="flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400"
+          class="flex items-center gap-2 text-sm font-semibold text-slate-600
+            dark:text-slate-400"
         >
           <Switch v-model="allowUsersToHideActions" />
           Allow users to hide actions
         </div>
         <div
-          class="flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400"
+          class="flex items-center gap-2 text-sm font-semibold text-slate-600
+            dark:text-slate-400"
         >
           <Switch v-model="allowActionSections" />
           Allow action sections
         </div>
         <div
-          class="flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400"
+          class="flex items-center gap-2 text-sm font-semibold text-slate-600
+            dark:text-slate-400"
         >
           <Switch v-model="allowCustomOrder" />
           Allow users to customize action card order

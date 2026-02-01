@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import type { TagsInputInputProps } from 'radix-vue'
 import type { HTMLAttributes } from 'vue'
-import { cn } from '@/services/utils'
-import { TagsInputInput, useForwardProps } from 'radix-vue'
-import { computed } from 'vue'
 
-const props = defineProps<TagsInputInputProps & { class?: HTMLAttributes['class'] }>()
+import { computed } from 'vue'
+import { TagsInputInput, useForwardProps } from 'radix-vue'
+
+import { cn } from '@/services/utils'
+
+const props = defineProps<
+  TagsInputInputProps & { class?: HTMLAttributes['class'] }
+>()
 
 const delegatedProps = computed(() => {
   const { class: _, ...delegated } = props
@@ -17,5 +21,13 @@ const forwardedProps = useForwardProps(delegatedProps)
 </script>
 
 <template>
-  <TagsInputInput v-bind="forwardedProps" :class="cn('text-sm min-h-6 focus:outline-hidden flex-1 bg-transparent px-1', props.class)" />
+  <TagsInputInput
+    v-bind="forwardedProps"
+    :class="
+      cn(
+        'min-h-6 flex-1 bg-transparent px-1 text-sm focus:outline-hidden',
+        props.class
+      )
+    "
+  />
 </template>

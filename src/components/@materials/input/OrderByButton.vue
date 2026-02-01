@@ -1,11 +1,15 @@
 <template>
-  <Button @click="changeOrder" variant="ghost" class="p-1 px-2 -left-1 relative">
+  <Button
+    @click="changeOrder"
+    variant="ghost"
+    class="relative -left-1 p-1 px-2"
+  >
     <slot />
     <ChevronDown
       class="transition-transform"
       v-if="order.field === props.field"
       :class="{
-        'rotate-180 ': order.direction === 'desc',
+        'rotate-180': order.direction === 'desc'
       }"
     />
   </Button>
@@ -13,8 +17,10 @@
 
 <script setup lang="ts">
 import type { Order } from '@@types'
-import { Button } from '@@materials/ui/button'
+
 import { ChevronDown } from 'lucide-vue-next'
+
+import { Button } from '@@materials/ui/button'
 
 const order = defineModel<Order>('order', {
   default: { field: '', direction: 'asc' }

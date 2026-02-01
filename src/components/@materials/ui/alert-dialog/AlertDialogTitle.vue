@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import type { AlertDialogTitleProps } from 'radix-vue'
 import type { HTMLAttributes } from 'vue'
-import { cn } from '@/services/utils'
-import { AlertDialogTitle } from 'radix-vue'
-import { computed } from 'vue'
 
-const props = defineProps<AlertDialogTitleProps & { class?: HTMLAttributes['class'] }>()
+import { computed } from 'vue'
+import { AlertDialogTitle } from 'radix-vue'
+
+import { cn } from '@/services/utils'
+
+const props = defineProps<
+  AlertDialogTitleProps & { class?: HTMLAttributes['class'] }
+>()
 
 const delegatedProps = computed(() => {
   const { class: _, ...delegated } = props

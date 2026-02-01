@@ -1,2 +1,3 @@
-import GalleryPage from './GalleryPage.vue';
-export default GalleryPage;
+import GalleryPage from './GalleryPage.vue'
+
+export default GalleryPage

@@ -1,7 +1,7 @@
 <template>
   <div class="mt-4 flex items-center gap-0.5">
     <span
-      class="pl-1 text-sm italic text-slate-800 dark:text-slate-400"
+      class="pl-1 text-sm text-slate-800 italic dark:text-slate-400"
       v-if="props.actionDetailed.isPublic"
     >
       This action is Public
@@ -13,7 +13,9 @@
       v-else
     >
       <button
-        class="dark:hover:bg-slate-800 p-0.5 rounded-md transition-colors text-slate-500 hover:text-slate-800 hover:bg-slate-200 dark:hover:text-slate-100"
+        class="rounded-md p-0.5 text-slate-500 transition-colors
+          hover:bg-slate-200 hover:text-slate-800 dark:hover:bg-slate-800
+          dark:hover:text-slate-100"
         title="View permissions"
         @click.prevent="isActionsUsersModalOpen = true"
       >
@@ -28,7 +30,9 @@
           v-for="(item, i) in permissions.slice(0, visibleCount)"
           :key="i"
           variant="outline"
-          class="flex items-center gap-1 rounded-lg bg-slate-100 px-1.5 py-0.5 text-xs text-slate-800 shadow-xs dark:bg-slate-800 dark:text-slate-400"
+          class="flex items-center gap-1 rounded-lg bg-slate-100 px-1.5 py-0.5
+            text-xs text-slate-800 shadow-xs dark:bg-slate-800
+            dark:text-slate-400"
         >
           <template v-if="'username' in item">
             <UserIcon :size="14" />
@@ -47,7 +51,9 @@
         <Badge
           v-if="permissions.length > visibleCount"
           variant="outline"
-          class="flex items-center gap-1 rounded-lg bg-slate-100 px-1.5 py-0.5 text-xs text-slate-800 shadow-xs dark:bg-slate-800 dark:text-slate-400"
+          class="flex items-center gap-1 rounded-lg bg-slate-100 px-1.5 py-0.5
+            text-xs text-slate-800 shadow-xs dark:bg-slate-800
+            dark:text-slate-400"
         >
           + {{ permissions.length - visibleCount }} autres
         </Badge>
@@ -56,7 +62,8 @@
 
     <div
       ref="measureRef"
-      class="pointer-events-none invisible absolute left-0 top-0 flex max-h-12 flex-wrap gap-1 overflow-hidden"
+      class="pointer-events-none invisible absolute top-0 left-0 flex max-h-12
+        flex-wrap gap-1 overflow-hidden"
       aria-hidden="true"
     >
       <Badge

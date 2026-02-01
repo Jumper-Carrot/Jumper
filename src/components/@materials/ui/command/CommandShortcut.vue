@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
+
 import { cn } from '@/services/utils'
 
 const props = defineProps<{
@@ -8,7 +9,11 @@ const props = defineProps<{
 </script>
 
 <template>
-  <span :class="cn('ml-auto text-xs tracking-widest text-muted-foreground', props.class)">
+  <span
+    :class="
+      cn('text-muted-foreground ml-auto text-xs tracking-widest', props.class)
+    "
+  >
     <slot />
   </span>
 </template>

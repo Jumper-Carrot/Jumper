@@ -28,17 +28,19 @@
 </template>
 
 <script setup lang="ts">
-import { useUserForm } from './useUserForm'
-import jumper from '@/services/jumper'
-import { useToast } from '@@materials/ui/toast'
-import { UserIcon } from 'lucide-vue-next'
-import { Button } from '@@materials/ui/button'
-import { FormModal } from '@@materials/modal'
-import { InputField } from '@@materials/input'
-import SystemRoleSelect from '../SystemRoleSelect.vue'
-import { useField } from 'vee-validate'
-import { Label } from '@@materials/ui/label'
 import { SystemRole } from '@@types/user'
+import { UserIcon } from 'lucide-vue-next'
+import { useField } from 'vee-validate'
+
+import jumper from '@/services/jumper'
+
+import { InputField } from '@@materials/input'
+import { FormModal } from '@@materials/modal'
+import { Button } from '@@materials/ui/button'
+import { Label } from '@@materials/ui/label'
+import { useToast } from '@@materials/ui/toast'
+import SystemRoleSelect from '../SystemRoleSelect.vue'
+import { useUserForm } from './useUserForm'
 
 const { toast } = useToast()
 
@@ -47,7 +49,7 @@ const userForm = useUserForm()
 const emit = defineEmits<{ userAdded: [] }>()
 const { value: systemRole } = useField<SystemRole>('systemRole')
 
-const onSubmit = userForm.handleSubmit(async (values) => {
+const onSubmit = userForm.handleSubmit(async values => {
   try {
     await jumper.users.create(values)
     emit('userAdded')

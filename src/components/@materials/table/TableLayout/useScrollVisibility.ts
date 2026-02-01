@@ -1,4 +1,5 @@
 import type { ComponentPublicInstance } from 'vue'
+
 import { ref, onMounted, onUnmounted, useTemplateRef } from 'vue'
 
 export const useScrollVisibility = (refName: string) => {
@@ -9,8 +10,10 @@ export const useScrollVisibility = (refName: string) => {
 
   const checkScrollbar = () => {
     if (element.value) {
-      isScrollY.value = element.value.$el.scrollHeight > element.value.$el.clientHeight
-      isScrollX.value = element.value.$el.scrollWidth > element.value.$el.clientWidth
+      isScrollY.value =
+        element.value.$el.scrollHeight > element.value.$el.clientHeight
+      isScrollX.value =
+        element.value.$el.scrollWidth > element.value.$el.clientWidth
     }
   }
 

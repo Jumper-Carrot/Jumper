@@ -8,13 +8,13 @@
     <div v-if="useCombobox" class="flex min-h-0 flex-1 flex-col gap-2">
       <Label>Combobox Code</Label>
       <CodeEditor
-        class="flex-1 min-h-0"
+        class="min-h-0 flex-1"
         v-model="comboboxCode"
         mode="get-options"
         language="python"
         :namespace="actionDetailed?.name + ' - Combobox'"
         @update:resultOptions="
-          (newOptions) => {
+          newOptions => {
             options = useCombobox ? newOptions : null
           }
         "
@@ -24,11 +24,13 @@
 </template>
 
 <script setup lang="ts">
-import { useField } from 'vee-validate'
-import CodeEditor from '../CodeEditor/CodeEditor.vue'
-import { Label } from '@@materials/ui/label'
-import { CheckboxField } from '@@materials/input'
 import type { ActionsComposable } from '../../../useActions'
+
+import { useField } from 'vee-validate'
+
+import { CheckboxField } from '@@materials/input'
+import { Label } from '@@materials/ui/label'
+import CodeEditor from '../CodeEditor/CodeEditor.vue'
 
 const props = defineProps<{
   actionComposable: ActionsComposable
@@ -39,7 +41,6 @@ const options = defineModel<string[] | null>('options', {
 })
 
 const { value: useCombobox } = useField<string>('data.useCombobox', undefined)
-const { value: comboboxCode } = useField<string>(
-  'data.comboboxCode')
+const { value: comboboxCode } = useField<string>('data.comboboxCode')
 const { actionDetailed } = props.actionComposable
 </script>

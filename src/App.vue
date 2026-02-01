@@ -2,7 +2,6 @@
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import { useColorMode } from '@vueuse/core'
 import { RouterView, useRoute } from 'vue-router'
-
 import 'vue-sonner/style.css'
 
 import { Toaster } from '@@materials/ui/sonner'

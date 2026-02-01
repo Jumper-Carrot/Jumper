@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import type { SelectTriggerProps } from 'radix-vue'
 import type { HTMLAttributes } from 'vue'
-import { cn } from '@/services/utils'
+
+import { computed } from 'vue'
 import { ChevronDown } from 'lucide-vue-next'
 import { SelectIcon, SelectTrigger, useForwardProps } from 'radix-vue'
-import { computed } from 'vue'
 
-const props = defineProps<SelectTriggerProps & { class?: HTMLAttributes['class'] }>()
+import { cn } from '@/services/utils'
+
+const props = defineProps<
+  SelectTriggerProps & { class?: HTMLAttributes['class'] }
+>()
 
 const delegatedProps = computed(() => {
   const { class: _, ...delegated } = props
@@ -20,14 +24,20 @@ const forwardedProps = useForwardProps(delegatedProps)
 <template>
   <SelectTrigger
     v-bind="forwardedProps"
-    :class="cn(
-      'flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background data-placeholder:text-muted-foreground focus:outline-hidden focus:ring-1 focus:ring-ring focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:truncate text-start',
-      props.class,
-    )"
+    :class="
+      cn(
+        `border-input bg-background ring-offset-background
+        data-placeholder:text-muted-foreground focus:ring-ring flex h-10 w-full
+        items-center justify-between rounded-md border px-3 py-2 text-start
+        text-sm focus:ring-1 focus:ring-offset-1 focus:outline-hidden
+        disabled:cursor-not-allowed disabled:opacity-50 [&>span]:truncate`,
+        props.class
+      )
+    "
   >
     <slot />
     <SelectIcon as-child>
-      <ChevronDown class="w-4 h-4 opacity-50 shrink-0" />
+      <ChevronDown class="h-4 w-4 shrink-0 opacity-50" />
     </SelectIcon>
   </SelectTrigger>
 </template>

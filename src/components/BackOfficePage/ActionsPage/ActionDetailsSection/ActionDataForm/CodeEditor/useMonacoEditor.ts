@@ -1,7 +1,3 @@
-import * as monaco from 'monaco-editor'
-import { TabFocus } from 'monaco-editor/esm/vs/editor/browser/config/tabFocus.js'
-import { useDark } from '@vueuse/core'
-
 import {
   type MaybeRefOrGetter,
   type MaybeRef,
@@ -10,6 +6,9 @@ import {
   watch,
   onMounted
 } from 'vue'
+import { useDark } from '@vueuse/core'
+import * as monaco from 'monaco-editor'
+import { TabFocus } from 'monaco-editor/esm/vs/editor/browser/config/tabFocus.js'
 
 const DEFAULT_EDITOR_LANGUAGE = 'python'
 
@@ -37,10 +36,15 @@ export const useMonacoEditor = (
   let modifiedModel: monaco.editor.ITextModel | null = null
 
   onMounted(async () => {
-    const slushAndPoppiesTheme = await import('monaco-themes/themes/Slush and Poppies.json')
+    const slushAndPoppiesTheme = await import(
+      'monaco-themes/themes/Slush and Poppies.json'
+    )
     const nightOwlTheme = await import('monaco-themes/themes/Night Owl.json')
-    monaco.editor.defineTheme('SlushAndPoppies', slushAndPoppiesTheme.default as any);
-    monaco.editor.defineTheme('NightOwl', nightOwlTheme.default as any);
+    monaco.editor.defineTheme(
+      'SlushAndPoppies',
+      slushAndPoppiesTheme.default as any
+    )
+    monaco.editor.defineTheme('NightOwl', nightOwlTheme.default as any)
     monaco.editor.setTheme(isDark.value ? 'NightOwl' : 'SlushAndPoppies')
     setupEditor()
   })
@@ -54,7 +58,6 @@ export const useMonacoEditor = (
     const oldOriginal = originalModel
     const oldModified = modifiedModel
     const oldEditor = editor
-
 
     if (modeRef.value === 'code') {
       editor = setupStandaloneEditor()
@@ -83,12 +86,12 @@ export const useMonacoEditor = (
       if (codeRef.value === editorValue) return
       codeRef.value = editorValue
     })
-    watch(codeRef, (newValue) => {
+    watch(codeRef, newValue => {
       if (standaloneEditor && newValue === standaloneEditor.getValue()) return
       standaloneEditor.setValue(newValue)
     })
     // To manage unfocus bug after editor switching
-    standaloneEditor?.onKeyDown((e) => {
+    standaloneEditor?.onKeyDown(e => {
       if (e.keyCode === monaco.KeyCode.Tab) {
         e.preventDefault()
         standaloneEditor.trigger('keyboard', 'tab', {})
@@ -119,7 +122,7 @@ export const useMonacoEditor = (
       if (codeRef.value === editorValue) return
       codeRef.value = editorValue
     })
-    watch(codeRef, (newValue) => {
+    watch(codeRef, newValue => {
       if (
         diffEditor &&
         newValue !== diffEditor.getModifiedEditor().getValue()
@@ -129,13 +132,13 @@ export const useMonacoEditor = (
     })
     const originalEditor = diffEditor.getOriginalEditor()
     const modifiedEditor = diffEditor.getModifiedEditor()
-    originalEditor?.onKeyDown((e) => {
+    originalEditor?.onKeyDown(e => {
       if (e.keyCode === monaco.KeyCode.Tab) {
         e.preventDefault()
         diffEditor.trigger('keyboard', 'tab', {})
       }
     })
-    modifiedEditor?.onKeyDown((e) => {
+    modifiedEditor?.onKeyDown(e => {
       if (e.keyCode === monaco.KeyCode.Tab) {
         e.preventDefault()
         diffEditor.trigger('keyboard', 'tab', {})

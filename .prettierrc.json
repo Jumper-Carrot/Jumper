@@ -12,26 +12,24 @@
   "plugins": [
     "prettier-plugin-tailwindcss",
     "prettier-plugin-classnames",
-    "prettier-plugin-merge",
-    "@ianvs/prettier-plugin-sort-imports"
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-merge"
   ],
   "importOrder": [
-    "<TYPES>^(node:)",
-    "<TYPES>",
-    "<TYPES>^[.]",
-    "",
+    "<THIRD_PARTY_TS_TYPES>",
+    "<TS_TYPES>",
+    "<SEPARATOR>",
     "<BUILTIN_MODULES>",
     "^vue$",
     "<THIRD_PARTY_MODULES>",
-    "",
+    "<SEPARATOR>",
     "^@/services",
     "^@/stores",
     "^@/composables",
-    "",
+    "<SEPARATOR>",
     "^@@materials",
     "^@/components",
-    "^[.]"
+    "^[./]"
   ],
-  "importOrderTypeScriptVersion": "5.0.0",
-  "importOrderCaseSensitive": false
+  "importOrderSeparation": true
 }

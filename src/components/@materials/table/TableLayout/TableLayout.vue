@@ -17,8 +17,8 @@
       <TableBody
         ref="tableBody"
         v-if="data && data.length"
-        class="block h-full overflow-x-hidden shadow-inner [&>tr]:table [&>tr]:w-full
-          [&>tr]:table-fixed"
+        class="block h-full overflow-x-hidden shadow-inner [&>tr]:table
+          [&>tr]:w-full [&>tr]:table-fixed"
         :class="{
           'overflow-y-auto': !isLoading,
           'overflow-y-hidden': isLoading
@@ -37,7 +37,8 @@
             <TableCell class="w-full">
               <div class="flex items-center gap-2">
                 <div
-                  class="h-[15px] w-[100px] animate-pulse rounded-sm bg-slate-200"
+                  class="h-[15px] w-[100px] animate-pulse rounded-sm
+                    bg-slate-200"
                 ></div>
               </div>
             </TableCell>
@@ -55,7 +56,6 @@ interface Item {
 </script>
 
 <script setup lang="ts" generic="T extends Item">
-import { useScrollVisibility } from './useScrollVisibility'
 import {
   Table,
   TableHeader,
@@ -65,6 +65,7 @@ import {
   TableCell
 } from '@@materials/ui/table'
 import TableCaptions from './TableCaptions.vue'
+import { useScrollVisibility } from './useScrollVisibility'
 
 const { isScrollY } = useScrollVisibility('tableBody')
 

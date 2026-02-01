@@ -1,5 +1,7 @@
 import type { RouteLocationNormalized } from 'vue-router'
+
 import { storeToRefs } from 'pinia'
+
 import { useAuthUserStore, useBackendInfoStore } from '@/stores'
 
 type pagePermission = (
@@ -11,8 +13,13 @@ export const usePagePermissions = async (): Promise<{
   [key: string]: pagePermission
 }> => {
   const authUserStore = useAuthUserStore()
-  const { isAuthenticated, isAdmin, isFetching, isUserManager, isActionManager } =
-    storeToRefs(useAuthUserStore())
+  const {
+    isAuthenticated,
+    isAdmin,
+    isFetching,
+    isUserManager,
+    isActionManager
+  } = storeToRefs(useAuthUserStore())
   const { isScimEnabled } = storeToRefs(useBackendInfoStore())
   if (isFetching.value) {
     await authUserStore.refetch()
@@ -25,9 +32,13 @@ export const usePagePermissions = async (): Promise<{
     home: () => isAuthenticated.value,
     settings: () => isAuthenticated.value,
     actions: () => isAdmin.value || isActionManager.value,
-    users: () => isAdmin.value || isUserManager.value || authUserStore.isActionManager,
-    roles: () => isAdmin.value || isUserManager.value || authUserStore.isActionManager,
+    users: () =>
+      isAdmin.value || isUserManager.value || authUserStore.isActionManager,
+    roles: () =>
+      isAdmin.value || isUserManager.value || authUserStore.isActionManager,
     system: () => isAdmin.value,
-    groups: () => (isAdmin.value || isUserManager.value || authUserStore.isActionManager) && isScimEnabled.value
+    groups: () =>
+      (isAdmin.value || isUserManager.value || authUserStore.isActionManager) &&
+      isScimEnabled.value
   }
 }

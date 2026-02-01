@@ -4,10 +4,11 @@
 
 <script setup lang="ts">
 import { type HTMLAttributes } from 'vue'
-import { type InputVariants, inputVariants } from '.'
 
 import { cn } from '@/services/utils'
+
 import { Input } from '@@materials/ui/input'
+import { type InputVariants, inputVariants } from '.'
 
 const props = defineProps<{
   variant?: InputVariants['variant']

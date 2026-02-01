@@ -25,15 +25,16 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'vue'
-import type { Workspace } from '@@types'
 import type { ActionsComposable } from '../../../useActions'
+import type { Workspace } from '@@types'
+
+import { watch } from 'vue'
 import { useField } from 'vee-validate'
 
 import { TabsContent } from '@@materials/ui/tabs'
+import ActionMainForm from '../../ActionMainForm/ActionMainForm.vue'
 import PythonCodeEditor from './PythonCodeEditor.vue'
 import PythonOptionsEditor from './PythonOptionsEditor.vue'
-import ActionMainForm from '../../ActionMainForm/ActionMainForm.vue'
 
 defineProps<{
   actionComposable: ActionsComposable

@@ -58,20 +58,21 @@
 </template>
 
 <script setup lang="ts">
-import { useWorkspacesQuery } from './useWorkspacesQuery'
 import { useAuthUserStore } from '@/stores'
-import { TableHead } from '@@materials/ui/table'
-import { Switch } from '@@materials/ui/switch'
-import { Label } from '@@materials/ui/label'
+
 import { SearchBar } from '@@materials/input'
 import { OrderByButton } from '@@materials/input'
 import { PaginationFooter, TableLayout } from '@@materials/table'
+import { Label } from '@@materials/ui/label'
+import { Switch } from '@@materials/ui/switch'
+import { TableHead } from '@@materials/ui/table'
 import {
   BackOfficePageLayout,
   BackOfficeHeader
 } from '@/components/BackOfficePage/@common'
 import WorkspaceRow from './WorkspaceRow.vue'
 import AddWorkspaceButton from './modals/AddWorkspaceButton.vue'
+import { useWorkspacesQuery } from './useWorkspacesQuery'
 
 const authUserStore = useAuthUserStore()
 

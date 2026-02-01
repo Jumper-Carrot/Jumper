@@ -8,8 +8,9 @@
       :title="isThemingBarOpen ? 'Close Theming Bar' : 'Open Theming Bar'"
     >
       <Palette
-        class="h-[17px] w-[17px] text-slate-700 transition-colors group-hover:text-slate-900
-          dark:text-slate-200 dark:group-hover:text-slate-100"
+        class="h-[17px] w-[17px] text-slate-700 transition-colors
+          group-hover:text-slate-900 dark:text-slate-200
+          dark:group-hover:text-slate-100"
       />
     </button>
     <button
@@ -18,8 +19,9 @@
       @click="openDebugWindow"
     >
       <Bug
-        class="h-[17px] w-[17px] text-slate-700 transition-colors group-hover:text-slate-900
-          dark:text-slate-200 dark:group-hover:text-slate-100"
+        class="h-[17px] w-[17px] text-slate-700 transition-colors
+          group-hover:text-slate-900 dark:text-slate-200
+          dark:group-hover:text-slate-100"
       />
     </button>
     <component
@@ -46,11 +48,11 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
 import { Cog, Bug, Palette } from 'lucide-vue-next'
+import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
 
 import { useDebugWindowStore, useTitleBarOptionsStore } from '@/stores'
-import { storeToRefs } from 'pinia'
 
 const router = useRouter()
 const debugWindowStore = useDebugWindowStore()

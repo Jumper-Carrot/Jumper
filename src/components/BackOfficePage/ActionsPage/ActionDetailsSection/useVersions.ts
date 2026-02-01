@@ -1,5 +1,5 @@
-import type { User } from '@@types'
 import type { ActionDetailedForm } from './useActionDetailedForm'
+import type { User } from '@@types'
 
 import { computed, MaybeRefOrGetter, ref, toRef } from 'vue'
 import { ActionData, ActionVersion, DetailedAction } from '@@types/action'

@@ -3,8 +3,8 @@
     <DropdownMenuTrigger>
       <Button
         variant="ghost"
-        class="rounded-sm px-3 text-slate-700 hover:bg-slate-100 dark:text-slate-300
-          dark:hover:bg-slate-600"
+        class="rounded-sm px-3 text-slate-700 hover:bg-slate-100
+          dark:text-slate-300 dark:hover:bg-slate-600"
       >
         <MoreHorizontal />
       </Button>
@@ -61,7 +61,7 @@
   <EditUserModal
     v-if="editUserModalOpen"
     v-model:open="editUserModalOpen"
-    @user-updated="(e) => $emit('userUpdated', e)"
+    @user-updated="e => $emit('userUpdated', e)"
     :user="user"
   />
   <EditUserPasswordModal
@@ -79,12 +79,14 @@
 
 <script lang="ts" setup>
 import type { User } from '@@types'
-import jumper from '@/services/jumper'
-import { storeToRefs } from 'pinia'
+
 import { ref, computed } from 'vue'
-import { useBackendInfoStore } from '@/stores'
-import { useToast } from '@@materials/ui/toast'
 import { MoreHorizontal } from 'lucide-vue-next'
+import { storeToRefs } from 'pinia'
+
+import jumper from '@/services/jumper'
+import { useBackendInfoStore } from '@/stores'
+
 import { Button } from '@@materials/ui/button'
 import {
   DropdownMenu,
@@ -92,16 +94,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@@materials/ui/dropdown-menu'
-import EditUserModal from './EditUserModal.vue'
-import { EditUserPasswordModal } from '@/components/BackOfficePage/@common'
-import DeleteUserModal from './DeleteUserModal.vue'
-
+import { useToast } from '@@materials/ui/toast'
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger
 } from '@@materials/ui/tooltip'
+import { EditUserPasswordModal } from '@/components/BackOfficePage/@common'
+import DeleteUserModal from './DeleteUserModal.vue'
+import EditUserModal from './EditUserModal.vue'
 
 const { isSSOEnabled } = storeToRefs(useBackendInfoStore())
 const { toast } = useToast()

@@ -61,16 +61,18 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
+
 import { useBackendInfoStore } from '@/stores'
 import { useAuthUserStore } from '@/stores'
-import { storeToRefs } from 'pinia'
 import { useUsersQuery } from '@/composables'
-import { TableHead } from '@@materials/ui/table'
-import { Switch } from '@@materials/ui/switch'
-import { Label } from '@@materials/ui/label'
+
 import { SearchBar } from '@@materials/input'
 import { OrderByButton } from '@@materials/input'
 import { PaginationFooter, TableLayout } from '@@materials/table'
+import { Label } from '@@materials/ui/label'
+import { Switch } from '@@materials/ui/switch'
+import { TableHead } from '@@materials/ui/table'
 import {
   BackOfficePageLayout,
   BackOfficeHeader

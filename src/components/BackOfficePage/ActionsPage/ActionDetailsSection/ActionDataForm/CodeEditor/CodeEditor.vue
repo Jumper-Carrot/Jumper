@@ -17,8 +17,8 @@
         />
         <Button
           v-if="isDiff"
-          class="absolute bottom-[16px] right-[50px] z-50 h-[30px] w-[30px] rounded-sm opacity-0
-            group-hover:opacity-100"
+          class="absolute right-[50px] bottom-[16px] z-50 h-[30px] w-[30px]
+            rounded-sm opacity-0 group-hover:opacity-100"
           variant="secondary"
           :class="{
             'right-[50px]': showCompare,
@@ -62,17 +62,19 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { useMonacoEditor } from './useMonacoEditor'
+import { GitCompare, GitCommitVertical } from 'lucide-vue-next'
+
+import { useCodeExec, ExecMode } from '@/composables/useCodeExec/useCodeExec'
+
+import { Button } from '@@materials/ui/button'
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup
 } from '@@materials/ui/resizable'
-import CodeLogsSection from './CodeLogsSection.vue'
 import CodeExecOptions from './CodeExecOptions.vue'
-import { Button } from '@@materials/ui/button'
-import { useCodeExec, ExecMode } from '@/composables/useCodeExec/useCodeExec'
-import { GitCompare, GitCommitVertical } from 'lucide-vue-next'
+import CodeLogsSection from './CodeLogsSection.vue'
+import { useMonacoEditor } from './useMonacoEditor'
 
 const props = defineProps<{
   namespace: string
@@ -117,7 +119,7 @@ const {
   () => props.namespace
 )
 
-watch(execOptions, (newOptions) => (resultOptions.value = newOptions ?? []))
+watch(execOptions, newOptions => (resultOptions.value = newOptions ?? []))
 </script>
 
 <style>

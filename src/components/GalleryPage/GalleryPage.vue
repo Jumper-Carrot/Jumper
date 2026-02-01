@@ -16,7 +16,8 @@
         <div class="mb-2 px-2">
           <h2
             v-if="isMultiSections"
-            class="border-secondary border-b text-sm font-semibold text-slate-400 italic dark:text-slate-300"
+            class="border-secondary border-b text-sm font-semibold
+              text-slate-400 italic dark:text-slate-300"
           >
             {{ sectionName }}
           </h2>
@@ -30,7 +31,7 @@
               class="relative"
             >
               <ActionCard
-                class="h-[145px] w-[130px] m-2"
+                class="m-2 h-[145px] w-[130px]"
                 :action="action"
                 :readonly="isThemingBarOpen"
                 :force-show="isThemingBarOpen"
@@ -61,7 +62,7 @@
         user?.preferences.allowShowingDescription
       "
       :class="[
-        isActionHovered ? 'opacity-100 right-4' : 'opacity-0 -right-4 delay-200'
+        isActionHovered ? 'right-4 opacity-100' : '-right-4 opacity-0 delay-200'
       ]"
       :action="lastHoveredAction"
     />

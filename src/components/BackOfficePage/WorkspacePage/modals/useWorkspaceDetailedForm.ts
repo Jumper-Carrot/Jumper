@@ -4,9 +4,10 @@ import type {
   DetailedGroup,
   DetailedRole
 } from '@@types'
+
 import { computed, MaybeRefOrGetter, toRef, watch } from 'vue'
-import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
+import { useForm } from 'vee-validate'
 import * as z from 'zod'
 
 export type WorkspaceDetailedForm = ReturnType<typeof useWorkspaceDetailedForm>
@@ -46,7 +47,7 @@ export const useWorkspaceDetailedForm = (
     keepValuesOnUnmount: true
   })
 
-  watch(workspaceRef, (newValue) => {
+  watch(workspaceRef, newValue => {
     if (!newValue) return
     form.resetForm()
     form.setValues(getInitialValues(newValue) ?? {})

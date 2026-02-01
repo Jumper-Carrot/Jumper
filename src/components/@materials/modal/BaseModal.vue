@@ -4,7 +4,8 @@
       <slot name="trigger" />
     </DialogTrigger>
     <DialogContent
-      class="mt-[15px] flex max-h-[80%] w-11/12 max-w-[600px] flex-col gap-3 dark:bg-slate-900"
+      class="mt-[15px] flex max-h-[80%] w-11/12 max-w-[600px] flex-col gap-3
+        dark:bg-slate-900"
       :disable-outside-pointer-events="false"
       :trap-focus="false"
       @interact-outside.prevent

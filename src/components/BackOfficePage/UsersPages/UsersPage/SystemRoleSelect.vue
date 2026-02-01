@@ -8,7 +8,7 @@
         <p class="grow truncate text-left">
           {{ getRoleDisplayText(role) }}
         </p>
-        <ChevronDownIcon class="ml-2 h-4 w-4 text-muted-foreground" />
+        <ChevronDownIcon class="text-muted-foreground ml-2 h-4 w-4" />
       </Button>
     </PopoverTrigger>
     <PopoverContent class="p-0" align="start" @click="isOpen = false">
@@ -22,7 +22,7 @@
               class="flex flex-col items-start space-y-1 px-4 py-2"
             >
               <p>{{ systemRole.label }}</p>
-              <p class="text-sm text-muted-foreground">
+              <p class="text-muted-foreground text-sm">
                 {{ systemRole.description }}
               </p>
             </CommandItem>
@@ -31,29 +31,31 @@
       </Command>
     </PopoverContent>
   </Popover>
-  <span v-else class="text-slate-700 dark:text-slate-400 font-semibold">
+  <span v-else class="font-semibold text-slate-700 dark:text-slate-400">
     {{ getRoleDisplayText(role) }}
   </span>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useAuthUserStore } from '@/stores'
 import type { SystemRole } from '@@types'
+
+import { ref } from 'vue'
 import { ChevronDownIcon } from 'lucide-vue-next'
+
+import { useAuthUserStore } from '@/stores'
+
 import { Button } from '@@materials/ui/button'
-import { Popover, PopoverContent, PopoverTrigger } from '@@materials/ui/popover'
-
-const authUserStore = useAuthUserStore()
-const role = defineModel<string>()
-const isOpen = ref(false)
-
 import {
   Command,
   CommandGroup,
   CommandItem,
   CommandList
 } from '@@materials/ui/command'
+import { Popover, PopoverContent, PopoverTrigger } from '@@materials/ui/popover'
+
+const authUserStore = useAuthUserStore()
+const role = defineModel<string>()
+const isOpen = ref(false)
 
 const SYSTEM_ROLES: {
   value: SystemRole
@@ -83,7 +85,7 @@ const SYSTEM_ROLES: {
 ]
 
 const getRoleDisplayText = (role: string | undefined) => {
-  const foundRole = SYSTEM_ROLES.find((r) => r.value === role)
+  const foundRole = SYSTEM_ROLES.find(r => r.value === role)
   return foundRole ? foundRole.label : 'Select role'
 }
 </script>

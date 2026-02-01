@@ -1,4 +1,3 @@
-
 export { default as InputField } from './InputField.vue'
 export { default as CheckboxField } from './CheckboxField.vue'
 export { default as TextareaField } from './TextareaField.vue'
@@ -11,4 +10,3 @@ export * from './Textarea'
 export * from './Select'
 export * from './Tags'
 export * from './Switch'
-

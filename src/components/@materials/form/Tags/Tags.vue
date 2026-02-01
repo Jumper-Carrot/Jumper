@@ -40,7 +40,7 @@
       <ComboboxAnchor as-child>
         <ComboboxInput as-child>
           <TagsInputInput
-            class="text-md max-w-full px-0 placeholder:text-muted-foreground"
+            class="text-md placeholder:text-muted-foreground max-w-full px-0"
             :placeholder="placeholder"
             aria-disabled="true"
             @keydown.enter.prevent="!noKeyEnter && addTag(searchTerm)"
@@ -54,15 +54,17 @@
             side="bottom"
             align="start"
             position="popper"
-            class="z-50 mt-2 max-h-[200px] max-w-full rounded-md bg-popover text-popover-foreground
-              shadow-md outline-hidden data-[state=open]:animate-in
-              data-[state=closed]:animate-out data-[state=closed]:fade-out-0
-              data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95
-              data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2
-              data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2
-              data-[side=top]:slide-in-from-bottom-2"
+            class="bg-popover text-popover-foreground
+              data-[state=open]:animate-in data-[state=closed]:animate-out
+              data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0
+              data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95
+              data-[side=bottom]:slide-in-from-top-2
+              data-[side=left]:slide-in-from-right-2
+              data-[side=right]:slide-in-from-left-2
+              data-[side=top]:slide-in-from-bottom-2 z-50 mt-2 max-h-[200px]
+              max-w-full rounded-md shadow-md outline-hidden"
           >
-            <div v-if="loading" class="h-15 m-auto my-1 w-[150px] text-primary">
+            <div v-if="loading" class="text-primary m-auto my-1 h-15 w-[150px]">
               <Loader2 class="m-auto h-12 animate-spin" />
             </div>
             <slot
@@ -74,9 +76,9 @@
             >
               <CommandItem
                 v-for="item in items.filter(
-                  (item) =>
+                  item =>
                     !tags.find(
-                      (tag) => JSON.stringify(tag) === JSON.stringify(item)
+                      tag => JSON.stringify(tag) === JSON.stringify(item)
                     )
                 )"
                 :key="JSON.stringify(item)"
@@ -99,17 +101,19 @@
 
 <script setup lang="ts" generic="T, U">
 import { type HTMLAttributes, ref } from 'vue'
-import Draggable from 'vuedraggable'
-import { cn } from '@/services/utils'
-import {
-  tagIconVariants,
-  type TagsVariants,
-  tagsVariants,
-  tagVariants
-} from '.'
 import { Tags, Loader2 } from 'lucide-vue-next'
+import {
+  ComboboxAnchor,
+  ComboboxContent,
+  ComboboxInput,
+  ComboboxPortal,
+  ComboboxRoot
+} from 'radix-vue'
+import Draggable from 'vuedraggable'
+
+import { cn } from '@/services/utils'
+
 import { CommandList, CommandItem } from '@@materials/ui/command'
-import { useItems } from '../useItems'
 import {
   TagsInput,
   TagsInputInput,
@@ -118,12 +122,12 @@ import {
   TagsInputItemText
 } from '@@materials/ui/tags-input'
 import {
-  ComboboxAnchor,
-  ComboboxContent,
-  ComboboxInput,
-  ComboboxPortal,
-  ComboboxRoot
-} from 'radix-vue'
+  tagIconVariants,
+  type TagsVariants,
+  tagsVariants,
+  tagVariants
+} from '.'
+import { useItems } from '../useItems'
 
 const searchTerm = defineModel<string>('search-term')
 const tags = defineModel<any[]>({

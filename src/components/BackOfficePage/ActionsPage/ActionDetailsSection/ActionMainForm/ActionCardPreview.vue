@@ -1,6 +1,7 @@
 <template>
   <div
-    class="flex h-[145px] w-[130px] shrink-0 flex-col items-center gap-2 rounded-md bg-slate-100 p-2 pb-1 shadow-xs dark:bg-slate-800"
+    class="flex h-[145px] w-[130px] shrink-0 flex-col items-center gap-2
+      rounded-md bg-slate-100 p-2 pb-1 shadow-xs dark:bg-slate-800"
   >
     <div class="h-[78px] w-[78px] shrink-0 p-[2px]">
       <img
@@ -14,7 +15,8 @@
     </div>
     <div class="flex grow flex-col items-center gap-0.5">
       <h2
-        class="text-md w-full overflow-hidden break-all text-center font-semibold text-slate-700 dark:text-slate-200"
+        class="text-md w-full overflow-hidden text-center font-semibold
+          break-all text-slate-700 dark:text-slate-200"
         :class="{
           'line-clamp-2': !hasCombobox,
           'line-clamp-1': hasCombobox
@@ -24,7 +26,10 @@
       </h2>
       <Combobox
         v-if="hasCombobox"
-        class="text-md ml-0!important h-[18px] w-[115px] gap-0 truncate border-none bg-slate-100 px-0.5 text-xs italic text-slate-400 hover:bg-slate-50 hover:text-slate-700 dark:bg-slate-700 dark:text-slate-400 dark:hover:bg-slate-600 dark:hover:text-slate-200"
+        class="text-md ml-0!important h-[18px] w-[115px] gap-0 truncate
+          border-none bg-slate-100 px-0.5 text-xs text-slate-400 italic
+          hover:bg-slate-50 hover:text-slate-700 dark:bg-slate-700
+          dark:text-slate-400 dark:hover:bg-slate-600 dark:hover:text-slate-200"
         :items="cardOptions ?? []"
         disable-check
         list-item-class="cursor-pointer p-1 data-highlighted:bg-slate-200 dark:data-highlighted:bg-slate-800"
@@ -40,7 +45,8 @@
         </template>
         <template #list-item="{ label }"
           ><p
-            class="flex w-full justify-center truncate text-xs font-semibold italic text-slate-500 dark:text-slate-400"
+            class="flex w-full justify-center truncate text-xs font-semibold
+              text-slate-500 italic dark:text-slate-400"
           >
             {{ label }}
           </p>

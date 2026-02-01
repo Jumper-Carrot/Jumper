@@ -1,4 +1,5 @@
 import type { User, DetailedUser } from '@@types'
+
 import { useMemoize } from '@vueuse/core'
 
 import {

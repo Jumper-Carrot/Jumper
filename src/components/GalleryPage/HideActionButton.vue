@@ -1,6 +1,8 @@
 <template>
   <button
-    class="absolute top-0 right-0 z-10 rounded-full bg-slate-300 p-1 opacity-80 transition-colors hover:bg-slate-400 hover:opacity-100 dark:bg-slate-700 dark:hover:bg-slate-600"
+    class="absolute top-0 right-0 z-10 rounded-full bg-slate-300 p-1 opacity-80
+      transition-colors hover:bg-slate-400 hover:opacity-100 dark:bg-slate-700
+      dark:hover:bg-slate-600"
     title="Hide Action"
     @click="toggleHidden"
   >

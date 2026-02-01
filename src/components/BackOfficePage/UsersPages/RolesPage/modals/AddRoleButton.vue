@@ -31,7 +31,7 @@
           </template>
           <template #search-list="{ items, addTag }">
             <Loader2
-              class="m-auto my-1 h-10 animate-spin text-primary"
+              class="text-primary m-auto my-1 h-10 animate-spin"
               v-if="usersSearch && (isUsersFetching || isUsersSearchDebouncing)"
             />
             <template v-else v-for="user in usersPage?.results" :key="user.id">
@@ -64,7 +64,7 @@
           </template>
           <template #search-list="{ items, addTag }">
             <Loader2
-              class="m-auto my-1 h-10 animate-spin text-primary"
+              class="text-primary m-auto my-1 h-10 animate-spin"
               v-if="
                 groupsSearch && (isGroupsFetching || isGroupsSearchDebouncing)
               "

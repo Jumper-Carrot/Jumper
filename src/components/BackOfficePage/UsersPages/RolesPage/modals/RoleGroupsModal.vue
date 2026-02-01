@@ -2,9 +2,9 @@
   <BaseModal
     :title="`'${role.name}' groups`"
     v-model:open="open"
-    class="p-6 w-[500px]"
+    class="w-[500px] p-6"
   >
-    <div class="flex flex-col space-y-3 flex-1 min-h-0">
+    <div class="flex min-h-0 flex-1 flex-col space-y-3">
       <div class="relative w-full items-center">
         <Input
           size="sm"
@@ -13,13 +13,15 @@
           v-model="search"
         />
         <span
-          class="absolute inset-y-0 start-0 flex items-center justify-center px-2"
+          class="absolute inset-y-0 start-0 flex items-center justify-center
+            px-2"
         >
-          <Search class="size-5 text-muted-foreground" />
+          <Search class="text-muted-foreground size-5" />
         </span>
       </div>
       <div
-        class="flex-1 min-h-[100px] rounded-lg border shadow-inner overflow-y-auto"
+        class="min-h-[100px] flex-1 overflow-y-auto rounded-lg border
+          shadow-inner"
         v-bind="containerProps"
       >
         <div v-bind="wrapperProps">
@@ -32,7 +34,9 @@
                 <TableCell>
                   <div class="flex items-center gap-3">
                     <div
-                      class="flex h-10 w-10 items-center justify-center rounded-full bg-slate-200 text-slate-600 dark:bg-slate-700 dark:text-slate-300"
+                      class="flex h-10 w-10 items-center justify-center
+                        rounded-full bg-slate-200 text-slate-600
+                        dark:bg-slate-700 dark:text-slate-300"
                     >
                       <p class="text-lg font-semibold">
                         {{ group.data.name.charAt(0).toUpperCase() }}

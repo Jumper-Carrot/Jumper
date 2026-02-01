@@ -6,7 +6,7 @@
       }}</FormLabel>
       <FormControl>
         <Select v-bind="componentField">
-          <SelectTrigger class="h-7 w-[120px] pl-2 pr-1">
+          <SelectTrigger class="h-7 w-[120px] pr-1 pl-2">
             <SelectValue
               class="font-semibold text-slate-700 dark:text-slate-400"
             />
@@ -40,7 +40,6 @@ import {
   FormLabel,
   FormMessage
 } from '@@materials/ui/form'
-
 import {
   Select,
   SelectContent,

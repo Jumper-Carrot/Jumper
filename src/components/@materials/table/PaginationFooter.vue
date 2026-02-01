@@ -11,8 +11,10 @@
           :model-value="String(itemsPerPage)"
           @update:model-value="itemsPerPage = Number($event)"
         >
-          <SelectTrigger class="h-7 w-[50px] pl-2 pr-1">
-            <SelectValue class="text-xs font-semibold text-slate-700 dark:text-slate-500" />
+          <SelectTrigger class="h-7 w-[50px] pr-1 pl-2">
+            <SelectValue
+              class="text-xs font-semibold text-slate-700 dark:text-slate-500"
+            />
           </SelectTrigger>
           <SelectContent>
             <SelectItem
@@ -24,7 +26,7 @@
             >
           </SelectContent>
         </Select>
-        <Label class="text-sm text-slate-500 pb-[2px]">per page</Label>
+        <Label class="pb-[2px] text-sm text-slate-500">per page</Label>
       </div>
       <Pagination
         v-slot="{ page }"
@@ -34,7 +36,9 @@
         :items-per-page="itemsPerPage"
       >
         <PaginationList v-slot="{ items }" class="flex items-center gap-1">
-          <PaginationFirst class="h-7 w-7 p-0 text-slate-700 dark:text-slate-500" />
+          <PaginationFirst
+            class="h-7 w-7 p-0 text-slate-700 dark:text-slate-500"
+          />
           <template v-for="(item, index) in items">
             <PaginationListItem
               v-if="item.type === 'page'"
@@ -45,15 +49,26 @@
               <Button
                 class="h-7 w-7 p-0"
                 :variant="item.value === page ? 'default' : 'outline'"
-                :class="item.value !== page ? 'text-slate-700 dark:text-slate-500' : ''"
+                :class="
+                  item.value !== page
+                    ? 'text-slate-700 dark:text-slate-500'
+                    : ''
+                "
                 @click="currentPage = item.value"
               >
                 {{ item.value }}
               </Button>
             </PaginationListItem>
-            <PaginationEllipsis class="text-slate-700" v-else :key="item.type" :index="index" />
+            <PaginationEllipsis
+              class="text-slate-700"
+              v-else
+              :key="item.type"
+              :index="index"
+            />
           </template>
-          <PaginationLast class="h-7 w-7 p-0 text-slate-700 dark:text-slate-500" />
+          <PaginationLast
+            class="h-7 w-7 p-0 text-slate-700 dark:text-slate-500"
+          />
         </PaginationList>
       </Pagination>
     </template>
@@ -71,7 +86,6 @@ import {
   PaginationList,
   PaginationListItem
 } from '@@materials/ui/pagination'
-
 import {
   Select,
   SelectContent,

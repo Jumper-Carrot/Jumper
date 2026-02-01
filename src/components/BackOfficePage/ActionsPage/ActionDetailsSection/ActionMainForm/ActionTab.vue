@@ -7,7 +7,8 @@
             <p class="font-semibold">Type :</p>
             <Badge
               variant="outline"
-              class="ml-1 flex items-center gap-1 rounded-md border-none bg-slate-100 px-2 py-1 text-sm shadow-xs dark:bg-slate-800"
+              class="ml-1 flex items-center gap-1 rounded-md border-none
+                bg-slate-100 px-2 py-1 text-sm shadow-xs dark:bg-slate-800"
             >
               <div
                 class="flex h-4 w-4 shrink-0 items-center justify-center"
@@ -24,12 +25,16 @@
             </Badge>
           </div>
           <Switch
-            class="ml-auto h-5 w-[35px] rounded-full data-[state=checked]:bg-green-600 data-[state=unchecked]:bg-slate-300 dark:data-[state=unchecked]:bg-slate-500"
+            class="ml-auto h-5 w-[35px] rounded-full
+              data-[state=checked]:bg-green-600
+              data-[state=unchecked]:bg-slate-300
+              dark:data-[state=unchecked]:bg-slate-500"
             v-model="isActive"
           >
             <template #thumb>
               <div
-                class="flex h-full w-full items-center justify-center rounded-full"
+                class="flex h-full w-full items-center justify-center
+                  rounded-full"
               >
                 <Check v-if="isActive" class="size-3 text-green-600" />
                 <div
@@ -41,7 +46,8 @@
           </Switch>
         </div>
         <div
-          class="flex w-full items-start justify-between gap-4 max-lg:flex-col-reverse"
+          class="flex w-full items-start justify-between gap-4
+            max-lg:flex-col-reverse"
         >
           <div class="flex w-full max-w-[calc(100%-100px)] flex-col gap-3">
             <InputField
@@ -52,7 +58,8 @@
               :show-error-message="false"
             />
             <TextareaField
-              class="max-h-[60px] min-h-[60px] max-w-[600px] resize-none px-2 py-1"
+              class="max-h-[60px] min-h-[60px] max-w-[600px] resize-none px-2
+                py-1"
               field-name="description"
               label="Description"
               maxlength="175"
@@ -94,7 +101,8 @@
                   />
                 </div>
                 <span
-                  class="text-xs font-semibold text-slate-800 dark:text-slate-400"
+                  class="text-xs font-semibold text-slate-800
+                    dark:text-slate-400"
                 >
                   Public
                 </span>
@@ -104,14 +112,20 @@
             <slot />
           </div>
           <div
-            class="group relative flex h-[78px] w-[78px] shrink-0 flex-col items-center gap-2 rounded-md border-slate-300 bg-slate-100 hover:cursor-pointer hover:border-slate-400 hover:shadow-xs dark:border-slate-700 dark:bg-slate-800"
+            class="group relative flex h-[78px] w-[78px] shrink-0 flex-col
+              items-center gap-2 rounded-md border-slate-300 bg-slate-100
+              hover:cursor-pointer hover:border-slate-400 hover:shadow-xs
+              dark:border-slate-700 dark:bg-slate-800"
           >
             <button
               @click.prevent="() => open()"
               class="h-full w-full shrink-0"
             >
               <div
-                class="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center rounded-md bg-black text-center text-sm text-white opacity-0 transition-all group-hover:opacity-50"
+                class="absolute top-0 left-0 flex h-full w-full flex-col
+                  items-center justify-center rounded-md bg-black text-center
+                  text-sm text-white opacity-0 transition-all
+                  group-hover:opacity-50"
               >
                 <ImagePlus class="size-6" />
               </div>
@@ -135,8 +149,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Workspace } from '@@types'
 import type { ActionsComposable } from '../../useActions'
+import type { Workspace } from '@@types'
 
 import { onMounted, ref } from 'vue'
 import { useFileDialog } from '@vueuse/core'

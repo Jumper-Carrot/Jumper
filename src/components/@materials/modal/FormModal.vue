@@ -57,8 +57,9 @@
 
 <script setup lang="ts">
 import { HTMLAttributes } from 'vue'
-import { useForm } from 'vee-validate'
 import { Loader2, Save } from 'lucide-vue-next'
+import { useForm } from 'vee-validate'
+
 import { Button } from '@@materials/ui/button'
 import {
   Dialog,

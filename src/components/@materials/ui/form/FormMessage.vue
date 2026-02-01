@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { ErrorMessage } from 'vee-validate'
 import { toValue } from 'vue'
+import { ErrorMessage } from 'vee-validate'
+
 import { useFormField } from './useFormField'
 
 const { name, formMessageId } = useFormField()
@@ -11,6 +12,6 @@ const { name, formMessageId } = useFormField()
     :id="formMessageId"
     as="p"
     :name="toValue(name)"
-    class="text-sm font-medium text-destructive"
+    class="text-destructive text-sm font-medium"
   />
 </template>

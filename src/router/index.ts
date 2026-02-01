@@ -1,9 +1,10 @@
 import { userAuthorisationGuard } from '@/router/middleware'
 import { createRouter, createWebHistory } from 'vue-router'
-import GalleryPage from '@/components/GalleryPage/GalleryPage.vue'
+
 import BackOfficePage from '@/components/BackOfficePage/BackOfficePage.vue'
-import LoginPage from '@/components/LoginPage.vue'
 import DebugPage from '@/components/DebugPage/DebugPage.vue'
+import GalleryPage from '@/components/GalleryPage/GalleryPage.vue'
+import LoginPage from '@/components/LoginPage.vue'
 import UpdaterPage from '@/components/UpdaterPage.vue'
 
 const router = createRouter({
@@ -118,7 +119,7 @@ const router = createRouter({
           name: 'info',
           component: () =>
             import('@/components/BackOfficePage/InfoPage/InfoPage.vue')
-        },
+        }
       ]
     },
     {

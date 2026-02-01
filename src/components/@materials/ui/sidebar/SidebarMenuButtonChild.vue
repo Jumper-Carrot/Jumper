@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import type { SidebarMenuButtonVariants } from '.'
 import type { PrimitiveProps } from 'radix-vue'
 import type { HTMLAttributes } from 'vue'
-import type { SidebarMenuButtonVariants } from '.'
-import { cn } from '@/services/utils'
+
 import { Primitive } from 'radix-vue'
+
+import { cn } from '@/services/utils'
+
 import { sidebarMenuButtonVariants } from '.'
 
 export interface SidebarMenuButtonProps extends PrimitiveProps {
@@ -16,7 +19,7 @@ export interface SidebarMenuButtonProps extends PrimitiveProps {
 const props = withDefaults(defineProps<SidebarMenuButtonProps>(), {
   as: 'button',
   variant: 'default',
-  size: 'default',
+  size: 'default'
 })
 </script>
 

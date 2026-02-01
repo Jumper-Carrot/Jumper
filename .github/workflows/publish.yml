@@ -9,11 +9,11 @@ jobs:
     permissions:
       contents: write
     strategy:
-        fail-fast: false
-        matrix:
-          include:
-            - platform: 'windows-latest'
-              args: ''
+      fail-fast: false
+      matrix:
+        include:
+          - platform: 'windows-latest'
+            args: ''
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v4
@@ -36,7 +36,7 @@ jobs:
           sed -i "s/^version = .*/version = \"${VERSION#v}\"/" src-tauri/Cargo.toml
         env:
           GITHUB_EVENT_RELEASE_TAG_NAME: ${{ github.event.release.tag_name }}
-          
+
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

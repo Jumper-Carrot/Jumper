@@ -1,6 +1,8 @@
 import type { BackendInfo } from '@/@types/utils'
+
 import { invoke } from '@tauri-apps/api/core'
 import axios, { type AxiosResponse } from 'axios'
+
 import { camelToSnake, snakeToCamel } from '@/services/utils'
 
 export const jumperClient = axios.create({
@@ -53,25 +55,24 @@ export const getBackendInfo = async () => {
   return response.data
 }
 
-jumperClient.interceptors.request.use((config) => {
+jumperClient.interceptors.request.use(config => {
   if (config.headers['Content-Type'] === 'application/json') {
     config.data = camelToSnake(config.data)
   }
   return config
 })
 
-jumperClient.interceptors.response.use((response) => {
+jumperClient.interceptors.response.use(response => {
   if (response.headers['content-type'] === 'application/json') {
     response.data = snakeToCamel(response.data)
   }
   return response
 })
 
-
 export class JumperBackendError extends Error {
   constructor(response: AxiosResponse) {
     const message = Object.values(response.data)
-      .map((value) => {
+      .map(value => {
         if (typeof value === 'string') return value
         if (Array.isArray(value)) return value.join(', ')
         return ''

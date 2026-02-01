@@ -28,14 +28,8 @@
 
 <script setup lang="ts">
 import { cn } from '@/services/utils'
-import {
-  itemVariants,
-  labelVariants,
-  descriptionVariants,
-  errorVariants,
-  type FieldVariants
-} from '.'
 
+import { Input } from '@@materials/form'
 import {
   FormField,
   FormDescription,
@@ -44,7 +38,13 @@ import {
   FormControl,
   FormLabel
 } from '@@materials/ui/form'
-import { Input } from '@@materials/form'
+import {
+  itemVariants,
+  labelVariants,
+  descriptionVariants,
+  errorVariants,
+  type FieldVariants
+} from '.'
 import FieldTooltip from './FieldTooltip.vue'
 
 defineProps<{

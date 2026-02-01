@@ -1,7 +1,9 @@
 import type { SystemInfo } from '@@types'
+
 import { computed } from 'vue'
-import jumper from '@/services/jumper'
 import { defineStore } from 'pinia'
+
+import jumper from '@/services/jumper'
 import { useQuery } from '@/composables/query/useQuery'
 
 export const useSystemStore = defineStore('system', () => {
@@ -19,14 +21,14 @@ export const useSystemStore = defineStore('system', () => {
 
   const updateDefaultBackgroundImage = async (file: File) => {
     const newData = await jumper.system.updateDefaultBackgroundImage(file)
-    query.setData((oldData) => ({
+    query.setData(oldData => ({
       ...oldData,
       defaultBackgroundImageUrl: newData.defaultBackgroundImageUrl
     }))
   }
   const deleteDefaultBackgroundImage = async () => {
     await jumper.system.deleteDefaultBackgroundImage()
-    query.setData((oldData) => ({
+    query.setData(oldData => ({
       ...oldData,
       defaultBackgroundImageUrl: null
     }))

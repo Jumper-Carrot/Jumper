@@ -15,7 +15,8 @@
         <template #title>Versions</template>
         <template #default>
           <div
-            class="flex items-center gap-1 text-sm font-semibold text-slate-600 dark:text-slate-400"
+            class="flex items-center gap-1 text-sm font-semibold text-slate-600
+              dark:text-slate-400"
           >
             <img
               class="inline h-4"
@@ -25,11 +26,12 @@
             Jumper: {{ jumperVersion }}
           </div>
           <div
-            class="flex items-center gap-1 text-sm font-semibold text-slate-600 dark:text-slate-400"
+            class="flex items-center gap-1 text-sm font-semibold text-slate-600
+              dark:text-slate-400"
           >
             <Carrot class="inline h-5 w-[21px] text-orange-500" />
             Carrot: {{ backendInfo?.version }}
-            <span class="italic font-normal">({{ getBackendHost() }})</span>
+            <span class="font-normal italic">({{ getBackendHost() }})</span>
           </div>
         </template>
       </InfoBlock>
@@ -39,7 +41,8 @@
         >
         <template #default>
           <div
-            class="flex items-center gap-1 ml-1 text-sm font-semibold text-slate-600 dark:text-slate-400"
+            class="ml-1 flex items-center gap-1 text-sm font-semibold
+              text-slate-600 dark:text-slate-400"
           >
             Jumper documentation:
             <a
@@ -52,7 +55,7 @@
           </div>
         </template>
       </InfoBlock>
-      <InfoBlock class="h-[150px] max-w-[400px] shrink-0 mb-auto">
+      <InfoBlock class="mb-auto h-[150px] max-w-[400px] shrink-0">
         <template #title
           ><img
             class="inline h-4"
@@ -63,14 +66,16 @@
 
         <template #default>
           <div
-            class="flex flex-col gap-1 text-sm font-semibold text-slate-600 dark:text-slate-400"
+            class="flex flex-col gap-1 text-sm font-semibold text-slate-600
+              dark:text-slate-400"
           >
-            <div class="italic mb-1">
+            <div class="mb-1 italic">
               Found a bug or have a feature request? <br />
               Please visit our GitHub repositories:
             </div>
             <div
-              class="flex items-center gap-1 text-sm font-semibold text-slate-600 dark:text-slate-400"
+              class="flex items-center gap-1 text-sm font-semibold
+                text-slate-600 dark:text-slate-400"
             >
               Jumper:
               <a
@@ -82,7 +87,8 @@
               >
             </div>
             <div
-              class="flex items-center gap-1 text-sm font-semibold text-slate-600 dark:text-slate-400"
+              class="flex items-center gap-1 text-sm font-semibold
+                text-slate-600 dark:text-slate-400"
             >
               Carrot:
               <a
@@ -96,7 +102,7 @@
           </div>
         </template>
       </InfoBlock>
-      <div class="w-40 text-sm italic text-slate-400 dark:text-slate-400">
+      <div class="w-40 text-sm text-slate-400 italic dark:text-slate-400">
         <p>Jumper & Carrot</p>
         <p>Author: Libert Antoine</p>
         <p>Licence: Apache 2.0</p>

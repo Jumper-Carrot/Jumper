@@ -2,10 +2,11 @@
   <TagsInput class="max-h-[500px]">
     <div v-if="icon" class="relative w-6 max-w-sm items-center">
       <span
-        class="absolute inset-y-0 start-0 flex h-full items-center justify-center"
+        class="absolute inset-y-0 start-0 flex h-full items-center
+          justify-center"
       >
         <slot name="icon">
-          <Tags class="size-6 text-muted-foreground text-slate-400" />
+          <Tags class="text-muted-foreground size-6 text-slate-400" />
         </slot>
       </span>
     </div>
@@ -31,7 +32,7 @@
       <ComboboxAnchor as-child>
         <ComboboxInput as-child class="w-full">
           <TagsInputInput
-            class="text-md max-w-full px-0 placeholder:text-muted-foreground"
+            class="text-md placeholder:text-muted-foreground max-w-full px-0"
             :placeholder="placeholder"
             @keyup.enter="!disableKeyEnter && addTag(searchTerm)"
             @focus="open = true"
@@ -44,13 +45,15 @@
             side="bottom"
             align="start"
             position="popper"
-            class="z-50 mt-2 max-h-[150px] w-[150px] rounded-md bg-popover text-popover-foreground
-              shadow-md outline-hidden data-[state=open]:animate-in
-              data-[state=closed]:animate-out data-[state=closed]:fade-out-0
-              data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95
-              data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2
-              data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2
-              data-[side=top]:slide-in-from-bottom-2"
+            class="bg-popover text-popover-foreground
+              data-[state=open]:animate-in data-[state=closed]:animate-out
+              data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0
+              data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95
+              data-[side=bottom]:slide-in-from-top-2
+              data-[side=left]:slide-in-from-right-2
+              data-[side=right]:slide-in-from-left-2
+              data-[side=top]:slide-in-from-bottom-2 z-50 mt-2 max-h-[150px]
+              w-[150px] rounded-md shadow-md outline-hidden"
           >
             <slot
               name="search-list"
@@ -68,6 +71,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Tags } from 'lucide-vue-next'
+import {
+  ComboboxAnchor,
+  ComboboxContent,
+  ComboboxInput,
+  ComboboxPortal,
+  ComboboxRoot
+} from 'radix-vue'
+
 import { CommandList } from '@@materials/ui/command'
 import {
   TagsInput,
@@ -76,13 +87,6 @@ import {
   TagsInputItemDelete,
   TagsInputItemText
 } from '@@materials/ui/tags-input'
-import {
-  ComboboxAnchor,
-  ComboboxContent,
-  ComboboxInput,
-  ComboboxPortal,
-  ComboboxRoot
-} from 'radix-vue'
 
 withDefaults(
   defineProps<{

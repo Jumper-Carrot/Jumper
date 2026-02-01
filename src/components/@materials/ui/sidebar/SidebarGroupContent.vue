@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
+
 import { cn } from '@/services/utils'
 
 const props = defineProps<{
@@ -8,10 +9,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div
-    data-sidebar="group-content"
-    :class="cn('w-full text-sm', props.class)"
-  >
+  <div data-sidebar="group-content" :class="cn('w-full text-sm', props.class)">
     <slot />
   </div>
 </template>

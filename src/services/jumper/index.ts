@@ -1,11 +1,11 @@
-import * as client from './client'
+import * as actions from './actions'
 import * as auth from './auth'
-import * as users from './users'
+import * as client from './client'
 import * as groups from './groups'
 import * as roles from './roles'
-import * as actions from './actions'
-import * as update from './update'
 import * as system from './system'
+import * as update from './update'
+import * as users from './users'
 import * as workspaces from './workspaces'
 
 export default {

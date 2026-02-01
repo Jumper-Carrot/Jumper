@@ -1,12 +1,13 @@
 import type { Action, PlayableAction } from '@@types'
+
 import { watch } from 'vue'
+import { defineStore } from 'pinia'
+import { useRoute } from 'vue-router'
+
 import {
   type ActionExec,
   useActionExec
 } from '@/stores/actionExecStore/useActionExec'
-import { useRoute } from 'vue-router'
-
-import { defineStore } from 'pinia'
 
 export const useActionExecStore = defineStore('actionExec', () => {
   let actionExecutions: Record<Action['id'], ActionExec> = {}
@@ -25,7 +26,7 @@ export const useActionExecStore = defineStore('actionExec', () => {
   watch(
     () => route.matched,
     () => {
-      if (!route.matched.some((m) => m.name === 'home')) {
+      if (!route.matched.some(m => m.name === 'home')) {
         actionExecutions = {}
       }
     }

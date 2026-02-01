@@ -1,6 +1,6 @@
+import { ref } from 'vue'
 import { getAllWindows, type Window } from '@tauri-apps/api/window'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
 
 export const useDebugWindowStore = defineStore('debugWindow', () => {
   const isOpen = ref(false)
@@ -15,8 +15,7 @@ export const useDebugWindowStore = defineStore('debugWindow', () => {
 
   const refreshWindows = async () => {
     const windows = await getAllWindows()
-    debugWindow.value =
-      windows.find((window) => window.label === 'debug') ?? null
+    debugWindow.value = windows.find(window => window.label === 'debug') ?? null
   }
 
   const focus = async () => {

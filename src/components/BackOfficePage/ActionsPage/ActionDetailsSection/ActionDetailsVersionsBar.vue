@@ -1,26 +1,31 @@
 <template>
   <div
-    class="ml-4 h-full w-[230px] border-l border-r bg-white dark:bg-slate-900 transition-transform"
+    class="ml-4 h-full w-[230px] border-r border-l bg-white transition-transform
+      dark:bg-slate-900"
   >
     <div
-      class="h-[30px] flex items-center bg-slate-50 dark:bg-slate-800 dark:text-slate-300 p-1 px-2 font-semibold italic text-slate-500 shadow-xs"
+      class="flex h-[30px] items-center bg-slate-50 p-1 px-2 font-semibold
+        text-slate-500 italic shadow-xs dark:bg-slate-800 dark:text-slate-300"
     >
       Versions
     </div>
     <div v-if="!versionsQuery.isFetched.value">
-      <Loader2 class="animate-spin text-slate-500 size-8 m-auto mt-8" />
+      <Loader2 class="m-auto mt-8 size-8 animate-spin text-slate-500" />
     </div>
     <div
       v-if="versionsQuery.isFetched.value"
-      class="flex h-[calc(100%-30px)] w-full flex-col items-center overflow-auto"
+      class="flex h-[calc(100%-30px)] w-full flex-col items-center
+        overflow-auto"
     >
       <button
         v-for="(version, i) in versions"
-        class="h-[50px] w-full shrink-0 border-b p-1 px-2 text-left transition-colors"
+        class="h-[50px] w-full shrink-0 border-b p-1 px-2 text-left
+          transition-colors"
         :class="{
           'bg-primary text-white':
             selectedVersion?.history.id === version.history.id,
-          'text-slate-500 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800':
+          [`text-slate-500 hover:bg-slate-50 dark:text-slate-300
+          dark:hover:bg-slate-800`]:
             selectedVersion?.history.id !== version.history.id
         }"
         @click.prevent="selectVersion(version)"

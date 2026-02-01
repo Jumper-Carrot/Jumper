@@ -5,7 +5,7 @@
       description="Edit your profile."
     />
     <div class="w-full grow overflow-auto pr-3">
-      <form class="flex max-w-[400px] flex-col pl-1 pt-2">
+      <form class="flex max-w-[400px] flex-col pt-2 pl-1">
         <InputField fieldName="username" label="Username" />
         <InputField fieldName="email" label="Email" type="email" />
         <InputField fieldName="firstName" label="First Name" />
@@ -52,17 +52,18 @@
 </template>
 
 <script setup lang="ts">
-import Button from '@@materials/ui/button/Button.vue'
-import { useAuthUserForm } from './useUserForm'
+import { Save, Loader2, LogOut } from 'lucide-vue-next'
 import { storeToRefs } from 'pinia'
+
+import { getUserDisplayName } from '@/services/helpers/userName'
 import { useAuthUserStore } from '@/stores'
 import { useConfirmToast } from '@/composables/useConfirmToast'
-import { getUserDisplayName } from '@/services/helpers/userName'
+
+import { InputField } from '@@materials/input'
+import Button from '@@materials/ui/button/Button.vue'
 import { BackOfficeHeader, BackOfficePageLayout } from '../../@common'
 import DeleteAccountButton from './modals/DeleteAccountButton.vue'
-
-import { Save, Loader2, LogOut } from 'lucide-vue-next'
-import { InputField } from '@@materials/input'
+import { useAuthUserForm } from './useUserForm'
 
 const authUserStore = useAuthUserStore()
 const { user, isFetching } = storeToRefs(authUserStore)
@@ -71,7 +72,7 @@ const { handleSubmit, isSubmitting, meta } = useAuthUserForm(
   user.value ?? undefined
 )
 
-const onSubmit = handleSubmit(async (values) => {
+const onSubmit = handleSubmit(async values => {
   await useConfirmToast(
     async () => {
       if (!user.value) return

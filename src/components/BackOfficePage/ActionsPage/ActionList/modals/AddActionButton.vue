@@ -26,16 +26,18 @@
 </template>
 
 <script setup lang="ts">
+import type { ActionsComposable } from '../../useActions'
+
 import { ref, watch } from 'vue'
 import { ACTION_TYPES } from '@@types'
-import type { ActionsComposable } from '../../useActions'
-import { useActionForm } from './useActionForm'
-import { useToast } from '@@materials/ui/toast'
 import { Carrot } from 'lucide-vue-next'
-import { Button } from '@@materials/ui/button'
-import { FormModal } from '@@materials/modal'
-import { InputField, TextareaField } from '@@materials/input'
+
 import { SelectField } from '@@materials/form'
+import { InputField, TextareaField } from '@@materials/input'
+import { FormModal } from '@@materials/modal'
+import { Button } from '@@materials/ui/button'
+import { useToast } from '@@materials/ui/toast'
+import { useActionForm } from './useActionForm'
 
 const { toast } = useToast()
 const actionForm = useActionForm()
@@ -45,7 +47,7 @@ const props = defineProps<{
   actionsComposable: ActionsComposable
 }>()
 
-const onSubmit = actionForm.handleSubmit(async (values) => {
+const onSubmit = actionForm.handleSubmit(async values => {
   try {
     await props.actionsComposable.create(values)
   } catch (error) {
@@ -63,7 +65,7 @@ const onSubmit = actionForm.handleSubmit(async (values) => {
   return true
 })
 
-watch(open, (newVal) => {
+watch(open, newVal => {
   if (newVal === true) {
     actionForm.setValues({
       name: '',

@@ -8,7 +8,7 @@ import {
 export const useQuery = <TData = unknown, TError = unknown>(
   queryKey: readonly unknown[],
   queryFn: () => Promise<TData>,
-  options?: Omit<UseQueryOptions<TData, TError>, "queryKey">
+  options?: Omit<UseQueryOptions<TData, TError>, 'queryKey'>
 ) => {
   const queryClient = useQueryClient()
   const query = useInternalQuery({

@@ -1,4 +1,5 @@
 import type { SystemInfo } from '@@types'
+
 import { jumperClient } from './client'
 
 export const getSystemInfo = async () => {

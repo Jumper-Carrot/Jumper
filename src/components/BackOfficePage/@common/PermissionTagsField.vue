@@ -1,6 +1,6 @@
 <template>
   <TagsField
-    class="max-w-[600px] max-h-[100px] overflow-auto p-1.5 gap-1.5"
+    class="max-h-[100px] max-w-[600px] gap-1.5 overflow-auto p-1.5"
     :field-name="fieldName"
     :label="label || 'Permissions'"
     :show-error-message="false"
@@ -9,11 +9,13 @@
   >
     <template #icon="{ items }">
       <button
-        class="dark:hover:bg-slate-800 p-0.5 rounded-md transition-colors text-slate-500 hover:text-slate-800 hover:bg-slate-200 dark:hover:text-slate-100"
+        class="rounded-md p-0.5 text-slate-500 transition-colors
+          hover:bg-slate-200 hover:text-slate-800 dark:hover:bg-slate-800
+          dark:hover:text-slate-100"
         title="View permissions"
         @click.prevent="isPermissionUsersModalOpen = true"
       >
-        <ScanEyeIcon class="text-slate-400 size-6" />
+        <ScanEyeIcon class="size-6 text-slate-400" />
       </button>
       <PermissionUsersModal
         :permissions="items as any"
@@ -42,7 +44,7 @@
     </template>
     <template #search-list="{ items, addTag }">
       <Loader2
-        class="m-auto my-1 h-10 animate-spin text-primary"
+        class="text-primary m-auto my-1 h-10 animate-spin"
         v-if="!searchedPermissions.isFetched"
       />
       <template v-else>

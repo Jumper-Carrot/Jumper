@@ -3,10 +3,15 @@
     ref="card"
     v-if="!isHidden || readonly || forceShow"
     :class="[
-      'custom-shadow flex flex-col items-center justify-center gap-2 rounded-md bg-slate-100 p-2 pb-1',
+      `custom-shadow flex flex-col items-center justify-center gap-2 rounded-md
+      bg-slate-100 p-2 pb-1`,
       readonly || isDelayActive
-        ? 'dark:shadow-slate-900 pointer-events-none cursor-not-allowed opacity-65 dark:bg-slate-800'
-        : 'dark:shadow-slate-900 hover:dark:shadow-slate-800 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md active:translate-y-0.5 active:shadow-none dark:bg-slate-800 hover:bg-slate-200/60 dark:hover:bg-slate-700/80',
+        ? `pointer-events-none cursor-not-allowed opacity-65 dark:bg-slate-800
+          dark:shadow-slate-900`
+        : `transition-all duration-200 ease-out hover:-translate-y-0.5
+          hover:bg-slate-200/60 hover:shadow-md active:translate-y-0.5
+          active:shadow-none dark:bg-slate-800 dark:shadow-slate-900
+          dark:hover:bg-slate-700/80 hover:dark:shadow-slate-800`,
       (hasOptions && !optionsExec?.options.value?.length) ||
       (isHidden && !forceShow)
         ? 'pointer-events-none cursor-not-allowed opacity-65'
@@ -16,7 +21,8 @@
     :title="action.name"
   >
     <div
-      class="flex h-[78px] w-[78px] shrink-0 items-center justify-center rounded-md p-0.5 relative"
+      class="relative flex h-[78px] w-[78px] shrink-0 items-center
+        justify-center rounded-md p-0.5"
     >
       <img
         v-if="action.thumbnailUrl"
@@ -29,14 +35,16 @@
       </div>
       <div
         v-if="isDelayActive"
-        class="absolute inset-0 flex items-center justify-center bg-slate-200/70 dark:bg-slate-800/70 rounded-md"
+        class="absolute inset-0 flex items-center justify-center rounded-md
+          bg-slate-200/70 dark:bg-slate-800/70"
       >
         <Loader2 class="animate-spin text-slate-500" :size="36" />
       </div>
     </div>
     <div class="flex grow flex-col gap-0.5">
       <h2
-        class="text-md w-full overflow-hidden text-center font-semibold break-after-all text-slate-700 dark:text-slate-200"
+        class="text-md w-full break-after-all overflow-hidden text-center
+          font-semibold text-slate-700 dark:text-slate-200"
         :class="{
           'line-clamp-2': !hasOptions,
           'line-clamp-1': hasOptions
@@ -47,7 +55,11 @@
       <div class="flex w-full items-center justify-center" @click.stop>
         <Combobox
           v-if="hasOptions"
-          class="text-md ml-0!important h-[18px] w-[115px] gap-0 truncate border-none bg-slate-100 px-0.5 text-xs text-slate-400 italic hover:bg-slate-50 dark:hover:bg-slate-600 dark:hover:text-slate-200 hover:text-slate-700 dark:bg-slate-700 dark:text-slate-400"
+          class="text-md ml-0!important h-[18px] w-[115px] gap-0 truncate
+            border-none bg-slate-100 px-0.5 text-xs text-slate-400 italic
+            hover:bg-slate-50 hover:text-slate-700 dark:bg-slate-700
+            dark:text-slate-400 dark:hover:bg-slate-600
+            dark:hover:text-slate-200"
           :class="{
             'pointer-events-none cursor-not-allowed':
               !optionsExec?.options.value?.length || readonly
@@ -88,7 +100,8 @@
           </template>
           <template #list-item="{ label }"
             ><p
-              class="w-full truncate text-center text-xs font-semibold text-slate-500 italic dark:text-slate-400"
+              class="w-full truncate text-center text-xs font-semibold
+                text-slate-500 italic dark:text-slate-400"
               @click="() => execAction(label as string)"
             >
               {{ label }}

@@ -4,8 +4,8 @@
       <div class="w-full">
         <div class="flex gap-1 lg:w-full">
           <h3
-            class="overflow-hidden truncate whitespace-nowrap font-medium text-slate-700
-              dark:text-slate-400"
+            class="truncate overflow-hidden font-medium whitespace-nowrap
+              text-slate-700 dark:text-slate-400"
             :title="`${user.firstName} ${user.lastName}`"
           >
             {{ user.username }}
@@ -38,7 +38,7 @@
       <UserDropdownMenuButton
         v-if="authUserStore.isAdmin || authUserStore.isUserManager"
         :user="user"
-        @user-updated="(e) => $emit('userUpdated', e)"
+        @user-updated="e => $emit('userUpdated', e)"
       />
     </div>
   </TableCell>
@@ -46,18 +46,20 @@
 
 <script setup lang="ts">
 import type { SystemRole } from '@@types'
-import { storeToRefs } from 'pinia'
-import { useAuthUserStore } from '@/stores'
-import { computed } from 'vue'
-import jumper from '@/services/jumper'
-import { useToast } from '@@materials/ui/toast'
 import type { User } from '@@types'
-import { useBackendInfoStore } from '@/stores'
+
+import { computed } from 'vue'
 import { Check } from 'lucide-vue-next'
-import UserDropdownMenuButton from './modals/UserDropdownMenuButton.vue'
-import SystemRoleSelect from './SystemRoleSelect.vue'
+import { storeToRefs } from 'pinia'
+
+import jumper from '@/services/jumper'
+import { useAuthUserStore } from '@/stores'
+import { useBackendInfoStore } from '@/stores'
 
 import { TableCell } from '@@materials/ui/table'
+import { useToast } from '@@materials/ui/toast'
+import SystemRoleSelect from './SystemRoleSelect.vue'
+import UserDropdownMenuButton from './modals/UserDropdownMenuButton.vue'
 
 const emit = defineEmits<{ userUpdated: [user?: User] }>()
 

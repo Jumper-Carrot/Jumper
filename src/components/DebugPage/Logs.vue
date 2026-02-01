@@ -2,19 +2,20 @@
   <div
     ref="logsContainer"
     @scroll="handleScroll"
-    class="grow overflow-auto bg-slate-200 shadow-inner dark:bg-slate-800 log-scrollbar"
+    class="log-scrollbar grow overflow-auto bg-slate-200 shadow-inner
+      dark:bg-slate-800"
   >
     <div
       v-for="(log, i) in showedLogs"
       :key="log.timestamp"
-      class="whitespace-pre-wrap px-2 font-mono"
+      class="px-2 font-mono whitespace-pre-wrap"
       :class="{
         'text-slate-800 dark:text-slate-300':
           log.level !== 'error' && log.level !== 'warn',
         'bg-slate-300/50 dark:bg-slate-700/40':
           i % 2 === 0 && log.level !== 'error' && log.level !== 'warn',
-        'bg-red-100 font-semibold dark:text-red-400/80 text-red-500/70 dark:bg-slate-800':
-          log.level === 'error'
+        [`bg-red-100 font-semibold text-red-500/70 dark:bg-slate-800
+        dark:text-red-400/80`]: log.level === 'error'
       }"
     >
       <template v-if="showLineInfo"
@@ -31,7 +32,9 @@
 import type { Log } from '@/stores/logsStore'
 
 import { ref } from 'vue'
-import { AnsiUp } from 'ansi_up' // Import de la bibliothèque
+import { AnsiUp } from 'ansi_up'
+
+// Import de la bibliothèque
 
 import { useScrollToBottom } from './useScrollToBottom'
 

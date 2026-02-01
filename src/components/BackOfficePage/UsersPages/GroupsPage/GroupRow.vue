@@ -1,7 +1,8 @@
 <template>
   <TableCell class="w-[250px]">
     <h3
-      class="overflow-hidden truncate whitespace-nowrap font-medium text-slate-700 dark:text-slate-400"
+      class="truncate overflow-hidden font-medium whitespace-nowrap
+        text-slate-700 dark:text-slate-400"
       :title="group.name"
     >
       {{ group.name }}

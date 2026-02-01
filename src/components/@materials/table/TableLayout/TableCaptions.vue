@@ -4,14 +4,16 @@
     <p>Can't fetch {{ itemName ? `${itemName}(s)` : 'data' }}</p>
     <p>{{ errorMessage }}</p>
   </TableCaption>
-  <TableCaption v-else-if="!isLoading && !data?.length"
-    class="text-lg font-semibold italic text-slate-400 pt-4"
+  <TableCaption
+    v-else-if="!isLoading && !data?.length"
+    class="pt-4 text-lg font-semibold text-slate-400 italic"
     >No {{ itemName || 'item' }} found</TableCaption
   >
 </template>
 
 <script setup lang="ts">
 import { WifiOff } from 'lucide-vue-next'
+
 import { TableCaption } from '@@materials/ui/table'
 
 defineProps<{

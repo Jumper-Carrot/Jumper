@@ -11,7 +11,7 @@
     />
     <Loader2 class="mt-3 size-12 animate-spin text-slate-400" />
     <p
-      class="font-semibold text-center"
+      class="text-center font-semibold"
       :class="{ 'text-red-500': error, 'text-slate-400': !error }"
     >
       {{ text }}

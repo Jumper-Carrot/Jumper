@@ -1,5 +1,6 @@
-import { type Ref, computed } from 'vue'
 import type { DetailedUser } from '@@types'
+
+import { type Ref, computed } from 'vue'
 
 export const usePermissions = (user: Ref<DetailedUser | undefined | null>) => {
   const isAuthenticated = (
@@ -14,14 +15,12 @@ export const usePermissions = (user: Ref<DetailedUser | undefined | null>) => {
 
   const isUserManager = computed(
     () =>
-      isAuthenticated(user.value) &&
-      user.value.systemRole === 'user_manager'
+      isAuthenticated(user.value) && user.value.systemRole === 'user_manager'
   )
 
   const isActionManager = computed(
     () =>
-      isAuthenticated(user.value) &&
-      user.value.systemRole === 'action_manager'
+      isAuthenticated(user.value) && user.value.systemRole === 'action_manager'
   )
 
   return {

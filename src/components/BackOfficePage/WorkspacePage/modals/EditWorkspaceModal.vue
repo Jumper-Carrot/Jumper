@@ -28,12 +28,14 @@
 
 <script setup lang="ts">
 import type { DetailedWorkspace, Workspace } from '@@types'
-import { useWorkspaceDetailedForm } from './useWorkspaceDetailedForm'
+
 import jumper from '@/services/jumper'
-import { useToast } from '@@materials/ui/toast'
-import { FormModal } from '@@materials/modal'
+
 import { InputField, CheckboxField, TextareaField } from '@@materials/input'
+import { FormModal } from '@@materials/modal'
+import { useToast } from '@@materials/ui/toast'
 import PermissionTagsField from '@/components/BackOfficePage/@common/PermissionTagsField.vue'
+import { useWorkspaceDetailedForm } from './useWorkspaceDetailedForm'
 
 const { toast } = useToast()
 
@@ -45,21 +47,21 @@ const workspaceForm = useWorkspaceDetailedForm(props.workspace)
 
 const emit = defineEmits<{ workspaceUpdated: [workspace: Workspace] }>()
 
-const onSubmit = workspaceForm.handleSubmit(async (values) => {
+const onSubmit = workspaceForm.handleSubmit(async values => {
   try {
     const workspaceUpdated = await jumper.workspaces.update(
       props.workspace.id,
       {
         ...values,
         user_ids: values.permissions
-          .filter((p) => 'username' in p)
-          .map((p) => p.id),
+          .filter(p => 'username' in p)
+          .map(p => p.id),
         group_ids: values.permissions
-          .filter((p) => 'isAdminGroup' in p)
-          .map((p) => p.id),
+          .filter(p => 'isAdminGroup' in p)
+          .map(p => p.id),
         role_ids: values.permissions
-          .filter((p) => 'description' in p)
-          .map((p) => p.id)
+          .filter(p => 'description' in p)
+          .map(p => p.id)
       }
     )
     emit('workspaceUpdated', workspaceUpdated)
