@@ -18,6 +18,7 @@
         "height": 680,
         "minHeight": 380,
         "minWidth": 330,
+        "dragDropEnabled": false,
         "visible": false
       },
       {
@@ -29,6 +30,7 @@
         "height": 700,
         "minHeight": 380,
         "minWidth": 500,
+        "dragDropEnabled": false,
         "visible": false
       },
       {
@@ -42,6 +44,7 @@
         "minWidth": 380,
         "maxHeight": 380,
         "maxWidth": 380,
+        "dragDropEnabled": false,
         "center": true
       }
     ],
