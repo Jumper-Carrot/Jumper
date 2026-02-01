@@ -27,8 +27,11 @@
             :list="visibleActionsBySection[sectionName]"
             :group="sectionName"
             item-key="id"
-            :move="(evt: any) => isThemingBarOpen && evt.to === evt.from"
-            :disabled="!isThemingBarOpen"
+            :move="
+              (evt: any) =>
+                isThemingBarOpen && allowCustomOrder && evt.to === evt.from
+            "
+            :disabled="!isThemingBarOpen || !allowCustomOrder"
             ghost-class="drag-ghost"
             chosen-class="drag-chosen"
             @start="onDragStart"
@@ -39,7 +42,8 @@
                 class="relative transition-all"
                 :key="action.id"
                 :class="{
-                  'cursor-grab': isThemingBarOpen && !grabbing
+                  'cursor-grab':
+                    isThemingBarOpen && !grabbing && allowCustomOrder
                 }"
               >
                 <ActionCard
@@ -122,6 +126,10 @@ const { systemInfo } = storeToRefs(useSystemStore())
 const { search, isThemingBarOpen } = storeToRefs(useTitleBarOptionsStore())
 const { user } = storeToRefs(useAuthUserStore())
 
+const allowCustomOrder = computed(
+  () => user.value?.preferences?.allowCustomOrder !== false
+)
+
 const isActionHovered = ref(false)
 const lastHoveredAction = ref<PlayableAction | null>(null)
 
@@ -160,9 +168,14 @@ function onDragStart() {
 const actionsBySection = computed(() => {
   const sections: Record<string, PlayableAction[]> = {}
   if (!actions.value) return sections
-  const customOrder = user.value?.preferences?.customOrder || []
+  const prefs = user.value?.preferences
+  const useCustomOrder = prefs?.allowCustomOrder !== false
+  const customOrder = prefs?.customOrder || []
   const actionsSorted = [...actions.value]
   actionsSorted.sort((a, b) => {
+    if (!useCustomOrder) {
+      return a.name.localeCompare(b.name)
+    }
     const ia = customOrder.indexOf(a.id)
     const ib = customOrder.indexOf(b.id)
     if (ia === -1 && ib === -1) {
@@ -172,6 +185,12 @@ const actionsBySection = computed(() => {
     if (ib === -1) return -1
     return ia - ib
   })
+
+  if (prefs?.allowSections === false) {
+    sections['Others'] = actionsSorted
+    return sections
+  }
+
   actionsSorted.forEach(action => {
     let section = 'Others'
     if (systemInfo.value?.allowActionSections && action.section) {

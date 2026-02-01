@@ -5,7 +5,10 @@
       dark:border-slate-700 dark:bg-slate-900"
   >
     <div class="mr-auto flex items-center gap-4" v-if="authUserStore.user">
-      <label class="flex cursor-pointer items-center gap-0 text-xs select-none">
+      <label
+        v-if="systemInfo?.allowCustomOrder !== false"
+        class="flex cursor-pointer items-center gap-0 text-xs select-none"
+      >
         <Checkbox
           :checked="authUserStore.user.preferences.allowCustomOrder"
           @update:checked="onChangeAllowCustomOrder"
@@ -13,7 +16,10 @@
         />
         Custom Order
       </label>
-      <label class="flex cursor-pointer items-center gap-0 text-xs select-none">
+      <label
+        v-if="systemInfo?.allowActionSections !== false"
+        class="flex cursor-pointer items-center gap-0 text-xs select-none"
+      >
         <Checkbox
           :checked="authUserStore.user.preferences.allowSections"
           @update:checked="onChangeAllowSections"
@@ -22,7 +28,7 @@
         Allow Sections
       </label>
     </div>
-    <div class="flex h-full items-center gap-3">
+    <div class="flex h-full items-center gap-1">
       <button
         class="group rounded-full p-[3px] transition-colors hover:bg-slate-200
           dark:hover:bg-slate-800"
@@ -43,8 +49,8 @@
         />
       </button>
       <button
-        class="group ml-2 rounded-full p-[3px] transition-colors
-          hover:bg-slate-200 dark:hover:bg-slate-800"
+        class="group rounded-full p-[3px] transition-colors hover:bg-slate-200
+          dark:hover:bg-slate-800"
       >
         <X
           class="h-[17px] w-[17px] text-slate-700 transition-colors
@@ -62,7 +68,11 @@ import { useDark, useToggle } from '@vueuse/core'
 import { Sun, X } from 'lucide-vue-next'
 import { storeToRefs } from 'pinia'
 
-import { useTitleBarOptionsStore, useAuthUserStore } from '@/stores'
+import {
+  useTitleBarOptionsStore,
+  useAuthUserStore,
+  useSystemStore
+} from '@/stores'
 
 import Checkbox from '@@materials/ui/checkbox/Checkbox.vue'
 import Moon from './Moon.vue'
@@ -72,6 +82,7 @@ const toggleDark = useToggle(isDark)
 
 const { isThemingBarOpen } = storeToRefs(useTitleBarOptionsStore())
 const authUserStore = useAuthUserStore()
+const { systemInfo } = storeToRefs(useSystemStore())
 
 const onChangeAllowCustomOrder = (val: boolean) => {
   authUserStore.updateUserPreferences({ allowCustomOrder: val })
