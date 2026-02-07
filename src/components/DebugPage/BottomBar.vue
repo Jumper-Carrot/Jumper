@@ -11,46 +11,19 @@
       />
       <p class="mb-0.5 text-xs text-slate-500 italic">Get Options</p>
     </div>
-    <div
-      class="ml-6 flex h-full items-center justify-center gap-1 max-sm:hidden"
-    >
-      <Checkbox
-        v-model:checked="showStrOut"
-        class="size-3.5 border-slate-400 data-[state=checked]:bg-slate-400
-          dark:border-slate-800 dark:data-[state=checked]:bg-slate-800"
-      />
-      <p class="mb-0.5 text-xs text-slate-500 italic">stdout</p>
-    </div>
-    <div
-      class="ml-3 flex h-full items-center justify-center gap-1 max-sm:hidden"
-    >
-      <Checkbox
-        v-model:checked="showStrErr"
-        class="size-3.5 border-slate-400 data-[state=checked]:bg-slate-400
-          dark:border-slate-800 dark:data-[state=checked]:bg-slate-800"
-      />
-      <p class="mb-0.5 text-xs text-slate-500 italic dark:text-slate-400">
-        stderr
-      </p>
-    </div>
-    <div
-      class="ml-3 flex h-full items-center justify-center gap-1 max-sm:hidden"
-    >
-      <Checkbox
-        v-model:checked="showLineInfo"
-        class="size-3.5 border-slate-400 data-[state=checked]:bg-slate-400
-          dark:border-slate-800 dark:data-[state=checked]:bg-slate-800"
-      />
-      <p class="mb-0.5 text-xs text-slate-500 italic dark:text-slate-400">
-        show ligne info
-      </p>
-    </div>
     <div class="ml-auto flex items-center">
       <Input
         v-model="search"
         class="mx-2 h-4 min-w-0 shrink rounded-sm bg-slate-200 px-2 text-xs
           ring-0 dark:bg-slate-800"
         placeholder="Search logs..."
+      />
+    </div>
+    <div class="mr-0.5 flex items-center">
+      <LogOptionsMenu
+        v-model:showStrOut="showStrOut"
+        v-model:showStrErr="showStrErr"
+        v-model:showLineInfo="showLineInfo"
       />
     </div>
     <Button
@@ -73,9 +46,9 @@ import { useExecutionsStore } from '@/stores'
 import { type Log } from '@/stores/logsStore'
 
 import { Button } from '@@materials/ui/button'
-import { Checkbox } from '@@materials/ui/checkbox'
 import Input from '@@materials/ui/input/Input.vue'
 import { MiniSwitch } from '@@materials/ui/switch'
+import LogOptionsMenu from './LogOptionsMenu.vue'
 
 const executionsStore = useExecutionsStore()
 
