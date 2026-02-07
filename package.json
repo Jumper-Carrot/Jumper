@@ -48,6 +48,7 @@
     "vue-component-type-helpers": "^2.2.8",
     "vue-router": "^4.5.0",
     "vue-sonner": "^2.0.9",
+    "vue-virtual-scroller": "^2.0.0-beta.8",
     "vuedraggable": "^4.1.0",
     "zod": "^3.24.2"
   },
