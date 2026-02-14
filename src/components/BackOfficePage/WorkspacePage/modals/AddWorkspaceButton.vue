@@ -25,12 +25,16 @@
           Only users listed here can manage and assign actions to this workspace. 
           Users that are not action managers or admin are ignored."
         />
-        <PermissionTagsField
-          field-name="actionPermissions"
-          label="Action permissions"
-          description="
-          Users, groups and roles allowed to execute actions on this workspace."
-        />
+        <div class="mt-3">
+          <PermissionTagsField
+            field-name="actionPermissions"
+            label="Action permissions"
+            description="
+          Restricts which users, groups, and roles can access actions in this workspace, 
+          even if they are allowed at the action level.
+          If empty, no restriction is applied and action-level permissions are used."
+          />
+        </div>
       </div>
     </template>
   </FormModal>
