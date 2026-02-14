@@ -32,11 +32,19 @@ export const useWorkspaceDetailedForm = (
 
   const getInitialValues = (newValue: DetailedWorkspace | null) => {
     if (newValue) {
+      console.log(
+        'getInitialValues called with newValue:',
+        newValue.usersManagers
+      )
       return {
         name: newValue.name,
         description: newValue.description,
         isActive: newValue.isActive,
-        permissions: [...newValue.users, ...newValue.groups, ...newValue.roles]
+        permissions: [
+          ...(newValue.usersManagers ?? []),
+          ...(newValue.groupsManagers ?? []),
+          ...(newValue.rolesManagers ?? [])
+        ]
       }
     }
   }

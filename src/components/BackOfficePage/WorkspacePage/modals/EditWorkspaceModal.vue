@@ -53,13 +53,13 @@ const onSubmit = workspaceForm.handleSubmit(async values => {
       props.workspace.id,
       {
         ...values,
-        user_ids: values.permissions
+        usersManagersIds: values.permissions
           .filter(p => 'username' in p)
           .map(p => p.id),
-        group_ids: values.permissions
+        groupsManagersIds: values.permissions
           .filter(p => 'isAdminGroup' in p)
           .map(p => p.id),
-        role_ids: values.permissions
+        rolesManagersIds: values.permissions
           .filter(p => 'description' in p)
           .map(p => p.id)
       }

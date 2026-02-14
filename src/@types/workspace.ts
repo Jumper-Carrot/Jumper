@@ -12,10 +12,10 @@ export type Workspace = {
 export type DetailedWorkspace = Workspace & {
   id: number
   createdBy: ShortUser
-  users: User[]
-  user_ids?: User['id'][]
-  groups: DetailedGroup[]
-  group_ids?: DetailedGroup['id'][]
-  roles: DetailedRole[]
-  role_ids?: DetailedRole['id'][]
+  usersManagers: User[]
+  usersManagersIds?: User['id'][]
+  groupsManagers: DetailedGroup[]
+  groupsManagersIds?: DetailedGroup['id'][]
+  rolesManagers: DetailedRole[]
+  rolesManagersIds?: DetailedRole['id'][]
 }
