@@ -9,6 +9,7 @@ type WorkspacesQueryParams = {
   ordering?: string
   detail?: boolean
   search?: string
+  as_manager?: boolean
 }
 
 export async function listWorkspaces(

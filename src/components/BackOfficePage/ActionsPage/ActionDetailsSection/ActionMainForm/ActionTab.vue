@@ -152,7 +152,7 @@
 import type { ActionsComposable } from '../../useActions'
 import type { Workspace } from '@@types'
 
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { useFileDialog } from '@vueuse/core'
 import { Carrot, Check, ImagePlus, Link } from 'lucide-vue-next'
 import { storeToRefs } from 'pinia'

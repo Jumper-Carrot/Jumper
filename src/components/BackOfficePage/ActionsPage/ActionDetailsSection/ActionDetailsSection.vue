@@ -105,7 +105,8 @@ const { data: workspaces } = useQuery(
       return Promise.resolve(null)
     }
     return jumper.workspaces.listWorkspaces({
-      limit: 10000
+      limit: 10000,
+      as_manager: true
     })
   }
 )
