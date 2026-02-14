@@ -63,6 +63,8 @@ const getCodeExec = (action: PlayableAction) => {
       return useCodeExec('python', action.data.code, action.name)
     case 'Windows CMD':
       return useCodeExec('cmd', action.data.code, action.name)
+    case 'Javascript':
+      return useCodeExec('javascript', action.data.code, action.name)
     default:
       throw new Error(`Unknown action type: ${action.data}`)
   }

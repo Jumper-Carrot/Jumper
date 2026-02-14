@@ -44,8 +44,6 @@ function main() {
       }
       if (flag === '-o') {
         printUnbuffered(`${context.id} - options ${JSON.stringify(result)}\n`)
-      } else {
-        printUnbuffered(`${JSON.stringify(result)}\n`)
       }
     } catch (err) {
       console.error('Error executing function:', err)

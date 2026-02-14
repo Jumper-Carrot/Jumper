@@ -1,3 +1,4 @@
+import JavascriptActionForm from './JavascriptActionForm/JavascriptActionForm.vue'
 import LinkActionForm from './LinkActionForm/LinkActionForm.vue'
 import PythonActionForm from './PythonActionForm/PythonActionForm.vue'
 import WindowsCMDActionForm from './WindowsCMDActionForm/WindowsCMDActionForm.vue'
@@ -5,5 +6,6 @@ import WindowsCMDActionForm from './WindowsCMDActionForm/WindowsCMDActionForm.vu
 export const ACTION_DATA_COMPONENTS = {
   'Windows CMD': WindowsCMDActionForm,
   Link: LinkActionForm,
-  Python: PythonActionForm
+  Python: PythonActionForm,
+  Javascript: JavascriptActionForm
 }

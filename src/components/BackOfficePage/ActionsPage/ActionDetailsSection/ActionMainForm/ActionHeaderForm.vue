@@ -17,6 +17,10 @@
               v-else-if="actionDetailed.data.type == 'Python'"
               src="/actions/python.png"
             />
+            <img
+              v-else-if="actionDetailed.data.type == 'Javascript'"
+              src="/actions/javascript.png"
+            />
             <img v-else src="/actions/windows-cmd.png" />
           </div>
           <div class="line-clamp-1 truncate font-semibold">

@@ -32,6 +32,8 @@ const getScriptExtension = (mode: ExecMode) => {
       return 'py'
     case 'cmd':
       return 'cmd'
+    case 'javascript':
+      return 'js'
     default:
       throw new Error(`Unknown mode: ${mode}`)
   }

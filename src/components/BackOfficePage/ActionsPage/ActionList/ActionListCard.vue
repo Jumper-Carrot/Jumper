@@ -19,6 +19,10 @@
           v-else-if="action.data.type == 'Python'"
           src="/actions/python.png"
         />
+        <img
+          v-else-if="action.data.type == 'Javascript'"
+          src="/actions/javascript.png"
+        />
         <img v-else src="/actions/windows-cmd.png" />
       </div>
       <h3

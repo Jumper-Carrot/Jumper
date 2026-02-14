@@ -2,7 +2,12 @@ import type { DetailedGroup, DetailedRole, ShortUser, User } from './user'
 
 import { Workspace } from './workspace'
 
-export const ACTION_TYPES = ['Python', 'Link', 'Windows CMD'] as const
+export const ACTION_TYPES = [
+  'Link',
+  'Windows CMD',
+  'Python',
+  'Javascript'
+] as const
 
 export type Action = {
   id: number
@@ -48,7 +53,7 @@ export type ActionData =
   | PythonActionData
   | LinkActionData
   | WindowsCMDActionData
-
+  | JavascriptActionData
 export type ActionVersion = DetailedAction & {
   history: {
     id: number
@@ -65,6 +70,13 @@ export type LinkActionData = {
 
 export type PythonActionData = {
   type: 'Python'
+  code: string
+  useCombobox: boolean
+  comboboxCode: string
+}
+
+export type JavascriptActionData = {
+  type: 'Javascript'
   code: string
   useCombobox: boolean
   comboboxCode: string

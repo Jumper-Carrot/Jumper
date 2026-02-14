@@ -37,9 +37,15 @@
           "args": [
             {
               "validator": ".+"
+            },
+            {
+              "validator": ".+"
+            },
+            {
+              "validator": ".+"
             }
           ],
-          "name": "bin/javascript/js-sidecar.exe",
+          "name": "bin/javascript/js",
           "sidecar": true
         }
       ]

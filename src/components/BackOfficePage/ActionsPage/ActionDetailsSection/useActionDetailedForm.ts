@@ -25,6 +25,13 @@ export const useActionDetailedForm = (
     comboboxCode: z.string().min(0).max(20000).optional()
   })
 
+  const javascriptDataSchema = z.object({
+    type: z.literal('Javascript'),
+    code: z.string().min(0).max(20000),
+    useCombobox: z.boolean(),
+    comboboxCode: z.string().min(0).max(20000).optional()
+  })
+
   const windowsCMDDataSchema = z.object({
     type: z.literal('Windows CMD'),
     code: z.string().min(0).max(20000),
@@ -35,6 +42,7 @@ export const useActionDetailedForm = (
   const dataSchema = {
     Link: linkDataSchema,
     Python: pythonDataSchema,
+    Javascript: javascriptDataSchema,
     'Windows CMD': windowsCMDDataSchema
   }
 
