@@ -25,6 +25,9 @@ export const useWorkspaceDetailedForm = (
         isActive: z.boolean().optional(),
         permissions: z
           .array(z.custom<User | DetailedGroup | DetailedRole>())
+          .default([]),
+        actionPermissions: z
+          .array(z.custom<User | DetailedGroup | DetailedRole>())
           .default([])
       })
     )
@@ -44,6 +47,11 @@ export const useWorkspaceDetailedForm = (
           ...(newValue.usersManagers ?? []),
           ...(newValue.groupsManagers ?? []),
           ...(newValue.rolesManagers ?? [])
+        ],
+        actionPermissions: [
+          ...(newValue.actionsAllowedUsers ?? []),
+          ...(newValue.actionsAllowedGroups ?? []),
+          ...(newValue.actionsAllowedRoles ?? [])
         ]
       }
     }

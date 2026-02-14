@@ -25,6 +25,12 @@
           Only users listed here can manage and assign actions to this workspace. 
           Users that are not action managers or admin are ignored."
         />
+        <PermissionTagsField
+          field-name="actionPermissions"
+          label="Action permissions"
+          description="
+          Users, groups and roles allowed to execute actions on this workspace."
+        />
       </div>
     </template>
   </FormModal>
@@ -59,6 +65,15 @@ const onSubmit = workspaceForm.handleSubmit(async values => {
         .filter(p => 'isAdminGroup' in p)
         .map(p => p.id),
       rolesManagersIds: values.permissions
+        .filter(p => 'description' in p)
+        .map(p => p.id),
+      actionsAllowedUsersIds: values.actionPermissions
+        .filter(p => 'username' in p)
+        .map(p => p.id),
+      actionsAllowedGroupsIds: values.actionPermissions
+        .filter(p => 'isAdminGroup' in p)
+        .map(p => p.id),
+      actionsAllowedRolesIds: values.actionPermissions
         .filter(p => 'description' in p)
         .map(p => p.id)
     })
