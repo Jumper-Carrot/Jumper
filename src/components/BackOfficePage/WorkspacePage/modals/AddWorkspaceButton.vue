@@ -1,6 +1,7 @@
 <template>
   <FormModal
     title="New workspace"
+    v-model:open="isOpen"
     :form="workspaceForm"
     description="Create a new workspace"
     :onSubmit="onSubmit"
@@ -41,7 +42,9 @@
 </template>
 
 <script setup lang="ts">
+import { watch, ref, onMounted } from 'vue'
 import { ComponentIcon } from 'lucide-vue-next'
+import { useRouter } from 'vue-router'
 
 import jumper from '@/services/jumper'
 
@@ -52,7 +55,10 @@ import { useToast } from '@@materials/ui/toast'
 import PermissionTagsField from '@/components/BackOfficePage/@common/PermissionTagsField.vue'
 import { useWorkspaceDetailedForm } from './useWorkspaceDetailedForm'
 
+const router = useRouter()
 const { toast } = useToast()
+
+const isOpen = ref(false)
 
 const workspaceForm = useWorkspaceDetailedForm()
 
@@ -95,5 +101,19 @@ const onSubmit = workspaceForm.handleSubmit(async values => {
     title: `"${values.name}" workspace created.`
   })
   return true
+})
+
+watch(isOpen, open => {
+  if (!open) {
+    router.push({ name: 'workspaces' })
+  } else {
+    router.push({
+      name: 'workspace-create'
+    })
+  }
+})
+
+onMounted(() => {
+  isOpen.value = router.currentRoute.value.name === 'workspace-create'
 })
 </script>

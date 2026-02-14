@@ -75,7 +75,6 @@ import AddWorkspaceButton from './modals/AddWorkspaceButton.vue'
 import { useWorkspacesQuery } from './useWorkspacesQuery'
 
 const authUserStore = useAuthUserStore()
-
 const {
   data: workspacesPage,
   isFetching,

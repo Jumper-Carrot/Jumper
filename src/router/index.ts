@@ -68,6 +68,33 @@ const router = createRouter({
                 )
             },
             {
+              path: 'workspaces/new',
+              name: 'workspace-create',
+              component: () =>
+                import(
+                  '@/components/BackOfficePage/WorkspacePage/WorkspacePage.vue'
+                ),
+              meta: { modal: 'create' }
+            },
+            {
+              path: 'workspaces/:id/edit',
+              name: 'workspace-edit',
+              component: () =>
+                import(
+                  '@/components/BackOfficePage/WorkspacePage/WorkspacePage.vue'
+                ),
+              meta: { modal: 'edit' }
+            },
+            {
+              path: 'workspaces/:id/delete',
+              name: 'workspace-delete',
+              component: () =>
+                import(
+                  '@/components/BackOfficePage/WorkspacePage/WorkspacePage.vue'
+                ),
+              meta: { modal: 'delete' }
+            },
+            {
               path: 'editor',
               name: 'action-editor',
               component: () =>
