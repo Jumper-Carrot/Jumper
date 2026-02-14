@@ -82,8 +82,8 @@
               :show-error-message="false"
               label="label"
               itemKey="value"
+              clear
               :items="[
-                { label: 'None', value: null },
                 ...workspaces.map(ws => ({
                   label: ws.name,
                   value: ws.id
