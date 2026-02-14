@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build-py": "pyinstaller -F py/__main__.py --distpath src-tauri/bin/python --clean -n python-x86_64-pc-windows-msvc && rimraf python-x86_64-pc-windows-msvc.spec",
+    "build-js": "npx pkg sidecars/main.js --output src-tauri/bin/javascript/js-x86_64-pc-windows-msvc.exe --targets node18-win-x64",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "tauri": "tauri",

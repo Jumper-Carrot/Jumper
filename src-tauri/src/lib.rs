@@ -100,6 +100,31 @@ async fn run_cmd_script(script: String) -> Result<String, String> {
     }
 }
 
+#[tauri::command]
+async fn run_js_script(script: String) -> Result<String, String> {
+    let mut temp = tempfile::NamedTempFile::new().map_err(|e| e.to_string())?;
+    write!(temp, "{}", script).map_err(|e| e.to_string())?;
+    let path = temp.path().to_str().ok_or("Invalid path")?;
+
+    // Chemin du sidecar JS packagé
+    let js_sidecar_path = if cfg!(target_os = "windows") {
+        "bin/javascript/js-sidecar.exe"
+    } else {
+        "bin/javascript/js-sidecar"
+    };
+
+    let output = Command::new(js_sidecar_path)
+        .arg(path)
+        .output()
+        .map_err(|e| e.to_string())?;
+
+    if output.status.success() {
+        Ok(String::from_utf8_lossy(&output.stdout).to_string())
+    } else {
+        Err(String::from_utf8_lossy(&output.stderr).to_string())
+    }
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     if cfg!(dev) {
@@ -127,6 +152,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             kill_process,
             run_cmd_script,
+            run_js_script,
             get_env_var,
             check_updates
         ])

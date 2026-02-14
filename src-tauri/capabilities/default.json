@@ -32,6 +32,15 @@
           ],
           "name": "bin/python/python",
           "sidecar": true
+        },
+        {
+          "args": [
+            {
+              "validator": ".+"
+            }
+          ],
+          "name": "bin/javascript/js-sidecar.exe",
+          "sidecar": true
         }
       ]
     },

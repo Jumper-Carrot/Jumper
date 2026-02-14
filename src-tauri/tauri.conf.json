@@ -77,7 +77,7 @@
     }
   },
   "bundle": {
-    "externalBin": ["bin/python/python"],
+    "externalBin": ["bin/python/python", "bin/javascript/js"],
     "active": true,
     "createUpdaterArtifacts": true,
     "targets": ["nsis"],

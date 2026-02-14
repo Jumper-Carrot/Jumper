@@ -13,7 +13,7 @@ import { useLogsStore } from '@/stores/logsStore'
 
 import { removeTempCodeFile, writeTempCodeFile } from './tempCodeFile'
 
-export type ExecMode = 'python' | 'cmd' | 'get-options'
+export type ExecMode = 'python' | 'cmd' | 'get-options' | 'javascript'
 type UserInfo = {
   id: User['id']
   username: User['username']
@@ -226,6 +226,16 @@ const getCommand = (
       ])
     case 'cmd':
       return Command.create('cmd', ['/C', filepath])
+    case 'javascript':
+      return Command.sidecar('bin/javascript/js', [
+        '-r',
+        filepath,
+        JSON.stringify({
+          id: commandId,
+          user: userInfo,
+          option
+        })
+      ])
     default:
       throw new Error(`Unknown mode: ${mode}`)
   }
@@ -254,6 +264,8 @@ const getCodePreInstructions = (
       set CONTEXT_COMMAND_ID=${commandId}
       @echo on
       `
+    case 'javascript':
+      return ''
     default:
       throw new Error(`Unknown mode: ${mode}`)
   }
