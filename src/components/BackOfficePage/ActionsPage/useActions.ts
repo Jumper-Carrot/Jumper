@@ -1,11 +1,14 @@
 import type { Action, DetailedAction } from '@@types'
 
 import { computed, ref } from 'vue'
+import { watch } from 'vue'
 
 import jumper from '@/services/jumper'
 import { useQuery } from '@/composables'
 
 export type ActionsComposable = ReturnType<typeof useActions>
+
+const SELECTED_ACTION_ID_KEY = 'actions:selectedActionId'
 
 export const useActions = () => {
   const search = ref('')
@@ -17,8 +20,19 @@ export const useActions = () => {
       limit: 10000,
       search: search.value
     })
-    if (!selectedAction.value && data.results.length)
-      selectedAction.value = data.results[0]
+    if (!selectedAction.value && data.results.length) {
+      const storedId = localStorage.getItem(SELECTED_ACTION_ID_KEY)
+      const storedIdNum = storedId !== null ? Number(storedId) : null
+      const found =
+        storedIdNum !== null && !isNaN(storedIdNum)
+          ? data.results.find(a => a.id === storedIdNum)
+          : null
+      if (found) {
+        selectedAction.value = found
+      } else {
+        selectedAction.value = data.results[0]
+      }
+    }
     return data.results
   })
 
@@ -33,6 +47,7 @@ export const useActions = () => {
   const create = async (action: Partial<Action>) => {
     const newAction = await jumper.actions.create(action)
     selectedAction.value = newAction
+    localStorage.setItem(SELECTED_ACTION_ID_KEY, String(newAction.id))
     actionsQuery.setData(prev => {
       if (!prev) return [newAction]
       return [...prev, newAction]
@@ -46,6 +61,9 @@ export const useActions = () => {
   ) => {
     const updatedAction = await jumper.actions.update(actionId, action)
     actionDetailedQuery.setData(() => updatedAction)
+    if (selectedAction.value?.id === actionId) {
+      localStorage.setItem(SELECTED_ACTION_ID_KEY, String(actionId))
+    }
     actionsQuery.refetch()
     return updatedAction
   }
@@ -67,11 +85,24 @@ export const useActions = () => {
     if (selectedAction.value?.id === actionId) {
       if (actionsQuery.data.value?.length) {
         selectedAction.value = actionsQuery.data.value[0]
+        localStorage.setItem(
+          SELECTED_ACTION_ID_KEY,
+          String(selectedAction.value.id)
+        )
       } else {
         selectedAction.value = null
+        localStorage.removeItem(SELECTED_ACTION_ID_KEY)
       }
     }
   }
+
+  watch(selectedAction, val => {
+    if (val?.id !== undefined && val?.id !== null) {
+      localStorage.setItem(SELECTED_ACTION_ID_KEY, String(val.id))
+    } else {
+      localStorage.removeItem(SELECTED_ACTION_ID_KEY)
+    }
+  })
 
   return {
     actions: computed(() => actionsQuery.data.value ?? null),
