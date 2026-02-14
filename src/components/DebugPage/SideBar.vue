@@ -61,7 +61,7 @@
               <X />
             </Button>
           </div>
-          <p class="truncate text-xs text-slate-400 italic">
+          <p class="w-full truncate text-left text-xs text-slate-400 italic">
             {{ getExecTime(execution.runTimestamp) }}
             <span v-if="execution.selectedOption">
               - {{ execution.selectedOption }}</span
@@ -121,7 +121,7 @@
               <X />
             </Button>
           </div>
-          <p class="truncate text-xs text-slate-400 italic">
+          <p class="w-full truncate text-left text-xs text-slate-400 italic">
             {{ getExecTime(execution.runTimestamp) }}
             <span v-if="execution.selectedOption">
               - {{ execution.selectedOption }}</span
