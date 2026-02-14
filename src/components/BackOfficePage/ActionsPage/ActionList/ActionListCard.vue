@@ -1,6 +1,6 @@
 <template>
   <button
-    class="dark:hover:bg-opacity-60 flex h-[60px] w-full flex-col rounded-md
+    class="dark:hover:bg-opacity-60 flex h-[65px] w-full flex-col rounded-md
       border p-[6px] shadow-2xs transition-all dark:bg-slate-800
       dark:hover:bg-slate-700"
     :class="{
@@ -42,7 +42,7 @@
     </div>
     <p
       v-if="action.description"
-      class="line-clamp-2 truncate text-start text-xs text-slate-500 italic
+      class="line-clamp-2 text-start text-xs text-ellipsis text-slate-500 italic
         dark:text-slate-400"
     >
       {{ action.description }}
