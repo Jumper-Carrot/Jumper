@@ -8,6 +8,16 @@
   >
     <template #trigger>
       <Button
+        v-if="small"
+        class="size-6 border-none bg-transparent p-0 text-slate-700 shadow-none
+          dark:text-slate-400"
+        variant="outline"
+        title="Edit gallery background image"
+      >
+        <ImagePlus />
+      </Button>
+      <Button
+        v-else
         size="sm"
         class="mt-2 w-[200px] text-slate-600 dark:text-slate-400"
         variant="outline"
@@ -63,6 +73,7 @@ import { open } from '@tauri-apps/plugin-dialog'
 import { readFile } from '@tauri-apps/plugin-fs'
 import { toTypedSchema } from '@vee-validate/zod'
 import { Carrot } from 'lucide-vue-next'
+import { ImagePlus } from 'lucide-vue-next'
 import { useForm } from 'vee-validate'
 import * as z from 'zod'
 
@@ -77,6 +88,7 @@ const authUserStore = useAuthUserStore()
 
 defineProps<{
   userPreferences: UserPreferences
+  small?: boolean
 }>()
 
 const systemBackgroundImageSchema = toTypedSchema(

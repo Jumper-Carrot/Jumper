@@ -29,6 +29,24 @@
       </label>
     </div>
     <div class="flex h-full items-center gap-1">
+      <div
+        v-if="
+          systemInfo?.allowBackgroundImage &&
+          systemInfo?.allowUserCustomBackgroundImage &&
+          authUserStore.user
+        "
+        class="mt-0.5 flex items-center"
+      >
+        <EditGalleryBackgroundImage
+          small
+          :userPreferences="authUserStore.user.preferences"
+        />
+        <DeleteBackgroundImageButton
+          small
+          v-if="authUserStore.user.preferences.customBackgroundImageUrl"
+          class="ml-2"
+        />
+      </div>
       <button
         class="group rounded-full p-[3px] transition-colors hover:bg-slate-200
           dark:hover:bg-slate-800"
@@ -75,6 +93,8 @@ import {
 } from '@/stores'
 
 import Checkbox from '@@materials/ui/checkbox/Checkbox.vue'
+import DeleteBackgroundImageButton from '@/components/BackOfficePage/AccountPage/AppearancePage/modals/DeleteBackgroundImageButton.vue'
+import EditGalleryBackgroundImage from '@/components/BackOfficePage/AccountPage/AppearancePage/modals/EditGalleryBackgroundImage.vue'
 import Moon from './Moon.vue'
 
 const isDark = useDark()
