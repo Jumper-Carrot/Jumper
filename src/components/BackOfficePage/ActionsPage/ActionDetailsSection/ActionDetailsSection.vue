@@ -120,7 +120,9 @@ const onSubmit = handleSubmit(async values => {
       delayBeforeRelaunch: values.delayBeforeRelaunch,
       data:
         values.data &&
-        (values.data.type === 'Python' || values.data.type === 'Windows CMD')
+        (values.data.type === 'Python' ||
+          values.data.type === 'Windows CMD' ||
+          values.data.type === 'Javascript')
           ? {
               ...values.data,
               comboboxCode: values.data.comboboxCode ?? ''

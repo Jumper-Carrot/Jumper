@@ -1,4 +1,4 @@
-import type { DetailedRole, User, Group, Action } from '@@types'
+import type { DetailedRole, Group, Action, ShortUser } from '@@types'
 
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
@@ -16,13 +16,19 @@ export const useRoleForm = (
       //   message: 'This username is already taken'
       // }),
       description: z.string().optional(),
-      users: z.array(z.custom<User>()).default([]),
+      users: z.array(z.custom<ShortUser>()).default([]),
       groups: z.array(z.custom<Group>()).default([]),
       actions: z.array(z.custom<Action>()).default([])
     })
   )
   return useForm({
     validationSchema: roleSchema,
-    initialValues: role
+    initialValues: {
+      name: role?.name || '',
+      description: role?.description || '',
+      users: role?.users || [],
+      groups: role?.groups || [],
+      actions: role?.actions || []
+    }
   })
 }

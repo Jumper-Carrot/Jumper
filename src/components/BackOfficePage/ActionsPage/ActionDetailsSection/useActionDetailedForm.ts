@@ -1,5 +1,5 @@
 import type { DetailedAction } from '@@types'
-import type { DetailedGroup, DetailedRole, User } from '@@types/user'
+import type { DetailedGroup, DetailedRole, ShortUser } from '@@types/user'
 
 import { computed, MaybeRefOrGetter, toRef, watch } from 'vue'
 import { toTypedSchema } from '@vee-validate/zod'
@@ -57,7 +57,7 @@ export const useActionDetailedForm = (
         section: z.string().nullable().optional(),
         workspace: z.number().nullable().optional(),
         permissions: z
-          .array(z.custom<User | DetailedGroup | DetailedRole>())
+          .array(z.custom<ShortUser | DetailedGroup | DetailedRole>())
           .default([]),
         hasDelayBeforeRelaunch: z.boolean().default(false),
         delayBeforeRelaunch: z.number().min(0).default(2000),

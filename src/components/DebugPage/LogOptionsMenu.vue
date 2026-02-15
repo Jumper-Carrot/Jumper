@@ -52,14 +52,20 @@
             >show ligne info</span
           >
         </div>
+        <div class="flex justify-end px-2 pt-2">
+          <span class="text-xs text-slate-400">Total logs: {{ logCount }}</span>
+        </div>
       </div>
     </DropdownMenuContent>
   </DropdownMenu>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { Eye } from 'lucide-vue-next'
+import { storeToRefs } from 'pinia'
+
+import { useLogsStore } from '@/stores/logsStore'
 
 import { Button } from '@@materials/ui/button'
 import { Checkbox } from '@@materials/ui/checkbox'
@@ -74,4 +80,7 @@ const dropdownOpen = ref(false)
 const showStrOut = defineModel<boolean>('showStrOut', { default: true })
 const showStrErr = defineModel<boolean>('showStrErr', { default: true })
 const showLineInfo = defineModel<boolean>('showLineInfo', { default: true })
+
+const { logs } = storeToRefs(useLogsStore())
+const logCount = computed(() => logs.value.length)
 </script>

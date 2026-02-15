@@ -51,7 +51,7 @@ import { Button } from '@@materials/ui/button'
 
 const authUserStore = useAuthUserStore()
 
-const props = defineProps<{
+defineProps<{
   small?: boolean
 }>()
 
