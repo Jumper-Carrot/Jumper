@@ -12,7 +12,12 @@ export async function writeTempCodeFile(
   const uuid = uuidv4()
   const filename = `script-${uuid}.${ext}`
   const filepath = await join(await tempDir(), filename)
-  await writeTextFile(filepath, code)
+  let finalCode = code
+  if (mode === 'cmd') {
+    // Redirect both stdout and stderr to stdout
+    finalCode = code.trimEnd() + '\r\n2>&1\r\n'
+  }
+  await writeTextFile(filepath, finalCode)
   return filepath
 }
 

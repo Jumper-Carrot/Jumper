@@ -6,6 +6,20 @@ function printUnbuffered(data) {
   process.stdout.write(data)
 }
 
+const origStderrWrite = process.stderr.write.bind(process.stderr)
+process.stderr.write = function (chunk, encoding, cb) {
+  const lines = chunk.toString().split(/(?<=\n)/)
+  for (const line of lines) {
+    if (line.trim()) {
+      process.stdout.write('[STDERR] ' + line, encoding)
+    } else {
+      process.stdout.write(line, encoding)
+    }
+  }
+  if (cb) cb()
+  return true
+}
+
 function main() {
   const [, , flag, scriptPath, contextJson] = process.argv
   if (!flag || !scriptPath) {

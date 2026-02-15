@@ -6,15 +6,30 @@ from pathlib import Path
 
 
 class Unbuffered(object):
-    def __init__(self, stream):
+    def __init__(self, stream, prefix=""):
         self.stream = stream
+        self.prefix = prefix
 
     def write(self, data):
-        self.stream.write(data)
+        if self.prefix and data.strip():
+            for line in data.splitlines(True):
+                if line.strip():
+                    self.stream.write(self.prefix + line)
+                else:
+                    self.stream.write(line)
+        else:
+            self.stream.write(data)
         self.stream.flush()
 
     def writelines(self, datas):
-        self.stream.writelines(datas)
+        if self.prefix:
+            for line in datas:
+                if line.strip():
+                    self.stream.write(self.prefix + line)
+                else:
+                    self.stream.write(line)
+        else:
+            self.stream.writelines(datas)
         self.stream.flush()
 
     def __getattr__(self, attr):
@@ -22,7 +37,7 @@ class Unbuffered(object):
 
 
 sys.stdout = Unbuffered(sys.stdout)
-sys.stderr = Unbuffered(sys.stderr)
+sys.stderr = Unbuffered(sys.stdout, prefix="[STDERR] ")
 
 script_path = Path(sys.argv[2]).resolve()
 module_name = script_path.stem
@@ -57,4 +72,4 @@ if hasattr(module, func):
     else:
         raise TypeError(f"{func} is not callable.")
 else:
-    raise AttributeError("Python script does not have a 'run' function.")
+    raise AttributeError(f"Python script does not have a '{func}' function.")

@@ -119,32 +119,18 @@ export const useCodeExec = (
     command.stdout.on('data', data => {
       const message = data.toString()
       if (message.startsWith(`${commandId} -`)) return
+      const isError = message.startsWith('[STDERR]')
+      const cleanMessage = isError
+        ? message.replace(/^\[STDERR\]\s?/, '')
+        : message
       pushLog({
-        level: 'info',
+        level: isError ? 'error' : 'info',
         execId: commandId,
         namespace: execNamespace,
         option: selectedOption.value,
-        message: data.toString()
+        message: cleanMessage
       })
     })
-    command.stderr.on('data', data => {
-      pushLog({
-        level: 'error',
-        execId: commandId,
-        namespace: execNamespace,
-        option: selectedOption.value,
-        message: data.toString()
-      })
-    })
-    command.on('error', error =>
-      pushLog({
-        level: 'error',
-        execId: commandId,
-        namespace: execNamespace,
-        option: selectedOption.value,
-        message: error.toString()
-      })
-    )
     command.on('close', () => {
       pushLog({
         level: 'info',
@@ -225,7 +211,7 @@ const getCommand = (
         })
       ])
     case 'cmd':
-      return Command.create('cmd', ['/C', filepath])
+      return Command.create('cmd', ['/C', filepath, '2>&1'])
     case 'javascript':
       return Command.sidecar('bin/javascript/js', [
         '-r',
