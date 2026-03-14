@@ -29,3 +29,6 @@ dist-ssr
 
 # Sidecar build files
 .spec
+
+.claude
+CLAUDE.md
